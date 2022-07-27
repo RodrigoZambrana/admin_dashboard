@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { SidebarContext } from '../context/SidebarContext';
-import CategoryServices from '../services/CategoryServices';
-import { notifyError, notifySuccess } from '../utils/toast';
+import { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { SidebarContext } from "../context/SidebarContext";
+import CategoryServices from "../services/CategoryServices";
+import { notifyError, notifySuccess } from "../utils/toast";
 
 const useCategorySubmit = (id) => {
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState("");
   const [children, setChildren] = useState([]);
   const { isDrawerOpen, closeDrawer, setIsUpdate } = useContext(SidebarContext);
 
@@ -18,10 +18,10 @@ const useCategorySubmit = (id) => {
   } = useForm();
 
   const onSubmit = ({ parent, type }) => {
-    if (!imageUrl) {
-      notifyError('Icon is required!');
-      return;
-    }
+    // if (!imageUrl) {
+    //   notifyError("Icon is required!");
+    //   return;
+    // }
     const categoryData = {
       parent: parent,
       // slug: slug,
@@ -51,32 +51,32 @@ const useCategorySubmit = (id) => {
 
   useEffect(() => {
     if (!isDrawerOpen) {
-      setValue('parent');
+      setValue("parent");
       // setValue("slug");
-      setValue('children');
-      setValue('type');
-      setImageUrl('');
+      setValue("children");
+      setValue("type");
+      setImageUrl("");
       setChildren([]);
-      clearErrors('parent');
+      clearErrors("parent");
       // setValue("slug");
-      clearErrors('children');
-      clearErrors('type');
+      clearErrors("children");
+      clearErrors("type");
       return;
     }
     if (id) {
       CategoryServices.getCategoryById(id)
         .then((res) => {
           if (res) {
-            setValue('parent', res.parent);
+            setValue("parent", res.parent);
             // setValue("slug", res.slug);
             setChildren(res.children);
-            setValue('type', res.type);
-            setValue('icon', res.icon);
+            setValue("type", res.type);
+            setValue("icon", res.icon);
             setImageUrl(res.icon);
           }
         })
         .catch((err) => {
-          notifyError('There is a server error!');
+          notifyError("There is a server error!");
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

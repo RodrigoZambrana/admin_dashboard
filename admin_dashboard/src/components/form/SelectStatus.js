@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { Select } from '@windmill/react-ui';
+import React, { useContext } from "react";
+import { Select } from "@windmill/react-ui";
 
-import OrderServices from '../../services/OrderServices';
-import { notifySuccess, notifyError } from '../../utils/toast';
-import { SidebarContext } from '../../context/SidebarContext';
+import OrderServices from "../../services/OrderServices";
+import { notifySuccess, notifyError } from "../../utils/toast";
+import { SidebarContext } from "../../context/SidebarContext";
 
 const SelectStatus = ({ id }) => {
   const { setIsUpdate } = useContext(SidebarContext);
@@ -28,7 +28,7 @@ const SelectStatus = ({ id }) => {
         <option value="Delivered">Delivered</option>
         <option value="Pending">Pending</option>
         <option value="Processing">Processing</option>
-        <option value="Cancel">Cancel</option>
+        <option value="Canceled">Canceled</option>
       </Select>
     </>
   );

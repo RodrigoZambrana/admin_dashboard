@@ -1,14 +1,14 @@
-import { Badge } from '@windmill/react-ui';
-import React from 'react';
-import { useParams } from 'react-router';
+import { Badge } from "@windmill/react-ui";
+import React from "react";
+import { useParams } from "react-router";
 
-import useAsync from '../hooks/useAsync';
-import MainDrawer from '../components/drawer/MainDrawer';
-import useToggleDrawer from '../hooks/useToggleDrawer';
-import Loading from '../components/preloader/Loading';
-import PageTitle from '../components/Typography/PageTitle';
-import ProductServices from '../services/ProductServices';
-import ProductDrawer from '../components/drawer/ProductDrawer';
+import useAsync from "../hooks/useAsync";
+import MainDrawer from "../components/drawer/MainDrawer";
+import useToggleDrawer from "../hooks/useToggleDrawer";
+import Loading from "../components/preloader/Loading";
+import PageTitle from "../components/Typography/PageTitle";
+import ProductServices from "../services/ProductServices";
+import ProductDrawer from "../components/drawer/ProductDrawer";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -21,7 +21,7 @@ const ProductDetails = () => {
         <ProductDrawer id={id} />
       </MainDrawer>
 
-      <PageTitle>Product Details</PageTitle>
+      <PageTitle>Detalles del Producto</PageTitle>
       {loading ? (
         <Loading loading={loading} />
       ) : (
@@ -34,13 +34,14 @@ const ProductDetails = () => {
               <div className="mb-5 block ">
                 <div className="font-serif font-semibold py-1 text-sm">
                   <p className="text-sm text-gray-500 pr-4">
-                    Status:{' '}
-                    {data.status === 'Show' ? (
-                      <span className="text-green-400">
-                        This product Showing
-                      </span>
+                    Estado:{" "}
+                    {data.status === "Show" ? (
+                      <span className="text-green-400">Visible en la web </span>
                     ) : (
-                      <span className="text-red-400"> This product Hidden</span>
+                      <span className="text-red-400">
+                        {" "}
+                        No mostado en la web
+                      </span>
                     )}
                   </p>
                 </div>
@@ -48,7 +49,7 @@ const ProductDetails = () => {
                   {data.title}
                 </h2>
                 <p className="uppercase font-serif font-medium text-gray-500 dark:text-gray-400 text-sm">
-                  SKU :{' '}
+                  Código :{" "}
                   <span className="font-bold text-gray-500 dark:text-gray-500">
                     {data._id !== undefined && data._id.substring(18, 24)}
                   </span>
@@ -67,16 +68,16 @@ const ProductDetails = () => {
               <div className="mb-3">
                 {data.quantity <= 0 ? (
                   <Badge type="danger">
-                    <span className="font-bold">Stock Out</span>{' '}
+                    <span className="font-bold">Agotado</span>{" "}
                   </Badge>
                 ) : (
                   <Badge type="success">
-                    {' '}
-                    <span className="font-bold">In Stock</span>
+                    {" "}
+                    <span className="font-bold">En stock</span>
                   </Badge>
                 )}
                 <span className="text-sm text-gray-500 dark:text-gray-400 font-medium pl-4">
-                  Quantity: {data.quantity}
+                  Cantidad: {data.quantity}
                 </span>
               </div>
               <p className="text-sm leading-6 text-gray-500 dark:text-gray-400 md:leading-7">
@@ -85,8 +86,8 @@ const ProductDetails = () => {
               <div className="flex flex-col mt-4">
                 <p className="font-serif font-semibold py-1 text-gray-500 text-sm">
                   <span className="text-gray-700 dark:text-gray-400">
-                    Category:{' '}
-                  </span>{' '}
+                    Categoria:{" "}
+                  </span>{" "}
                   {data.type}
                 </p>
                 <div className="flex flex-row">
@@ -105,7 +106,7 @@ const ProductDetails = () => {
                   onClick={() => handleUpdate(id)}
                   className="cursor-pointer leading-5 transition-colors duration-150 font-medium text-sm focus:outline-none px-5 py-2 rounded-md text-white bg-green-500 border border-transparent active:bg-green-600 hover:bg-green-600 focus:ring focus:ring-purple-300"
                 >
-                  Edit Product
+                  Editar Producto
                 </button>
               </div>
             </div>

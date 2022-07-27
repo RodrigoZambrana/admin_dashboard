@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useDropzone } from 'react-dropzone';
-import { FiUploadCloud } from 'react-icons/fi';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useDropzone } from "react-dropzone";
+import { FiUploadCloud } from "react-icons/fi";
 
 const Uploader = ({ setImageUrl, imageUrl }) => {
   const [files, setFiles] = useState([]);
-  const uploadUrl = process.env.REACT_APP_CLOUDINARY_URL;
-  const upload_Preset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
+  const uploadUrl = "https://api.cloudinary.com/v1_1/urucortinas/image/upload";
+  const upload_Preset = "ptnndkwu";
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
+    accept: "image/*",
     multiple: false,
     maxSize: 500000,
     onDrop: (acceptedFiles) => {
@@ -29,13 +29,13 @@ const Uploader = ({ setImageUrl, imageUrl }) => {
     if (files) {
       files.forEach((file) => {
         const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', uploadPreset);
+        formData.append("file", file);
+        formData.append("upload_preset", uploadPreset);
         axios({
           url: uploadURL,
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            "Content-Type": "application/x-www-form-urlencoded",
           },
           data: formData,
         })

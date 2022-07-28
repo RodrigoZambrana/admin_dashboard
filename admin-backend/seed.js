@@ -1,16 +1,18 @@
-require('dotenv').config();
-const connectDB = require('./config/db');
+require("dotenv").config();
+const connectDB = require("./config/db");
 
-const User = require('./models/User');
-const userData = require('./utils/user');
-const Admin = require('./models/Admin');
-const adminData = require('./utils/admin');
-const Coupon = require('./models/Coupon');
-const couponData = require('./utils/coupon');
-const productData = require('./utils/products');
-const Product = require('./models/Product');
-const Category = require('./models/Category');
-const categoryData = require('./utils/category');
+const User = require("./models/User");
+const userData = require("./utils/user");
+const Admin = require("./models/Admin");
+const adminData = require("./utils/admin");
+const Coupon = require("./models/Coupon");
+const couponData = require("./utils/coupon");
+const productData = require("./utils/products");
+const Product = require("./models/Product");
+const Category = require("./models/Category");
+const categoryData = require("./utils/category");
+const Order = require("./models/Order");
+const orderData = require("./utils/orders");
 
 connectDB();
 const importData = async () => {
@@ -30,10 +32,13 @@ const importData = async () => {
     await Coupon.deleteMany();
     await Coupon.insertMany(couponData);
 
-    console.log('data inserted successfully!');
+    await Order.deleteMany();
+    await Order.insertMany(orderData);
+
+    console.log("data inserted successfully!");
     process.exit();
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
     process.exit(1);
   }
 };

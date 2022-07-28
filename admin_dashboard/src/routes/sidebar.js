@@ -52,9 +52,19 @@ const sidebar = [
     name: "Presupuestos",
   },
   {
-    path: "/setting",
     icon: FiSettings,
-    name: "Facturas",
+    name: "Pages",
+    routes: [
+      // submenu
+      {
+        path: "/app/404",
+        name: "404",
+      },
+      {
+        path: "/app/blank",
+        name: "Blank",
+      },
+    ],
   },
 ];
 

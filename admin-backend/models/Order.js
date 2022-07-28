@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const AutoIncrement = require('mongoose-sequence')(mongoose);
+const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const orderSchema = new mongoose.Schema(
   {
@@ -74,13 +74,13 @@ const orderSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['Pending', 'Processing', 'Delivered'],
+      enum: ['Pending', 'Processing', 'Delivered', 'Canceled'],
     },
   },
   {
     timestamps: true,
-  }
-);
+  },
+)
 
 const Order =
   mongoose.models.Order ||
@@ -89,6 +89,6 @@ const Order =
     orderSchema.plugin(AutoIncrement, {
       inc_field: 'invoice',
       start_seq: 10000,
-    })
-  );
-module.exports = Order;
+    }),
+  )
+module.exports = Order

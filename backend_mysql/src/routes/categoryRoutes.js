@@ -7,7 +7,7 @@ const pool = require("../config/database.js");
 router.post("/add", async (req, res) => {
   const { id, name, image_url } = req.body;
   const newCategory = { id, name, image_url };
-  await pool.query("INSERT INTO category set ?", [newCategory]);
+  pool.query("INSERT INTO category set ?", [newCategory]);
   res.send("category saved");
 });
 
@@ -39,33 +39,19 @@ router.get("/id=:id", (req, res) => {
 });
 
 // DELETE An category
-router.delete("/:id", (req, res) => {
+router.get("/delete/:id", async (req, res) => {
   const { id } = req.params;
-  pool.query("DELETE FROM employee WHERE id = ?", [id], (err, rows, fields) => {
-    if (!err) {
-      res.json({ status: "Employee Deleted" });
-    } else {
-      console.log(err);
-    }
-  });
+  await pool.query("DELETE FROM category WHERE id = ?", [id]);
+  res.send("category deleted");
 });
 
-router.put("/:id", (req, res) => {
-  const { name, salary } = req.body;
+// UPDATE An category
+router.post("/edit/:id", async (req, res) => {
   const { id } = req.params;
-  const query = `
-    SET @id = ?;
-    SET @name = ?;
-    SET @salary = ?;
-    CALL employeeAddOrEdit(@id, @name, @salary);
-  `;
-  mysqlConnection.query(query, [id, name, salary], (err, rows, fields) => {
-    if (!err) {
-      res.json({ status: "Employee Updated" });
-    } else {
-      console.log(err);
-    }
-  });
+  const { name, image_url } = req.body;
+  const editCategory = { name, image_url };
+  pool.query("UPDATE  category set ? WHERE id = ?", [editCategory, id]);
+  res.send("category updated");
 });
 
 module.exports = router;

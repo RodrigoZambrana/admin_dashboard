@@ -1,146 +1,77 @@
-const Category = require('../models/Category');
+const Category = require('../models/Category')
 
 const addCategory = async (req, res) => {
-  try {
-    const newCategory = new Category(req.body);
-    await newCategory.save();
-    res.status(200).send({
-      message: 'Category Added Successfully!',
-    });
-  } catch (err) {
-    res.status(500).send({
-      message: err.message,
-    });
-  }
-};
+  const { id, name, image_url } = req.body
+  const newCategory = { id, name, image_url }
+  pool.query('INSERT INTO category set ?', [newCategory])
+  res.send('category saved')
+}
 
 const addAllCategory = async (req, res) => {
   try {
-    await Category.insertMany(req.body);
+    await Category.insertMany(req.body)
     res.status(200).send({
       message: 'Category Added successfully!',
-    });
+    })
   } catch (err) {
     res.status(500).send({
       message: err.message,
-    });
+    })
   }
-};
-
-const getShowingCategory = async (req, res) => {
-  try {
-    const categories = await Category.find({ status: 'Show' }).sort({
-      _id: -1,
-    });
-    res.send(categories);
-  } catch (err) {
-    res.status(500).send({
-      message: err.message,
-    });
-  }
-};
+}
 
 const getAllCategory = async (req, res) => {
-  try {
-    const categories = await Category.find({}).sort({ _id: -1 });
-    res.send(categories);
-  } catch (err) {
-    res.status(500).send({
-      message: err.message,
-    });
-  }
-};
+  pool.query('SELECT * FROM category', (err, rows, fields) => {
+    if (!err) {
+      res.json(rows)
+    } else {
+      console.log(err)
+    }
+  })
+}
 
-const getCategoryById = async (req, res) => {
-  try {
-    const category = await Category.findById(req.params.id);
-    res.send(category);
-  } catch (err) {
-    res.status(500).send({
-      message: err.message,
-    });
-  }
-};
+const getCategoryById = (req, res) => {
+  const { id } = req.params
+  pool.query(
+    'SELECT * FROM category WHERE id = ?',
+    [id],
+    (err, rows, fields) => {
+      if (!err) {
+        res.json(rows[0])
+      } else {
+        console.log(err)
+      }
+    },
+  )
+}
 
 const updateCategory = async (req, res) => {
-  try {
-    const category = await Category.findById(req.params.id);
-    if (category) {
-      category.parent = req.body.parent;
-      // category.slug = req.body.slug;
-      category.type = req.body.type;
-      category.icon = req.body.icon;
-      category.children = req.body.children;
-      await category.save();
-      res.send({ message: 'Category Updated Successfully!' });
-    }
-  } catch (err) {
-    res.status(404).send({ message: 'Category not found!' });
-  }
-};
-
-const updateStatus = (req, res) => {
-  const newStatus = req.body.status;
-
-  Category.updateOne(
-    { _id: req.params.id },
-    {
-      $set: {
-        status: newStatus,
-      },
-    },
-    (err) => {
-      if (err) {
-        res.status(500).send({
-          message: err.message,
-        });
-      } else {
-        res.status(200).send({
-          message: `Category ${newStatus} Successfully!`,
-        });
-      }
-    }
-  );
-};
+  const { id } = req.params
+  const { name, image_url } = req.body
+  const editCategory = { name, image_url }
+  pool.query('UPDATE  category set ? WHERE id = ?', [editCategory, id])
+  res.send('category updated')
+}
 
 const deleteCategory = (req, res) => {
   Category.deleteOne({ _id: req.params.id }, (err) => {
     if (err) {
       res.status(500).send({
         message: err.message,
-      });
+      })
     } else {
       res.status(200).send({
         message: 'Category Deleted Successfully!',
-      });
+      })
     }
-  });
-
-  //This is for delete children category
-  // Category.updateOne(
-  //   { _id: req.params.id },
-  //   {
-  //     $pull: { children: req.body.title },
-  //   },
-  //   (err) => {
-  //     if (err) {
-  //       res.status(500).send({ message: err.message });
-  //     } else {
-  //       res.status(200).send({
-  //         message: 'Category Deleted Successfully!',
-  //       });
-  //     }
-  //   }
-  // );
-};
+  })
+}
 
 module.exports = {
   addCategory,
   addAllCategory,
   getAllCategory,
-  getShowingCategory,
   getCategoryById,
   updateCategory,
-  updateStatus,
   deleteCategory,
-};
+}

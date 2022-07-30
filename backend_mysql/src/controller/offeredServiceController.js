@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../config/database.js");
 
-const getAllCategory = async (req, res) => {
-  pool.query("SELECT * FROM category", (err, rows, fields) => {
+const getAllService = async (req, res) => {
+  pool.query("SELECT * FROM service", (err, rows, fields) => {
     if (!err) {
       res.json(rows);
     } else {
@@ -12,12 +12,12 @@ const getAllCategory = async (req, res) => {
   });
 };
 
-const addCategory = async (req, res) => {
+const addService = async (req, res) => {
   try {
-    const { id, name, image_url } = req.body;
-    const newCategory = { id, name, image_url };
-    pool.query("INSERT INTO category set ?", [newCategory]);
-    res.send("category saved");
+    const { id, service_name, cost, description } = req.body;
+    const newService = { id, service_name, cost, description };
+    pool.query("INSERT INTO service set ?", [newService]);
+    res.send("service saved");
   } catch (err) {
     res.status(500).send({
       message: err.message,
@@ -25,11 +25,11 @@ const addCategory = async (req, res) => {
   }
 };
 
-const getCategoryById = (req, res) => {
+const getServiceById = (req, res) => {
   try {
     const { id } = req.params;
     pool.query(
-      "SELECT * FROM category WHERE id = ?",
+      "SELECT * FROM service WHERE id = ?",
       [id],
       (err, rows, fields) => {
         if (!err) {
@@ -46,13 +46,13 @@ const getCategoryById = (req, res) => {
   }
 };
 
-const updateCategory = async (req, res) => {
+const updateService = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, image_url } = req.body;
-    const editCategory = { name, image_url };
-    pool.query("UPDATE  category set ? WHERE id = ?", [editCategory, id]);
-    res.send("category updated");
+    const { id, service_name, cost, description } = req.body;
+    const editCategory = { id, service_name, cost, description };
+    pool.query("UPDATE  service set ? WHERE id = ?", [editCategory, id]);
+    res.send("service updated");
   } catch (err) {
     res.status(500).send({
       message: err.message,
@@ -60,11 +60,11 @@ const updateCategory = async (req, res) => {
   }
 };
 
-const deleteCategory = async (req, res) => {
+const deleteService = async (req, res) => {
   const { id } = req.params;
   try {
-    await pool.query("DELETE FROM category WHERE id = ?", [id]);
-    res.send("category deleted");
+    await pool.query("DELETE FROM service WHERE id = ?", [id]);
+    res.send("service deleted");
   } catch (err) {
     res.status(500).send({
       message: err.message,
@@ -73,9 +73,9 @@ const deleteCategory = async (req, res) => {
 };
 
 module.exports = {
-  addCategory,
-  getAllCategory,
-  getCategoryById,
-  updateCategory,
-  deleteCategory,
+  addService,
+  getAllService,
+  getServiceById,
+  updateService,
+  deleteService,
 };

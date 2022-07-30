@@ -1,54 +1,24 @@
-const express = require('express');
-const router = express.Router();
 const {
-  loginUser,
-  registerUser,
-  signUpWithProvider,
-  verifyEmailAddress,
-  forgetPassword,
-  changePassword,
-  resetPassword,
-  getAllUsers,
-  getUserById,
-  updateUser,
-  deleteUser,
-} = require('../controller/userController');
-const {
-  passwordVerificationLimit,
-  emailVerificationLimit,
-} = require('../config/others');
+  addCustomer,
+  getAllCustomer,
+  getCustomerById,
+  updateCustomer,
+  deleteCustomer,
+} = require("../controller/categoryController");
 
-//verify email
-router.post('/verify-email', emailVerificationLimit, verifyEmailAddress);
+//get all category
+router.get("/", getAllCustomer);
 
-//register a user
-router.post('/register/:token', registerUser);
+//add a category
+router.post("/add", addCustomer);
 
-//login a user
-router.post('/login', loginUser);
+//get a category
+router.get("/:id", getCustomerById);
 
-//register or login with google and fb
-router.post('/signup', signUpWithProvider);
+//update a category
+router.put("/edit/:id", updateCustomer);
 
-//forget-password
-router.put('/forget-password', passwordVerificationLimit, forgetPassword);
-
-//reset-password
-router.put('/reset-password', resetPassword);
-
-//change password
-router.post('/change-password', changePassword);
-
-//get all user
-router.get('/', getAllUsers);
-
-//get a user
-router.get('/:id', getUserById);
-
-//update a user
-router.put('/:id', updateUser);
-
-//delete a user
-router.delete('/:id', deleteUser);
+//delete a category
+router.patch("/delete/:id", deleteCustomer);
 
 module.exports = router;

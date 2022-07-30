@@ -2,22 +2,17 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../config/database.js");
 
-const getAllCategory = async (req, res) => {
-  pool.query("SELECT * FROM category", (err, rows, fields) => {
-    if (!err) {
-      res.json(rows);
-    } else {
-      console.log(err);
-    }
-  });
-};
-
-const addCategory = async (req, res) => {
+const getAllCustomerAddress = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id, name, image_url } = req.body;
-    const newCategory = { id, name, image_url };
-    pool.query("INSERT INTO category set ?", [newCategory]);
-    res.send("category saved");
+    pool.query("SELECT * FROM address WHERE customer_id = ?", [id]);
+    (err, rows, fields) => {
+      if (!err) {
+        res.json(rows);
+      } else {
+        console.log(err);
+      }
+    };
   } catch (err) {
     res.status(500).send({
       message: err.message,
@@ -25,11 +20,24 @@ const addCategory = async (req, res) => {
   }
 };
 
-const getCategoryById = (req, res) => {
+const addAddress = async (req, res) => {
+  try {
+    const { customer_id, address, city, type } = req.body;
+    const newCustomerAdress = { customer_id, address, city, type };
+    pool.query("INSERT INTO address set ?", [newCustomerAdress]);
+    res.send("address saved");
+  } catch (err) {
+    res.status(500).send({
+      message: err.message,
+    });
+  }
+};
+
+const getAddressById = (req, res) => {
   try {
     const { id } = req.params;
     pool.query(
-      "SELECT * FROM category WHERE id = ?",
+      "SELECT * FROM address WHERE id = ?",
       [id],
       (err, rows, fields) => {
         if (!err) {
@@ -46,12 +54,12 @@ const getCategoryById = (req, res) => {
   }
 };
 
-const updateCategory = async (req, res) => {
+const updateAddress = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, image_url } = req.body;
-    const editCategory = { name, image_url };
-    pool.query("UPDATE  category set ? WHERE id = ?", [editCategory, id]);
+    const { address, city, type } = req.body;
+    const editCustomerAdress = { address, city, type };
+    pool.query("UPDATE  address set ? WHERE id = ?", [editCustomerAdress, id]);
     res.send("category updated");
   } catch (err) {
     res.status(500).send({
@@ -60,11 +68,11 @@ const updateCategory = async (req, res) => {
   }
 };
 
-const deleteCategory = async (req, res) => {
+const deleteAddress = async (req, res) => {
   const { id } = req.params;
   try {
-    await pool.query("DELETE FROM category WHERE id = ?", [id]);
-    res.send("category deleted");
+    pool.query("DELETE FROM address WHERE id = ?", [id]);
+    res.send("address deleted");
   } catch (err) {
     res.status(500).send({
       message: err.message,
@@ -73,9 +81,9 @@ const deleteCategory = async (req, res) => {
 };
 
 module.exports = {
-  addCategory,
-  getAllCategory,
-  getCategoryById,
-  updateCategory,
-  deleteCategory,
+  getAllCustomerAddress,
+  addAddress,
+  getAddressById,
+  updateAddress,
+  deleteAddress,
 };

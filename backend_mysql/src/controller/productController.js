@@ -65,7 +65,7 @@ const addProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const update_date = new Date()
-    const create_date = new Date('December 17, 1995 03:24:00')
+    //const create_date = new Date('December 17, 1995 03:24:00')
     const { id } = req.params
     const {
       title,
@@ -80,6 +80,7 @@ const updateProduct = async (req, res) => {
       images,
       description,
       visible,
+      create_date,
       aditional_information,
     } = req.body
     const updatedProduct = {
@@ -95,7 +96,6 @@ const updateProduct = async (req, res) => {
       images,
       description,
       visible,
-      create_date,
       update_date,
       aditional_information,
     }

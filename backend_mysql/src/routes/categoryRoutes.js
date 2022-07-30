@@ -19,9 +19,9 @@ router.post('/add', addCategory)
 router.get('/:id', getCategoryById)
 
 //update a category
-router.put('/:id', updateCategory)
+router.put('/edit/:id', updateCategory)
 
 //delete a category
-router.patch('/:id', deleteCategory)
+router.patch('/delete/:id', deleteCategory)
 
 module.exports = router

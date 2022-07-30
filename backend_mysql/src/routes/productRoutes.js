@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 const {
   getAllProducts,
   getShowingProducts,
@@ -8,43 +8,38 @@ const {
   getProductById,
   getProductBySlug,
   addProduct,
-  addAllProducts,
   updateProduct,
   updateStatus,
   deleteProduct,
-} = require('../controller/productController');
-
-//add a product
-router.post('/add', addProduct);
-
-//add multiple products
-router.post('/all', addAllProducts);
-
-//get a product
-router.post('/:id', getProductById);
-
-//get showing products only
-router.get('/show', getShowingProducts);
-
-//get discounted products only
-router.get('/discount', getDiscountedProducts);
+} = require('../controller/productController')
 
 //get all products
-router.get('/', getAllProducts);
+router.get('/', getAllProducts)
 
-//get all stock out products
-router.get('/stock-out', getStockOutProducts);
+//add a product
+router.post('/add', addProduct)
 
-//get a product by slug
-router.get('/:slug', getProductBySlug);
-
+//get a product
+router.post('/product/:id', getProductById)
 //update a product
-router.put('/:id', updateProduct);
+router.post('/edit/:id', updateProduct)
 
 //update a product status
-router.put('/status/:id', updateStatus);
+router.put('/status/:id', updateStatus)
 
 //delete a product
-router.delete('/:id', deleteProduct);
+router.delete('/:id', deleteProduct)
 
-module.exports = router;
+//get showing products only
+router.get('/show', getShowingProducts)
+
+//get discounted products only
+router.get('/discount', getDiscountedProducts)
+
+//get all stock out products
+router.get('/stock-out', getStockOutProducts)
+
+//get a product by slug
+router.get('/:slug', getProductBySlug)
+
+module.exports = router

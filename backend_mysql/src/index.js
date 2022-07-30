@@ -3,8 +3,6 @@ const morgan = require('morgan')
 const app = express()
 const pool = require('./config/database')
 
-const categoryRoutes = require('./routes/categoryRoutes')
-
 // Settings
 app.set('port', process.env.PORT || 3000)
 
@@ -16,6 +14,8 @@ app.use(morgan('dev'))
 
 // Routes
 app.use('/categories', require('./routes/categoryRoutes'))
+app.use('/subcategories', require('./routes/subCategoryRoutes'))
+app.use('/products', require('./routes/productRoutes'))
 
 //Public
 

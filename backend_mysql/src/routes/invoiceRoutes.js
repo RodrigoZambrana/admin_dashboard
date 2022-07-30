@@ -1,5 +1,5 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 const {
   addCategory,
@@ -7,21 +7,24 @@ const {
   getCategoryById,
   updateCategory,
   deleteCategory,
-} = require('../controller/categoryController')
+} = require("../controller/categoryController");
 
-//get all category
-router.get('/', getAllCategory)
+//get all invoice
+router.get("/", getAllCategory);
 
-//add a category
-router.post('/add', addCategory)
+//add a invoice
+router.post("/add", addCategory);
 
-//get a category
-router.get('/:id', getCategoryById)
+//get all invoices from a client
+router.post("/add", addCategory);
 
-//update a category
-router.put('/edit/:id', updateCategory)
+//get an invoice
+router.get("/:id", getCategoryById);
 
-//delete a category
-router.patch('/delete/:id', deleteCategory)
+//update an invoice
+router.put("/edit/:id", updateCategory);
 
-module.exports = router
+//delete an invoice
+router.patch("/delete/:id", deleteCategory);
+
+module.exports = router;

@@ -1,27 +1,30 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 const {
-  addCategory,
-  getAllCategory,
-  getCategoryById,
-  updateCategory,
-  deleteCategory,
-} = require('../controller/categoryController')
+  addBudget,
+  getAllBudget,
+  getAllCustomerBudget,
+  getBudgetById,
+  updateBudget,
+  deleteBudget,
+} = require("../controller/categoryController");
 
-//get all category
-router.get('/', getAllCategory)
+//get all budgets
+router.get("/", getAllBudget);
 
-//add a category
-router.post('/add', addCategory)
+router.get("/:id", getAllCustomerBudget);
 
-//get a category
-router.get('/:id', getCategoryById)
+//add a budget
+router.post("/add", addBudget);
 
-//update a category
-router.put('/edit/:id', updateCategory)
+//get a budget
+router.get("/:id", getBudgetById);
 
-//delete a category
-router.patch('/delete/:id', deleteCategory)
+//update a budget
+router.put("/edit/:id", updateBudget);
 
-module.exports = router
+//delete a budget
+router.patch("/delete/:id", deleteBudget);
+
+module.exports = router;

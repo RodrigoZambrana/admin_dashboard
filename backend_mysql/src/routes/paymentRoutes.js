@@ -1,27 +1,27 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 const {
-  addCategory,
-  getAllCategory,
-  getCategoryById,
-  updateCategory,
-  deleteCategory,
-} = require('../controller/categoryController')
+  getAllPayment,
+  addPayment,
+  getPaymentById,
+  updatePayment,
+  deletePayment,
+} = require("../controller/paymentController");
 
-//get all category
-router.get('/', getAllCategory)
+//get all payments
+router.get("/", getAllPayment);
 
-//add a category
-router.post('/add', addCategory)
+//add a payment
+router.post("/add", addPayment);
 
-//get a category
-router.get('/:id', getCategoryById)
+//get a payment
+router.get("/:id", getPaymentById);
 
-//update a category
-router.put('/edit/:id', updateCategory)
+//update a payment
+router.put("/edit/:id", updatePayment);
 
-//delete a category
-router.patch('/delete/:id', deleteCategory)
+//delete a payment
+router.patch("/delete/:id", deletePayment);
 
-module.exports = router
+module.exports = router;

@@ -7,7 +7,7 @@ const {
   getBudgetEntryById,
   updateBudgetEntry,
   deleteBudgetEntry,
-} = require("../controller/categoryController");
+} = require("../controller/budgetEntryController");
 
 //get all budget entries for a budget
 router.get("/:id", getAllEntriesByBudgetId);

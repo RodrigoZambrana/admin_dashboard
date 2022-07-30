@@ -112,7 +112,6 @@ const updateBudget = async (req, res) => {
       valid_days,
       status,
     };
-    const editBudget = { name, image_url };
     pool.query("UPDATE  budget set ? WHERE id = ?", [editBudget, id]);
     res.send("budget updated");
   } catch (err) {

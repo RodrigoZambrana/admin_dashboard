@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../config/database.js");
 
-const getAllCategory = async (req, res) => {
-  pool.query("SELECT * FROM category", (err, rows, fields) => {
+const getAllPayment = async (req, res) => {
+  pool.query("SELECT * FROM payment", (err, rows, fields) => {
     if (!err) {
       res.json(rows);
     } else {
@@ -12,12 +12,28 @@ const getAllCategory = async (req, res) => {
   });
 };
 
-const addCategory = async (req, res) => {
+const addPayment = async (req, res) => {
   try {
-    const { id, name, image_url } = req.body;
-    const newCategory = { id, name, image_url };
-    pool.query("INSERT INTO category set ?", [newCategory]);
-    res.send("category saved");
+    const {
+      id,
+      order_id,
+      invoice_id,
+      amount,
+      payment_method,
+      created_date,
+      status,
+    } = req.body;
+    const newPayment = {
+      id,
+      order_id,
+      invoice_id,
+      amount,
+      payment_method,
+      created_date,
+      status,
+    };
+    pool.query("INSERT INTO payment set ?", [newPayment]);
+    res.send("payment saved");
   } catch (err) {
     res.status(500).send({
       message: err.message,
@@ -25,11 +41,11 @@ const addCategory = async (req, res) => {
   }
 };
 
-const getCategoryById = (req, res) => {
+const getPaymentById = (req, res) => {
   try {
     const { id } = req.params;
     pool.query(
-      "SELECT * FROM category WHERE id = ?",
+      "SELECT * FROM payment WHERE id = ?",
       [id],
       (err, rows, fields) => {
         if (!err) {
@@ -46,12 +62,27 @@ const getCategoryById = (req, res) => {
   }
 };
 
-const updateCategory = async (req, res) => {
+const updatePayment = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, image_url } = req.body;
-    const editCategory = { name, image_url };
-    pool.query("UPDATE  category set ? WHERE id = ?", [editCategory, id]);
+    const {
+      order_id,
+      invoice_id,
+      amount,
+      payment_method,
+      created_date,
+      status,
+    } = req.body;
+    const editPayment = {
+      id,
+      order_id,
+      invoice_id,
+      amount,
+      payment_method,
+      created_date,
+      status,
+    };
+    pool.query("UPDATE  payment set ? WHERE id = ?", [editPayment, id]);
     res.send("category updated");
   } catch (err) {
     res.status(500).send({
@@ -60,11 +91,11 @@ const updateCategory = async (req, res) => {
   }
 };
 
-const deleteCategory = async (req, res) => {
+const deletePayment = async (req, res) => {
   const { id } = req.params;
   try {
-    await pool.query("DELETE FROM category WHERE id = ?", [id]);
-    res.send("category deleted");
+    await pool.query("DELETE FROM payment WHERE id = ?", [id]);
+    res.send("payment deleted");
   } catch (err) {
     res.status(500).send({
       message: err.message,
@@ -73,9 +104,9 @@ const deleteCategory = async (req, res) => {
 };
 
 module.exports = {
-  addCategory,
-  getAllCategory,
-  getCategoryById,
-  updateCategory,
-  deleteCategory,
+  getAllPayment,
+  addPayment,
+  getPaymentById,
+  updatePayment,
+  deletePayment,
 };

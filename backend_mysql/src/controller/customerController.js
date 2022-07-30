@@ -49,7 +49,7 @@ const getCustomerById = (req, res) => {
 const updateCustomer = async (req, res) => {
   try {
     const { id } = req.params;
-    const { id, full_name, email_address, telephone, user_id } = req.body;
+    const { full_name, email_address, telephone, user_id } = req.body;
     const updateCustomer = { id, full_name, email_address, telephone, user_id };
     pool.query("UPDATE  customer set ? WHERE id = ?", [updateCustomer, id]);
     res.send("service updated");

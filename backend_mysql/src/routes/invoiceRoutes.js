@@ -7,7 +7,7 @@ const {
   getCategoryById,
   updateCategory,
   deleteCategory,
-} = require("../controller/categoryController");
+} = require("../controller/invoiceController");
 
 //get all invoice
 router.get("/", getAllCategory);

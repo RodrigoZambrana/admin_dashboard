@@ -7,7 +7,7 @@ const {
   getServiceById,
   updateService,
   deleteService,
-} = require("../controller/categoryController");
+} = require("../controller/offeredServiceController");
 
 //get all category
 router.get("/", getAllService);

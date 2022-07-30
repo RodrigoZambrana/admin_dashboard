@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../config/database.js");
 
-const getAllExpense = async (req, res) => {
+const getAllCategory = async (req, res) => {
   pool.query("SELECT * FROM category", (err, rows, fields) => {
     if (!err) {
       res.json(rows);
@@ -12,7 +12,7 @@ const getAllExpense = async (req, res) => {
   });
 };
 
-const addExpense = async (req, res) => {
+const addCategory = async (req, res) => {
   try {
     const { id, name, image_url } = req.body;
     const newCategory = { id, name, image_url };
@@ -25,7 +25,7 @@ const addExpense = async (req, res) => {
   }
 };
 
-const getExpenseById = (req, res) => {
+const getCategoryById = (req, res) => {
   try {
     const { id } = req.params;
     pool.query(
@@ -46,7 +46,7 @@ const getExpenseById = (req, res) => {
   }
 };
 
-const updateExpense = async (req, res) => {
+const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, image_url } = req.body;
@@ -60,7 +60,7 @@ const updateExpense = async (req, res) => {
   }
 };
 
-const deleteExpense = async (req, res) => {
+const deleteCategory = async (req, res) => {
   const { id } = req.params;
   try {
     await pool.query("DELETE FROM category WHERE id = ?", [id]);
@@ -73,9 +73,9 @@ const deleteExpense = async (req, res) => {
 };
 
 module.exports = {
-  getAllExpense,
-  addExpense,
-  getExpenseById,
-  updateExpense,
-  deleteExpense,
+  addCategory,
+  getAllCategory,
+  getCategoryById,
+  updateCategory,
+  deleteCategory,
 };

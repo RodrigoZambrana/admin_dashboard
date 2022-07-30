@@ -1,10 +1,13 @@
+const express = require("express");
+const router = express.Router();
+
 const {
   addCustomer,
   getAllCustomer,
   getCustomerById,
   updateCustomer,
   deleteCustomer,
-} = require("../controller/categoryController");
+} = require("../controller/customerController");
 
 //get all category
 router.get("/", getAllCustomer);

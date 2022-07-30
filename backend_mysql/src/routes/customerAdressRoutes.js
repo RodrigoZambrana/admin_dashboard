@@ -7,7 +7,7 @@ const {
   getAddressById,
   updateAddress,
   deleteAddress,
-} = require("../controller/categoryController");
+} = require("../controller/customerAdressController");
 
 //get all customer address
 router.get("/:id", getAllCustomerAddress);

@@ -1,4 +1,5 @@
-const Order = require('../models/Order');
+const express = require("express");
+const router = express.Router();
 
 const getAllOrders = async (req, res) => {
   try {
@@ -51,7 +52,7 @@ const updateOrder = (req, res) => {
         });
       } else {
         res.status(200).send({
-          message: 'Order Updated Successfully!',
+          message: "Order Updated Successfully!",
         });
       }
     }
@@ -66,7 +67,7 @@ const deleteOrder = (req, res) => {
       });
     } else {
       res.status(200).send({
-        message: 'Order Deleted Successfully!',
+        message: "Order Deleted Successfully!",
       });
     }
   });

@@ -17,11 +17,12 @@ app.use("/subcategories", require("./routes/subCategoryRoutes"));
 app.use("/services", require("./routes/offeredServicesRoutes"));
 app.use("/customers", require("./routes/customerRoutes"));
 app.use("/customer/address", require("./routes/customerAdressRoutes"));
-app.use("/budgets", require("./routes/budgetRoutes"));
-app.use("/budget/product", require("./routes/budgetEntryRoutes "));
+app.use("/budgets", require("./routes/budgetRoutes "));
+app.use("/budget/product", require("./routes/budgetEntryRoutes"));
 app.use("/orders", require("./routes/orderRoutes"));
 app.use("/invoice", require("./routes/invoiceRoutes"));
-app.use("/payment", require("./routes/budgetRoutes"));
+//app.use("/invoice/product", require("./routes/invoiceEntryRoutes"));
+app.use("/payment", require("./routes/paymentRoutes"));
 app.use("/expenses", require("./routes/expenseRoutes"));
 
 //Public

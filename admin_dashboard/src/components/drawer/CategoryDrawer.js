@@ -19,6 +19,7 @@ const CategoryDrawer = ({ id }) => {
     errors,
     imageUrl,
     setImageUrl,
+    setName,
     children,
     setChildren,
   } = useCategorySubmit(id);
@@ -42,7 +43,7 @@ const CategoryDrawer = ({ id }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="p-6 flex-grow scrollbar-hide w-full max-h-full pb-40">
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Category Icon" />
+              <LabelArea label="Foto" />
               <div className="col-span-8 sm:col-span-4">
                 <Uploader imageUrl={imageUrl} setImageUrl={setImageUrl} />
               </div>
@@ -51,17 +52,18 @@ const CategoryDrawer = ({ id }) => {
               <LabelArea label="Nombre" />
               <div className="col-span-8 sm:col-span-4">
                 <InputArea
+                  setName={setName}
                   register={register}
                   label="Nombre Categoria"
                   name="name"
+                  required="true"
                   type="text"
                   placeholder="Nombre Categoria"
                 />
-                <Error errorName={errors.parent} />
+                <Error errorName={errors.required} />
               </div>
             </div>
           </div>
-
           <DrawerButton id={id} title="Category" />
         </form>
       </Scrollbars>

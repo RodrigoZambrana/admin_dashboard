@@ -14,8 +14,14 @@ const getAllCategory = async (req, res) => {
 
 const addCategory = async (req, res) => {
   try {
-    const { id, name, image_url, customizable } = req.body;
-    const newCategory = { id, name, image_url, customizable };
+    const { name, image_url } = req.body;
+    const newCategory = {
+      id: 0,
+      name,
+      image_url,
+      customizable: false,
+      status: true,
+    };
     console.log(newCategory);
     pool.query("INSERT INTO category set ?", [newCategory]);
     res.send("category saved");

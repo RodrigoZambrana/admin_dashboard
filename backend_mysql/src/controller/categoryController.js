@@ -73,10 +73,24 @@ const deleteCategory = async (req, res) => {
   }
 };
 
+const updateStatus = (req, res) => {
+  const newStatus = req.body.status;
+  console.log(newStatus);
+  const { id } = req.params;
+  try {
+    pool.query("UPDATE category set status=? WHERE id = ?", [newStatus, id]);
+    res.send("category updted");
+  } catch (err) {
+    res.status(500).send({
+      message: err.message,
+    });
+  }
+};
 module.exports = {
   addCategory,
   getAllCategory,
   getCategoryById,
   updateCategory,
   deleteCategory,
+  updateStatus,
 };

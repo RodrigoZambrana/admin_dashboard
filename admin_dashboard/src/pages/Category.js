@@ -68,7 +68,7 @@ const Category = () => {
               ></button>
             </div>
             <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-              <SelectCategory setFilter={setFilter} />
+              {/* <SelectCategory setFilter={setFilter} /> */}
             </div>
             <div className="w-full md:w-56 lg:w-56 xl:w-56">
               <Button onClick={toggleDrawer} className="w-full rounded-md h-12">

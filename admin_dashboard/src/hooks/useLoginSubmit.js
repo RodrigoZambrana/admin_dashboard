@@ -51,8 +51,7 @@ const useLoginSubmit = () => {
             setLoading(false);
             notifySuccess("Ingreso existoso!");
             dispatch({ type: "USER_LOGIN", payload: res });
-            console.log(JSON.stringify(res));
-            Cookies.set("adminInfo", res);
+            Cookies.set("adminInfo", JSON.stringify(res));
             history.replace("/");
           }
         })

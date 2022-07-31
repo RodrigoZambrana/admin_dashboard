@@ -1,20 +1,22 @@
-import Cookies from 'js-cookie';
-import React, { createContext, useReducer } from 'react';
+import Cookies from "js-cookie";
+import React, { createContext, useReducer } from "react";
 
 export const AdminContext = createContext();
 
 const initialState = {
-  adminInfo: Cookies.get('adminInfo')
-    ? JSON.parse(Cookies.get('adminInfo'))
+  adminInfo: Cookies.get("adminInfo")
+    ? JSON.parse(Cookies.get("adminInfo"))
     : null,
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'USER_LOGIN':
-      return { ...state, adminInfo: action.payload };
+    case "USER_LOGIN":
+      const estado = { ...state, adminInfo: action.payload };
+      console.log(action.payload);
+      return estado;
 
-    case 'USER_LOGOUT':
+    case "USER_LOGOUT":
       return {
         ...state,
         adminInfo: null,

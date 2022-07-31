@@ -18,11 +18,11 @@ const CategoryServices = {
   },
 
   updateStatus(id, body) {
-    return requests.put(`/category/status/${id}`, body);
+    return requests.put(`/categories/status/${id}`, body);
   },
 
   deleteCategory(id, body) {
-    return requests.patch(`/category/${id}`, body);
+    return requests.patch(`/categories/${id}`, body);
   },
 };
 

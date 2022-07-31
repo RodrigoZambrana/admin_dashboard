@@ -19,16 +19,19 @@ const CategoryTable = ({ categories }) => {
 
       <TableBody>
         {categories?.map((category) => (
-          <TableRow key={category._id}>
+          <TableRow key={category.id}>
             <TableCell className="font-semibold uppercase text-xs">
-              {category._id.substring(20, 24)}
+              {category.id}
+            </TableCell>
+            <TableCell className="font-semibold uppercase text-xs">
+              {category.name}
             </TableCell>
             <TableCell>
-              <ShowHideButton id={category._id} status={category.status} />
+              <ShowHideButton id={category.id} status={category.status} />
             </TableCell>
             <TableCell>
               <EditDeleteButton
-                id={category._id}
+                id={category.id}
                 handleUpdate={handleUpdate}
                 handleModalOpen={handleModalOpen}
               />

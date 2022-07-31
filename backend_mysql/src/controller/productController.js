@@ -19,9 +19,8 @@ const getAllProducts = async (req, res) => {
 
 const addProduct = async (req, res) => {
   try {
-    const create_date = new Date();
-    const update_date = new Date();
     const {
+      id,
       title,
       price,
       sale_price,
@@ -35,9 +34,12 @@ const addProduct = async (req, res) => {
       images,
       description,
       visible,
+      create_date,
+      update_date,
       aditional_information,
     } = req.body;
     const newProduct = {
+      id,
       title,
       price,
       sale_price,
@@ -73,7 +75,7 @@ const updateProduct = async (req, res) => {
       title,
       price,
       former_price,
-      former_price,
+      sale_price,
       measurement_unit,
       category_id,
       sub_category_id,
@@ -88,6 +90,7 @@ const updateProduct = async (req, res) => {
     const updatedProduct = {
       title,
       price,
+      sale_price,
       former_price,
       measurement_unit,
       category_id,
@@ -128,17 +131,17 @@ const getProductById = async (req, res) => {
     });
   }
 };
-const deleteProduct = (req, res) => {
-    try  {
-        const { id } = req.params
-        await pool.query('DELETE FROM category WHERE id = ?', [id])
-        res.send('category deleted')
-    } catch {
-      res.status(200).send({
-        message: "Product Deleted Successfully!",
-      });
-    }
+const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await pool.query("DELETE FROM category WHERE id = ?", [id]);
+    res.send("category deleted");
+  } catch {
+    res.status(200).send({
+      message: "Product Deleted Successfully!",
+    });
   }
+};
 
 const updateStatus = (req, res) => {
   const newStatus = req.body.status;

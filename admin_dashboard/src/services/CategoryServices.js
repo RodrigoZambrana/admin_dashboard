@@ -1,20 +1,20 @@
-import requests from './httpService';
+import requests from "./httpService";
 
 const CategoryServices = {
   getAllCategory() {
-    return requests.get('/category');
+    return requests.get("/categories");
   },
 
   getCategoryById(id) {
-    return requests.get(`/category/${id}`);
+    return requests.get(`/categories/${id}`);
   },
 
   addCategory(body) {
-    return requests.post('/category/add', body);
+    return requests.post("/categories/add", body);
   },
 
   updateCategory(id, body) {
-    return requests.put(`/category/${id}`, body);
+    return requests.put(`/categories/${id}`, body);
   },
 
   updateStatus(id, body) {

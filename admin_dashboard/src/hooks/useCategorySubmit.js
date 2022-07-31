@@ -17,17 +17,14 @@ const useCategorySubmit = (id) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = ({ parent, type }) => {
-    // if (!imageUrl) {
-    //   notifyError("Icon is required!");
-    //   return;
-    // }
+  const onSubmit = ({ name, type }) => {
+    if (!imageUrl) {
+      notifyError("Icon is required!");
+      return;
+    }
     const categoryData = {
-      parent: parent,
-      // slug: slug,
-      type: type,
+      name: name,
       icon: imageUrl,
-      children: children,
     };
 
     if (id) {

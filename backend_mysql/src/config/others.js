@@ -1,5 +1,4 @@
-const rateLimit = require('express-rate-limit');
-const Product = require('../models/Product');
+const rateLimit = require("express-rate-limit");
 
 //decrease product quantity after a order created
 const handleProductQuantity = (cart) => {
@@ -15,7 +14,7 @@ const handleProductQuantity = (cart) => {
         if (err) {
           console.log(err.message);
         } else {
-          console.log('success');
+          console.log("success");
         }
       }
     );

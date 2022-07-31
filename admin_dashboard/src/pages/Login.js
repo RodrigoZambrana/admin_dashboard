@@ -47,7 +47,7 @@ const Login = () => {
                   <LabelArea label="Email" />
                   <InputArea
                     register={register}
-                    defaultValue="admin@gmail.com"
+                    defaultValue="rodrigo@gmail.com"
                     label="Email"
                     name="email"
                     type="email"
@@ -91,7 +91,7 @@ const Login = () => {
                   </button> */}
                 </form>
 
-                <p className="mt-4">
+                {/* <p className="mt-4">
                   <Link
                     className="text-sm font-medium text-green-500 dark:text-green-400 hover:underline"
                     to="/forgot-password"
@@ -106,7 +106,7 @@ const Login = () => {
                   >
                     Create account
                   </Link>
-                </p>
+                </p> */}
               </div>
             </main>
           </div>

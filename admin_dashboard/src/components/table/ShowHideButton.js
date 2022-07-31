@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
-import { BsToggleOff, BsToggleOn } from 'react-icons/bs';
+import React, { useContext } from "react";
+import { useLocation } from "react-router-dom";
+import { BsToggleOff, BsToggleOn } from "react-icons/bs";
 
-import { notifySuccess, notifyError } from '../../utils/toast';
-import ProductServices from '../../services/ProductServices';
-import CategoryServices from '../../services/CategoryServices';
-import { SidebarContext } from '../../context/SidebarContext';
+import { notifySuccess, notifyError } from "../../utils/toast";
+import ProductServices from "../../services/ProductServices";
+import CategoryServices from "../../services/CategoryServices";
+import { SidebarContext } from "../../context/SidebarContext";
 
 const ShowHideButton = ({ id, status }) => {
   const location = useLocation();
@@ -13,13 +13,13 @@ const ShowHideButton = ({ id, status }) => {
 
   const handleChangeStatus = (id) => {
     let newStatus;
-    if (status === 'Show') {
-      newStatus = 'Hide';
+    if (status === true) {
+      newStatus = false;
     } else {
-      newStatus = 'Show';
+      newStatus = false;
     }
 
-    if (location.pathname === '/category') {
+    if (location.pathname === "/category") {
       CategoryServices.updateStatus(id, { status: newStatus })
         .then((res) => {
           setIsUpdate(true);
@@ -28,7 +28,7 @@ const ShowHideButton = ({ id, status }) => {
         .catch((err) => notifyError(err.message));
     }
 
-    if (location.pathname === '/products') {
+    if (location.pathname === "/products") {
       ProductServices.updateStatus(id, { status: newStatus })
         .then((res) => {
           setIsUpdate(true);
@@ -43,7 +43,7 @@ const ShowHideButton = ({ id, status }) => {
       className="cursor-pointer text-xl flex justify-center text-center"
       onClick={() => handleChangeStatus(id)}
     >
-      {status === 'Show' ? (
+      {status === "Show" ? (
         <BsToggleOn className="text-green-500" />
       ) : (
         <BsToggleOff className="text-orange-500" />

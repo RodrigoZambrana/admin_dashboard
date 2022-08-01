@@ -20,7 +20,7 @@ export interface Product {
   aditional_information: string
 }
 
-export interface offered_services {
+export interface offered_service {
   id: number
   service_name: string
   cost: number

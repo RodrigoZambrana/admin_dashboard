@@ -8,11 +8,13 @@ export interface invoice {
 }
 
 export interface Invoice_entry {
+  id: number
   invoice_id: number
   product_name: string
   width?: number
   height?: number
-  advance: string
+  advance?: string
+  length: number
   quantity: number
   unit_cost: number
   additional_information: string

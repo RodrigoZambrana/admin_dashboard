@@ -13,11 +13,15 @@ export interface Budget {
 }
 
 export interface Budget_entry {
+  id: number
   budget_id: number
   product_id: number
   width: number
   height?: number
   advance?: number
+  quantity: number
+  unit_cost: number
+  additional_information: string
 }
 
 export enum Budget_status {

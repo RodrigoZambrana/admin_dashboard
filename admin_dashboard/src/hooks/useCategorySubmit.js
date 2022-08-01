@@ -6,7 +6,6 @@ import { notifyError, notifySuccess } from "../utils/toast";
 
 const useCategorySubmit = (id) => {
   const [imageUrl, setImageUrl] = useState("");
-  const [name, setName] = useState("");
   const [children, setChildren] = useState([]);
   const { isDrawerOpen, closeDrawer, setIsUpdate } = useContext(SidebarContext);
 
@@ -55,6 +54,9 @@ const useCategorySubmit = (id) => {
     if (!isDrawerOpen) {
       setImageUrl("");
       setValue("name", "");
+      setImageUrl("");
+      setValue("icon", "");
+
       return;
     }
     if (id) {

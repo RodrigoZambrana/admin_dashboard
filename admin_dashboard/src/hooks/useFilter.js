@@ -112,7 +112,7 @@ const useFilter = (data) => {
     //category searching
     if (categoryType) {
       services = services.filter((search) =>
-        search.type.toLowerCase().includes(categoryType.toLowerCase())
+        search.name.toLowerCase().includes(categoryType.toLowerCase())
       );
     }
 

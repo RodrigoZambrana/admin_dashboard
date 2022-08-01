@@ -64,7 +64,7 @@ const CategoryDrawer = ({ id }) => {
               </div>
             </div>
           </div>
-          <DrawerButton id={id} title="Category" />
+          <DrawerButton id={id} title="Categoria" />
         </form>
       </Scrollbars>
     </>

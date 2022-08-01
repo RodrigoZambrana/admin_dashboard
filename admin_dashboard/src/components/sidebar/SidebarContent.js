@@ -21,13 +21,13 @@ const SidebarContent = () => {
 
   return (
     <div className="py-4 text-gray-500 dark:text-gray-400">
-      <a className=" text-gray-900 dark:text-gray-200" href="/dashboard">
+      {/* <a className=" text-gray-900 dark:text-gray-200" href="/dashboard">
         {mode === "dark" ? (
           <img src={logoLight} alt="dashtar" width="135" className="pl-6" />
         ) : (
           <img src={logoDark} alt="dashtar" width="135" className="pl-6" />
         )}
-      </a>
+      </a> */}
       <ul className="mt-8">
         {sidebar.map((route) =>
           route.routes ? (

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Button } from "@windmill/react-ui";
 import { SidebarContext } from "../../context/SidebarContext";
 
-const DrawerButton = ({id, title}) => {
+const DrawerButton = ({ id, title }) => {
   const { toggleDrawer } = useContext(SidebarContext);
   return (
     <>
@@ -19,7 +19,7 @@ const DrawerButton = ({id, title}) => {
         <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
           <Button type="submit" className="w-full h-12">
             {" "}
-            {id ? <span>Update {title}</span> : <span>Add {title}</span>}
+            {id ? <span>Editar {title}</span> : <span>Agregar {title}</span>}
           </Button>
         </div>
       </div>

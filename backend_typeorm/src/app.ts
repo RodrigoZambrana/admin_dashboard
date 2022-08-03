@@ -9,6 +9,6 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.use("/api", adminRoutes);
+app.use("/admin", adminRoutes);
 
 export default app;

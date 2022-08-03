@@ -11,7 +11,6 @@ import {
   // updateStaff,
   // deleteStaff,
 } from "../controller/adminController";
-import { passwordVerificationLimit } from "../config/others";
 
 const router = Router();
 

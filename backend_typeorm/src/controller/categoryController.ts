@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
 import { Category } from "../entity/Category";
 import { validate } from "class-validator";
-import { createConnection } from "typeorm";
+import { getRepository } from "typeorm";
+import { AppDataSource } from "../db";
+
+const categoryRepository = AppDataSource.getRepository(Category);
 
 export const addCategory = async (req: Request, res: Response) => {
   try {
     const { name, image_url } = req.body;
-
     const newCategory = new Category();
     newCategory.name = name;
     newCategory.image_url = image_url;
@@ -39,51 +41,75 @@ export const getAllCategory = async (req: Request, res: Response) => {
   }
 };
 
-// export const getCategoryById = async (req: Request, res: Response) => {
-//   try {
-//     const category = await Category.findOneBy(req.params.id);
-//     res.json(category);
-//   } catch (error) {
-//     res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// };
+export const getCategoryById = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    const category = await categoryRepository.find({
+      relations: {
+        subCategories: true,
+      },
+      where: {
+        id: id,
+      },
+    });
+    res.json(category);
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+    });
+  }
+};
 
-// export const updateCategory = async (req: Request, res: Response) => {
-//   try {
-//     const category = await Category.findOneBy(req.params.id);
-//     if (category) {
-//       category.parent = req.body.parent;
-//       category.type = req.body.type;
-//       category.icon = req.body.icon;
-//       category.children = req.body.children;
-//       await category.save();
-//       res.send({ message: "Category Updated Successfully!" });
-//     }
-//   } catch (err) {
-//     res.status(404).send({ message: "Category not found!" });
-//   }
-// };
+export const updateCategory = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    const search_category = await categoryRepository.find({
+      where: {
+        id: id,
+      },
+    });
+    if (search_category != null) {
+      const { name, image_url, showing } = req.body;
+      const category = await Category.update(
+        {
+          id,
+        },
+        {
+          name: name,
+          image_url: image_url,
+          showing: showing,
+        }
+      );
+      res.json(category);
+    } else {
+      res.status(404).send({ message: "Category not found!" });
+    }
+  } catch (err) {
+    res.status(404).send({ message: "Category not found!" });
+  }
+};
 
-// export const deleteCategory = (req: Request, res: Response) => {
-//   Category.deleteOne({ _id: req.params.id }, (error) => {
-//     if (error) {
-//       res.status(500).send({
-//         message: error.message,
-//       });
-//     } else {
-//       res.status(200).send({
-//         message: "Category Deleted Successfully!",
-//       });
-//     }
-//   });
-// };
+export const deleteCategory = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    const category = await categoryRepository.findOneById(id);
+    if (category !== null) {
+      await categoryRepository.delete({ id });
+      res.status(200).send({
+        message: "Category Deleted Successfully!",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+    });
+  }
+};
 
 module.exports = {
   addCategory,
   getAllCategory,
-  // getCategoryById,
-  // updateCategory,
-  // deleteCategory,
+  getCategoryById,
+  updateCategory,
+  deleteCategory,
 };

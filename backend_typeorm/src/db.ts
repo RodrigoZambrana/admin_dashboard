@@ -15,7 +15,7 @@ export const AppDataSource = new DataSource({
   username: "root",
   password: "password",
   database: "urucortinas_dev",
-  synchronize: true,
+  // synchronize: true,
   logging: true,
   entities: [
     Admin,

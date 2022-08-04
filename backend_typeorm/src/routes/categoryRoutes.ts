@@ -2,9 +2,9 @@ import { Router } from "express";
 import {
   addCategory,
   getAllCategory,
-  // getCategoryById,
-  // updateCategory,
-  // deleteCategory,
+  getCategoryById,
+  updateCategory,
+  deleteCategory,
 } from "../controller/categoryController";
 
 const router = Router();
@@ -15,13 +15,13 @@ router.get("/", getAllCategory);
 //add a category
 router.post("/add", addCategory);
 
-// //get a category
-// router.get("/:id", getCategoryById);
+//get a category
+router.get("/:id", getCategoryById);
 
-// //update a category
-// router.put("/:id", updateCategory);
+//update a category
+router.put("/:id", updateCategory);
 
-// //delete a category
-// router.patch("/:id", deleteCategory);
+//delete a category
+router.patch("/:id", deleteCategory);
 
 export default router;

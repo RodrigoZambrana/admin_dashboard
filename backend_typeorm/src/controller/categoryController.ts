@@ -98,6 +98,8 @@ export const deleteCategory = async (req: Request, res: Response) => {
       res.status(200).send({
         message: "Category Deleted Successfully!",
       });
+    } else {
+      res.status(404).send({ message: "Category not found!" });
     }
   } catch (error) {
     res.status(500).json({

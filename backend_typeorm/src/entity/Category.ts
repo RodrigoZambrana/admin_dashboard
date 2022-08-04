@@ -5,6 +5,16 @@ import {
   BaseEntity,
   OneToMany,
 } from "typeorm";
+import {
+  Contains,
+  IsInt,
+  Length,
+  IsEmail,
+  IsFQDN,
+  IsDate,
+  Min,
+  Max,
+} from "class-validator";
 import { SubCategory } from "./SubCategory";
 import { Product } from "./Product";
 
@@ -18,6 +28,9 @@ export class Category extends BaseEntity {
 
   @Column()
   image_url: string;
+
+  @Column({ default: false })
+  showing: boolean;
 
   @OneToMany(() => SubCategory, (subCategory) => subCategory.category, {
     cascade: true,

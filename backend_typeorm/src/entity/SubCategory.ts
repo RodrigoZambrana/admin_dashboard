@@ -32,8 +32,17 @@ export class SubCategory extends BaseEntity {
   @ManyToOne(() => Category, (category) => category.subCategories)
   category: Category
 
-  @OneToMany(() => Product, (product) => product.category, {
+  @OneToMany(() => Product, (product) => product.subcategory, {
     eager: true,
+    cascade: true,
+    onDelete: 'CASCADE',
   })
   products: Product[]
+
+  addProduct(product: Product) {
+    if (this.products == null) {
+      this.products = new Array<Product>()
+    }
+    this.products.push(product)
+  }
 }

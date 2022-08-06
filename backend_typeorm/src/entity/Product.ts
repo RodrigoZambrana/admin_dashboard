@@ -4,14 +4,16 @@ import {
   PrimaryGeneratedColumn,
   BaseEntity,
   ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm'
 import { Category } from './Category'
 import { SubCategory } from './SubCategory'
 
 export enum selling_unit {
   SUQARE_METER = 'Metros Cuadrados',
-  METER = 'metros lineales',
-  UNIT = 'unidad',
+  METER = 'Metros lineales',
+  UNIT = 'Unidad',
 }
 
 export enum providers {
@@ -30,10 +32,13 @@ export class Product extends BaseEntity {
   name: string
 
   @Column()
-  price: number //precio sin IVA
+  price: number //precio de costo
 
   @Column()
-  fomer_price: number //precio anterior-para peomociones
+  sale_price: number //precio de venta IVA incluido
+
+  @Column()
+  former_price: number //precio anterior-para peomociones
 
   @Column()
   stock: number
@@ -41,17 +46,14 @@ export class Product extends BaseEntity {
   @Column()
   image: string
 
-  @Column()
-  create_date: Date
-
-  @Column()
-  update_date: Date
+  @Column('simple-array')
+  tags: string[]
 
   @Column({
     type: 'enum',
     enum: providers,
   })
-  providers: providers
+  provider: providers
 
   @Column({
     type: 'enum',
@@ -59,12 +61,12 @@ export class Product extends BaseEntity {
   })
   unit: selling_unit
 
-  @Column()
-  products: string
-
-  @ManyToOne(() => Category, (category) => category.products)
-  category: Category
-
   @ManyToOne(() => SubCategory, (subcategory) => subcategory.products)
   subcategory: SubCategory
+
+  @CreateDateColumn()
+  created_at: Date
+
+  @UpdateDateColumn()
+  updated_at: Date
 }

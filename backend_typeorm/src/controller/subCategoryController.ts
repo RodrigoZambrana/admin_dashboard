@@ -4,7 +4,6 @@ import { Category } from '../entity/Category'
 import { validate } from 'class-validator'
 import { getRepository } from 'typeorm'
 import { AppDataSource } from '../db'
-import { ISubCategory } from '../models/Category'
 
 const subCategoryRepository = AppDataSource.getRepository(SubCategory)
 const categoryRepository = AppDataSource.getRepository(Category)
@@ -14,25 +13,18 @@ export const addSubCategory = async (req: Request, res: Response) => {
     const id = Number(req.params.id)
     const category = await categoryRepository.findOneById(id)
     if (category !== null) {
-      const {
-        name,
-        description,
-        image_url,
-        images,
-        additional_information,
-      } = req.body
-      const newSubCategory = new SubCategory()
-      newSubCategory.name = name
-      newSubCategory.image_url = image_url
-      newSubCategory.description = description
-      newSubCategory.additional_information = additional_information
-      newSubCategory.images = new Array(images)
-      category.subCategories = [newSubCategory]
-
-      await category.save()
-      res.status(200).json({
-        message: 'SubCategory  Successfully Added!',
-      })
+      let newSubCategory = new SubCategory()
+      newSubCategory = req.body
+      const errors = await validate(newSubCategory)
+      if (errors.length > 0) {
+        throw new Error(`Validation failed!`)
+      } else {
+        category.subCategories = [newSubCategory]
+        await category.save()
+        res.status(200).json({
+          message: 'SubCategory  Successfully Added!',
+        })
+      }
     } else {
       res.status(404).send({ message: 'Category id not found!' })
     }

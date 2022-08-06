@@ -19,13 +19,13 @@ export const addSubCategory = async (req: Request, res: Response) => {
         description,
         image_url,
         images,
-        aditional_information,
+        additional_information,
       } = req.body
       const newSubCategory = new SubCategory()
       newSubCategory.name = name
       newSubCategory.image_url = image_url
       newSubCategory.description = description
-      newSubCategory.aditional_information = aditional_information
+      newSubCategory.additional_information = additional_information
       newSubCategory.images = new Array(images)
       category.subCategories = [newSubCategory]
 

@@ -20,14 +20,14 @@ export class SubCategory extends BaseEntity {
   @Column()
   image_url: string
 
-  @Column('text', { array: true })
+  @Column('simple-array')
   images: string[]
 
   @Column()
   description: string
 
   @Column()
-  aditional_information: string
+  additional_information: string
 
   @ManyToOne(() => Category, (category) => category.subCategories)
   category: Category

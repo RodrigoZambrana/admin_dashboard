@@ -5,24 +5,35 @@ import {
   BaseEntity,
   ManyToOne,
   OneToMany,
-} from "typeorm";
-import { Category } from "./Category";
-import { Product } from "./Product";
+} from 'typeorm'
+import { Category } from './Category'
+import { Product } from './Product'
 
 @Entity()
 export class SubCategory extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column()
-  name: string;
+  name: string
 
   @Column()
-  image_url: string;
+  image_url: string
+
+  @Column('text', { array: true })
+  images: string[]
+
+  @Column()
+  description: string
+
+  @Column()
+  aditional_information: string
 
   @ManyToOne(() => Category, (category) => category.subCategories)
-  category: Category;
+  category: Category
 
-  @OneToMany((type) => Product, (product) => product.category)
-  products: Product[];
+  @OneToMany(() => Product, (product) => product.category, {
+    eager: true,
+  })
+  products: Product[]
 }

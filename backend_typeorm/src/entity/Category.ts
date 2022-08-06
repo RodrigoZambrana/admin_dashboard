@@ -23,6 +23,7 @@ export class Category extends BaseEntity {
   showing: boolean;
 
   @OneToMany(() => SubCategory, (subCategory) => subCategory.category, {
+    eager: true,
     cascade: true,
     onDelete: "CASCADE",
   })
@@ -34,10 +35,8 @@ export class Category extends BaseEntity {
     }
     this.subCategories.push(subCategory);
   }
-
-  @OneToMany(() => Product, (product) => product.category, {
-    cascade: true,
-  })
+  @OneToMany(() => Product, (product) => product.category)
+  // {cascade: true,}
   products: Product[];
 
   addProduct(product: Product) {

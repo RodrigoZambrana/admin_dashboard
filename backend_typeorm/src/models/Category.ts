@@ -1,13 +1,14 @@
 export interface Category {
-  id: number;
-  name: string;
-  image_url: string;
-  sbcategories: SubCategory[];
+  id: number
+  name: string
+  image_url: string
+  sbcategories: ISubCategory[]
 }
 
-export interface SubCategory {
-  id: number;
-  name: string;
-  image_url: string;
-  category_id: number;
+export interface ISubCategory {
+  name: string
+  description: string
+  images: string[]
+  image_url: string
+  additional_information: string
 }

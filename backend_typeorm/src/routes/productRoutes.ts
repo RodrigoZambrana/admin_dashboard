@@ -1,45 +1,26 @@
-const express = require('express')
-const router = express.Router()
-const {
-  getAllProducts,
-  getShowingProducts,
-  getDiscountedProducts,
-  getStockOutProducts,
+import { Router } from "express";
+import {
+  getAllProduct,
   getProductById,
-  getProductBySlug,
   addProduct,
   updateProduct,
-  updateStatus,
   deleteProduct,
-} = require('../controller/productController')
+} from "../controller/productController";
+
+const router = Router();
 
 //get all products
-router.get('/', getAllProducts)
+router.get("/", getAllProduct);
 
 //add a product
-router.post('/add', addProduct)
+router.post("/add", addProduct);
 
 //get a product
-router.post('/product/:id', getProductById)
+router.post("/product/:id", getProductById);
 //update a product
-router.post('/edit/:id', updateProduct)
-
-//update a product status
-router.put('/status/:id', updateStatus)
+router.post("/edit/:id", updateProduct);
 
 //delete a product
-router.delete('/:id', deleteProduct)
+router.delete("/:id", deleteProduct);
 
-//get showing products only
-router.get('/show', getShowingProducts)
-
-//get discounted products only
-router.get('/discount', getDiscountedProducts)
-
-//get all stock out products
-router.get('/stock-out', getStockOutProducts)
-
-//get a product by slug
-router.get('/:slug', getProductBySlug)
-
-module.exports = router
+export default router;

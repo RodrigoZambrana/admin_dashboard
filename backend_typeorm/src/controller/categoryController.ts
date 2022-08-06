@@ -20,7 +20,7 @@ export const addCategory = async (req: Request, res: Response) => {
       await newCategory.save();
     }
     res.status(200).json({
-      message: "Category Added Successfully!",
+      message: "Category  Successfully Added!",
     });
   } catch (error) {
     res.status(500).json({
@@ -44,7 +44,7 @@ export const getAllCategory = async (req: Request, res: Response) => {
 export const getCategoryById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
-    const category = await categoryRepository.find({
+    const search_category = await categoryRepository.find({
       relations: {
         subCategories: true,
       },
@@ -52,7 +52,12 @@ export const getCategoryById = async (req: Request, res: Response) => {
         id: id,
       },
     });
-    res.json(category);
+
+    if (search_category != null) {
+      res.json(search_category);
+    } else {
+      res.status(404).send({ message: "Category id not found!" });
+    }
   } catch (error) {
     res.status(500).json({
       message: error,
@@ -80,7 +85,9 @@ export const updateCategory = async (req: Request, res: Response) => {
           showing: showing,
         }
       );
-      res.json(category);
+      res.status(200).json({
+        message: "Category  Successfully Updated!",
+      });
     } else {
       res.status(404).send({ message: "Category not found!" });
     }

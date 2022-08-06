@@ -4,73 +4,67 @@ import {
   PrimaryGeneratedColumn,
   BaseEntity,
   ManyToOne,
-} from "typeorm";
-import { Category } from "./Category";
-import { SubCategory } from "./SubCategory";
+} from 'typeorm'
+import { Category } from './Category'
+import { SubCategory } from './SubCategory'
 
 export enum selling_unit {
-  SUQARE_METER = "Metros Cuadrados",
-  METER = "metros lineales",
-  UNIT = "unidad",
+  SUQARE_METER = 'Metros Cuadrados',
+  METER = 'metros lineales',
+  UNIT = 'unidad',
 }
 
 export enum providers {
-  VEROSOL = "Verosol",
-  PROPERFIL = "Properfil",
-  LIDASUR = "Lidasur",
-  URUCORTINAS = "urucortinas",
+  VEROSOL = 'Verosol',
+  PROPERFIL = 'Properfil',
+  LIDASUR = 'Lidasur',
+  URUCORTINAS = 'urucortinas',
 }
 
 @Entity()
 export class Product extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column()
-  title: string;
+  name: string
 
   @Column()
-  price: number; //precio sin IVA
+  price: number //precio sin IVA
 
   @Column()
-  fomer_price: number; //precio anterior-para peomociones
+  fomer_price: number //precio anterior-para peomociones
 
   @Column()
-  stock: number;
+  stock: number
 
   @Column()
-  image: string;
+  image: string
 
   @Column()
-  description: string;
+  create_date: Date
 
   @Column()
-  create_date: Date;
-
-  @Column()
-  update_date: Date;
-
-  @Column()
-  aditional_information: string;
+  update_date: Date
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: providers,
   })
-  providers: providers;
+  providers: providers
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: selling_unit,
   })
-  unit: selling_unit;
+  unit: selling_unit
 
   @Column()
-  products: string;
+  products: string
 
-  @ManyToOne((type) => Category, (category) => category.products)
-  category: Category;
+  @ManyToOne(() => Category, (category) => category.products)
+  category: Category
 
-  @ManyToOne((type) => SubCategory, (subcategory) => subcategory.products)
-  subcategory: SubCategory;
+  @ManyToOne(() => SubCategory, (subcategory) => subcategory.products)
+  subcategory: SubCategory
 }

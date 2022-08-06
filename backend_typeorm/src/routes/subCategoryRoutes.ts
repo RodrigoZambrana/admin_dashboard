@@ -1,12 +1,11 @@
 import { Router } from "express";
-
-const {
+import {
   getAllSubCategory,
   addSubCategory,
   getSubCategoryById,
   updateSubCategory,
   deleteSubCategory,
-} = require("../controller/subCategoryController");
+} from "../controller/subCategoryController";
 
 const router = Router();
 
@@ -14,7 +13,7 @@ const router = Router();
 router.get("/", getAllSubCategory);
 
 //add a category
-router.post("/add", addSubCategory);
+router.post("/add/:id", addSubCategory);
 
 //get a category
 router.get("/:id", getSubCategoryById);
@@ -25,4 +24,4 @@ router.put("/:id", updateSubCategory);
 //delete a category
 router.patch("/:id", deleteSubCategory);
 
-module.exports = router;
+export default router;

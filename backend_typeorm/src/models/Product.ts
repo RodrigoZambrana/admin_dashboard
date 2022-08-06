@@ -1,5 +1,5 @@
 import { Category } from './Category'
-import { SubCategory } from './Category'
+import { ISubCategory } from './Category'
 
 export interface Product {
   id: number
@@ -8,7 +8,7 @@ export interface Product {
   former_price: number
   selling_unit: SellingUnit
   category_id: Category
-  sub_category_id: SubCategory
+  sub_category_id: ISubCategory
   provider_name: ProviderName
   tags: string[]
   stock: number

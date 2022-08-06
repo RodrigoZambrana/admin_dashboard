@@ -35,7 +35,7 @@ export class SubCategory extends BaseEntity {
   @OneToMany(() => Product, (product) => product.subcategory, {
     eager: true,
     cascade: true,
-    onDelete: 'CASCADE',
+    //onDelete: 'CASCADE',
   })
   products: Product[]
 

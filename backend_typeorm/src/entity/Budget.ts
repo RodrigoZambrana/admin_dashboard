@@ -4,62 +4,67 @@ import {
   PrimaryGeneratedColumn,
   BaseEntity,
   OneToMany,
-} from "typeorm";
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm'
 
-import { Budget_Entry } from "./Budget_Entry";
+import { Budget_Entry } from './BudgetEntry'
 
 export enum budget_status {
-  PENDIENTE = "Pendiente",
-  ACEPTADO = "Aceptado",
-  RECHAZADO = "Rechazado",
-  EXPIRADO = "Expirado",
+  PENDIENTE = 'Pendiente',
+  ACEPTADO = 'Aceptado',
+  RECHAZADO = 'Rechazado',
+  EXPIRADO = 'Expirado',
 }
 
 @Entity()
 export class Budget extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column({ nullable: true })
-  customer_id: number;
+  customer_id: number
 
   @Column({ nullable: true })
-  customer_name: string;
+  customer_name: string
 
   @Column({ nullable: true })
-  customer_telephone: string;
+  customer_telephone: string
 
   @Column({ nullable: true })
-  customer_email: string;
+  customer_email: string
 
   @Column({ nullable: true })
-  customer_address: string;
-
-  @Column()
-  created_date: Date;
+  customer_address: string
 
   @Column({ default: 0 })
-  discount_percentage: number;
+  discount_percentage: number
 
   @Column({ default: 15 })
-  valid_days: number;
+  valid_days: number
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: budget_status,
-    default: budget_status.PENDIENTE,
   })
-  status: budget_status;
+  status: budget_status
 
   @OneToMany(() => Budget_Entry, (budget_entry) => budget_entry.budget, {
+    eager: true,
     cascade: true,
   })
-  budget_entries: Budget_Entry[];
+  budget_entries: Budget_Entry[]
 
   addEntry(budget_entry: Budget_Entry) {
     if (this.budget_entries == null) {
-      this.budget_entries = new Array<Budget_Entry>();
+      this.budget_entries = new Array<Budget_Entry>()
     }
-    this.budget_entries.push(budget_entry);
+    this.budget_entries.push(budget_entry)
   }
+
+  @CreateDateColumn()
+  created_at: Date
+
+  @UpdateDateColumn()
+  updated_at: Date
 }

@@ -4,38 +4,38 @@ import {
   PrimaryGeneratedColumn,
   BaseEntity,
   ManyToOne,
-} from "typeorm";
-import { Budget } from "./Budget";
+} from 'typeorm'
+import { Budget } from './Budget'
 
 @Entity()
 export class Budget_Entry extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column()
-  product_name: number;
+  product_name: number
 
   @Column({ nullable: true })
-  length: number;
+  length: number
 
   @Column({ nullable: true })
-  width: number;
+  width: number
 
   @Column({ nullable: true })
-  height: number;
+  height: number
 
   @Column({ nullable: true })
-  advance: number;
+  advance: number
 
   @Column()
-  quantity: number;
+  quantity: number
 
   @Column()
-  unit_cost: number;
+  unit_cost: number
 
   @Column()
-  additional_information: string;
+  additional_information: string
 
   @ManyToOne(() => Budget, (budget) => budget.budget_entries)
-  budget: Budget;
+  budget: Budget
 }

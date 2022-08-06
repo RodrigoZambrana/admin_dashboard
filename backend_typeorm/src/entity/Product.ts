@@ -7,7 +7,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { Category } from './Category'
 import { SubCategory } from './SubCategory'
 
 export enum selling_unit {

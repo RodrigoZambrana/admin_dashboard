@@ -1,30 +1,30 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from 'express'
 
-const {
+import {
   addBudget,
   getAllBudget,
-  getAllCustomerBudget,
   getBudgetById,
   updateBudget,
   deleteBudget,
-} = require("../controller/budgetController");
+} from '../controller/budgetController'
+
+const router = Router()
 
 //get all budgets
-router.get("/", getAllBudget);
+router.get('/', getAllBudget)
 
-router.get("/:id", getAllCustomerBudget);
+// router.get('/:id', getAllCustomerBudget)
 
 //add a budget
-router.post("/add", addBudget);
+router.post('/add', addBudget)
 
 //get a budget
-router.get("/:id", getBudgetById);
+router.get('/:id', getBudgetById)
 
 //update a budget
-router.put("/edit/:id", updateBudget);
+router.put('/edit/:id', updateBudget)
 
 //delete a budget
-router.patch("/delete/:id", deleteBudget);
+router.patch('/delete/:id', deleteBudget)
 
-module.exports = router;
+export default router

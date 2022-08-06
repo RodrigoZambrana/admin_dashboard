@@ -6,7 +6,7 @@ import { Product } from './entity/Product'
 import { Customer } from './entity/Customer'
 import { Address } from './entity/Address'
 import { Budget } from './entity/Budget'
-import { Budget_Entry } from './entity/Budget_Entry'
+import { Budget_Entry } from './entity/BudgetEntry'
 
 export const AppDataSource = new DataSource({
   type: 'mysql',

@@ -1,32 +1,32 @@
 import { Request, Response } from 'express'
-import { SubCategory } from '../entity/SubCategory'
-import { Category } from '../entity/Category'
+import { Budget_Entry } from '../entity/BudgetEntry'
+import { Budget } from '../entity/Budget'
 import { validate } from 'class-validator'
 import { getRepository } from 'typeorm'
 import { AppDataSource } from '../db'
 
-const subCategoryRepository = AppDataSource.getRepository(SubCategory)
-const categoryRepository = AppDataSource.getRepository(Category)
+const Budget_EntryRepository = AppDataSource.getRepository(Budget_Entry)
+const budgetRepository = AppDataSource.getRepository(Budget)
 
-export const addSubCategory = async (req: Request, res: Response) => {
+export const addBudget_Entry = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const category = await categoryRepository.findOneById(id)
-    if (category !== null) {
-      let newSubCategory = new SubCategory()
-      newSubCategory = req.body
-      const errors = await validate(newSubCategory)
+    const budget = await budgetRepository.findOneById(id)
+    if (budget !== null) {
+      let newBudget_Entry = new Budget_Entry()
+      newBudget_Entry = req.body
+      const errors = await validate(newBudget_Entry)
       if (errors.length > 0) {
         throw new Error(`Validation failed!`)
       } else {
-        category.subCategories = [newSubCategory]
-        await category.save()
+        budget.budget_entries = [newBudget_Entry]
+        await budget.save()
         res.status(200).json({
-          message: 'SubCategory  Successfully Added!',
+          message: 'Budget_Entry  Successfully Added!',
         })
       }
     } else {
-      res.status(404).send({ message: 'Category id not found!' })
+      res.status(404).send({ message: 'Budget_Entry id not found!' })
     }
   } catch (error) {
     res.status(500).json({
@@ -35,12 +35,10 @@ export const addSubCategory = async (req: Request, res: Response) => {
   }
 }
 
-//categories and products of subcategory
-export const getAllSubCategory = async (req: Request, res: Response) => {
+//categories and products of Budget_Entry
+export const getAllBudget_Entry = async (req: Request, res: Response) => {
   try {
-    const subCategories = await subCategoryRepository.find({
-      relations: ['products'],
-    })
+    const subCategories = await Budget_EntryRepository.find()
     res.json(subCategories)
   } catch (error) {
     res.status(500).json({
@@ -49,22 +47,19 @@ export const getAllSubCategory = async (req: Request, res: Response) => {
   }
 }
 
-export const getSubCategoryById = async (req: Request, res: Response) => {
+export const getBudget_EntryById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const search_SubCategory = await subCategoryRepository.find({
-      relations: {
-        products: true,
-      },
+    const search_Budget_Entry = await Budget_EntryRepository.find({
       where: {
         id: id,
       },
     })
 
-    if (search_SubCategory != null) {
-      res.json(search_SubCategory)
+    if (search_Budget_Entry != null) {
+      res.json(search_Budget_Entry)
     } else {
-      res.status(404).send({ message: 'SubCategory id not found!' })
+      res.status(404).send({ message: 'Budget_Entry id not found!' })
     }
   } catch (error) {
     res.status(500).json({
@@ -73,47 +68,62 @@ export const getSubCategoryById = async (req: Request, res: Response) => {
   }
 }
 
-export const updateSubCategory = async (req: Request, res: Response) => {
+export const updateBudget_Entry = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const search_SubCategory = await subCategoryRepository.find({
+    const search_Budget_Entry = await Budget_EntryRepository.find({
       where: {
         id: id,
       },
     })
-    if (search_SubCategory != null) {
-      const { name, image_url, showing } = req.body
-      const subCategory = await subCategoryRepository.update(
+    if (search_Budget_Entry != null) {
+      const {
+        product_name,
+        length,
+        width,
+        height,
+        advance,
+        quantity,
+        unit_cost,
+        additional_information,
+      } = req.body
+      const Budget_Entry = await Budget_EntryRepository.update(
         {
           id,
         },
         {
-          name: name,
-          image_url: image_url,
+          product_name,
+          length,
+          width,
+          height,
+          advance,
+          quantity,
+          unit_cost,
+          additional_information,
         },
       )
       res.status(200).json({
-        message: 'SubCategory  Successfully Updated!',
+        message: 'Budget_Entry  Successfully Updated!',
       })
     } else {
-      res.status(404).send({ message: 'SubCategory not found!' })
+      res.status(404).send({ message: 'Budget_Entry not found!' })
     }
   } catch (err) {
-    res.status(404).send({ message: 'SubCategory not found!' })
+    res.status(404).send({ message: 'Budget_Entry not found!' })
   }
 }
 
-export const deleteSubCategory = async (req: Request, res: Response) => {
+export const deleteBudget_Entry = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const subCategory = await subCategoryRepository.findOneById(id)
-    if (subCategory !== null) {
-      await subCategoryRepository.delete({ id })
+    const Budget_Entry = await Budget_EntryRepository.findOneById(id)
+    if (Budget_Entry !== null) {
+      await Budget_EntryRepository.delete({ id })
       res.status(200).send({
-        message: 'subCategory Deleted Successfully!',
+        message: 'Budget_Entry Deleted Successfully!',
       })
     } else {
-      res.status(404).send({ message: 'subCategory not found!' })
+      res.status(404).send({ message: 'Budget_Entry not found!' })
     }
   } catch (error) {
     res.status(500).json({
@@ -123,9 +133,9 @@ export const deleteSubCategory = async (req: Request, res: Response) => {
 }
 
 module.exports = {
-  addSubCategory,
-  getAllSubCategory,
-  getSubCategoryById,
-  updateSubCategory,
-  deleteSubCategory,
+  addBudget_Entry,
+  getAllBudget_Entry,
+  getBudget_EntryById,
+  updateBudget_Entry,
+  deleteBudget_Entry,
 }

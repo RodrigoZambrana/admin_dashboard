@@ -43,8 +43,6 @@ export const addBudget = async (req: Request, res: Response) => {
     newBudget.valid_days = valid_days
     newBudget.status = status
 
-    console.log(newBudget)
-
     const errors = await validate(newBudget)
     if (errors.length > 0) {
       throw new Error(`Validation failed!`)

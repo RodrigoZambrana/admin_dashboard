@@ -52,6 +52,7 @@ export class Budget extends BaseEntity {
   @OneToMany(() => Budget_Entry, (budget_entry) => budget_entry.budget, {
     eager: true,
     cascade: true,
+    onDelete: 'CASCADE',
   })
   budget_entries: Budget_Entry[]
 

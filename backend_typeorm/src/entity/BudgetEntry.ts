@@ -13,7 +13,7 @@ export class Budget_Entry extends BaseEntity {
   id: number
 
   @Column()
-  product_name: number
+  product_name: string
 
   @Column({ nullable: true })
   length: number

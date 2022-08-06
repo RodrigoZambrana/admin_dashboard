@@ -25,6 +25,6 @@ router.get('/:id', getBudgetById)
 router.put('/edit/:id', updateBudget)
 
 //delete a budget
-router.patch('/delete/:id', deleteBudget)
+router.patch('/:id', deleteBudget)
 
 export default router

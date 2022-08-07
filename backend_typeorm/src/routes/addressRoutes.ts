@@ -1,27 +1,27 @@
 import { Router } from 'express'
 import {
-  getAllSubCategory,
-  addSubCategory,
-  getSubCategoryById,
-  updateSubCategory,
-  deleteSubCategory,
-} from '../controller/subCategoryController'
+  getAllAddress,
+  addAddress,
+  getAddressById,
+  updateAddress,
+  deleteAddress,
+} from '../controller/addressController'
 
 const router = Router()
 
 //get all subCategories
-router.get('/', getAllSubCategory)
+router.get('/', getAllAddress)
 
 //add a category
-router.post('/add/:id', addSubCategory)
+router.post('/:id', addAddress)
 
 //get a category
-router.get('/:id', getSubCategoryById)
+router.get('/:id', getAddressById)
 
 //update a category
-router.put('/:id', updateSubCategory)
+router.put('/:id', updateAddress)
 
 //delete a category
-router.patch('/:id', deleteSubCategory)
+router.patch('/:id', deleteAddress)
 
 export default router

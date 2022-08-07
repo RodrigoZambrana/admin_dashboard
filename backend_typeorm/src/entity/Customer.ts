@@ -31,6 +31,7 @@ export class Customer extends BaseEntity {
   addresses: Address[]
 
   @OneToMany(() => Order, (order) => order.customer, {
+    cascade: true,
     eager: true,
   })
   orders: Order[]

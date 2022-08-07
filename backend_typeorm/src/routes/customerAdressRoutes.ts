@@ -1,27 +1,30 @@
-const express = require("express");
-const router = express.Router();
-
-const {
-  getAllCustomerAddress,
+import { Router } from 'express'
+import {
+  getAllAddress,
   addAddress,
   getAddressById,
   updateAddress,
   deleteAddress,
-} = require("../controller/customerAdressController");
+} from '../controller/addressController'
+
+const router = Router()
 
 //get all customer address
-router.get("/:id", getAllCustomerAddress);
+router.get('/', getAllAddress)
+
+//get all customer address
+router.get('/:id', getAllAddress)
 
 //add an address to a customer
-router.post("/add/:id", addAddress);
+router.post('/add/:id', addAddress)
 
 //get an address by adress_id
-router.get("/:id", getAddressById);
+router.get('/:id', getAddressById)
 
 //update customer address
-router.put("/edit/:id", updateAddress);
+router.put('/edit/:id', updateAddress)
 
 //delete an address
-router.patch("/delete/:id", deleteAddress);
+router.patch('/delete/:id', deleteAddress)
 
-module.exports = router;
+export default router

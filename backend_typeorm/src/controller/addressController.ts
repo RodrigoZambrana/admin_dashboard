@@ -5,7 +5,7 @@ import { validate } from 'class-validator'
 import { getRepository } from 'typeorm'
 import { AppDataSource } from '../db'
 
-const AddressRepository = AppDataSource.getRepository(Address)
+const addressRepository = AppDataSource.getRepository(Address)
 const customerRepository = AppDataSource.getRepository(Customer)
 
 export const addAddress = async (req: Request, res: Response) => {
@@ -38,10 +38,8 @@ export const addAddress = async (req: Request, res: Response) => {
 //categories and products of Address
 export const getAllAddress = async (req: Request, res: Response) => {
   try {
-    const subCategories = await AddressRepository.find({
-      relations: ['products'],
-    })
-    res.json(subCategories)
+    const addresses = await addressRepository.find()
+    res.json(addresses)
   } catch (error) {
     res.status(500).json({
       message: error,
@@ -52,7 +50,7 @@ export const getAllAddress = async (req: Request, res: Response) => {
 export const getAddressById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const search_Address = await AddressRepository.find({
+    const search_Address = await addressRepository.find({
       where: {
         id: id,
       },
@@ -73,18 +71,23 @@ export const getAddressById = async (req: Request, res: Response) => {
 export const updateAddress = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const search_Address = await AddressRepository.find({
+    const search_Address = await addressRepository.find({
       where: {
         id: id,
       },
     })
     if (search_Address != null) {
-      const { name, image_url, showing } = req.body
-      const Address = await AddressRepository.update(
+      const { street, number, apartment, corner } = req.body
+      const address = await addressRepository.update(
         {
           id,
         },
-        {},
+        {
+          street: street,
+          number: number,
+          apartment: apartment,
+          corner: corner,
+        },
       )
       res.status(200).json({
         message: 'Address  Successfully Updated!',
@@ -100,9 +103,9 @@ export const updateAddress = async (req: Request, res: Response) => {
 export const deleteAddress = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const Address = await AddressRepository.findOneById(id)
-    if (Address !== null) {
-      await AddressRepository.delete({ id })
+    const address = await addressRepository.findOneById(id)
+    if (address !== null) {
+      await addressRepository.delete({ id })
       res.status(200).send({
         message: 'Address Deleted Successfully!',
       })

@@ -136,7 +136,7 @@ export const deleteOrder = async (req: Request, res: Response) => {
 module.exports = {
   getAllOrders,
   getOrderById,
-  getOrderByUser,
+  // getOrderByUser,
   updateOrder,
   deleteOrder,
 }

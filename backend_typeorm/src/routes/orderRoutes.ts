@@ -3,7 +3,7 @@ import { Router } from 'express'
 import {
   getAllOrders,
   getOrderById,
-  //getOrderByUser,
+  addOrder,
   updateOrder,
   deleteOrder,
 } from '../controller/orderController'
@@ -13,8 +13,7 @@ const router = Router()
 //get all orders
 router.get('/', getAllOrders)
 
-//get all order by a user
-// router.get('/user/:id', getOrderByUser)
+router.post('/add', addOrder)
 
 //get a order by id
 router.get('/:id', getOrderById)

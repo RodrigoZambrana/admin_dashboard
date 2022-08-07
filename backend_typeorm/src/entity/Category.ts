@@ -29,10 +29,9 @@ export class Category extends BaseEntity {
   })
   subCategories: SubCategory[]
 
-  addSubCategory(subCategory: SubCategory) {
+  addSubCategory() {
     if (this.subCategories == null) {
       this.subCategories = new Array<SubCategory>()
     }
-    this.subCategories.push(subCategory)
   }
 }

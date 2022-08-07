@@ -1,17 +1,19 @@
 import { Request, Response } from 'express'
-import { Budget_Entry } from '../entity/BudgetEntry'
-import { Budget } from '../entity/Budget'
+import { Order_Entry } from '../entity/OrderEntry'
+import { Order } from '../entity/Order'
+import { Product } from '../entity/Product'
 import { validate } from 'class-validator'
 import { getRepository } from 'typeorm'
 import { AppDataSource } from '../db'
 
-const Budget_EntryRepository = AppDataSource.getRepository(Budget_Entry)
-const budgetRepository = AppDataSource.getRepository(Budget)
+const order_EntryRepository = AppDataSource.getRepository(Order_Entry)
+const orderRepository = AppDataSource.getRepository(Order)
+const productRepository = AppDataSource.getRepository(Product)
 
 //categories and products of Budget_Entry
-export const getAllBudget_Entry = async (req: Request, res: Response) => {
+export const getAllOrder_Entry = async (req: Request, res: Response) => {
   try {
-    const subCategories = await Budget_EntryRepository.find()
+    const subCategories = await order_EntryRepository.find()
     res.json(subCategories)
   } catch (error) {
     res.status(500).json({
@@ -20,25 +22,51 @@ export const getAllBudget_Entry = async (req: Request, res: Response) => {
   }
 }
 
-export const addBudget_Entry = async (req: Request, res: Response) => {
+export const addOrder_Entry = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const budget = await budgetRepository.findOneById(id)
-    if (budget !== null) {
-      let newBudget_Entry = new Budget_Entry()
-      newBudget_Entry = req.body
-      const errors = await validate(newBudget_Entry)
-      if (errors.length > 0) {
-        throw new Error(`Validation failed!`)
+    const productId = req.params.productId
+    const order = await orderRepository.findOneById(id)
+    const product = await productRepository.findOneById(id)
+
+    if (order !== null) {
+      if (product !== null) {
+        const {
+          length,
+          width,
+          height,
+          advance,
+          quantity,
+          unit_cost,
+          additional_information,
+        } = req.body
+
+        const newOrder_Entry = new Order_Entry()
+        ;(newOrder_Entry.product = product),
+          (newOrder_Entry.length = length),
+          (newOrder_Entry.length = length),
+          (newOrder_Entry.width = width),
+          (newOrder_Entry.height = height),
+          (newOrder_Entry.advance = advance),
+          (newOrder_Entry.quantity = quantity),
+          (newOrder_Entry.unit_cost = unit_cost),
+          (newOrder_Entry.additional_information = additional_information)
+
+        const errors = await validate(newOrder_Entry)
+        if (errors.length > 0) {
+          throw new Error(`Validation failed!`)
+        } else {
+          order.order_entries.push(newOrder_Entry)
+          await order.save()
+          res.status(200).json({
+            message: 'Order_Entry Successfully Added!',
+          })
+        }
       } else {
-        budget.budget_entries.push(newBudget_Entry)
-        await budget.save()
-        res.status(200).json({
-          message: 'Budget_Entry  Successfully Added!',
-        })
+        res.status(404).send({ message: 'product not found!' })
       }
     } else {
-      res.status(404).send({ message: 'Budget_Entry id not found!' })
+      res.status(404).send({ message: 'Order_Entry id not found!' })
     }
   } catch (error) {
     res.status(500).json({
@@ -47,19 +75,19 @@ export const addBudget_Entry = async (req: Request, res: Response) => {
   }
 }
 
-export const getBudget_EntryById = async (req: Request, res: Response) => {
+export const getOrder_EntryById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const search_Budget_Entry = await Budget_EntryRepository.find({
+    const search_Order_Entry = await order_EntryRepository.find({
       where: {
         id: id,
       },
     })
 
-    if (search_Budget_Entry != null) {
-      res.json(search_Budget_Entry)
+    if (search_Order_Entry != null) {
+      res.json(search_Order_Entry)
     } else {
-      res.status(404).send({ message: 'Budget_Entry id not found!' })
+      res.status(404).send({ message: 'Order_Entryid not found!' })
     }
   } catch (error) {
     res.status(500).json({
@@ -68,17 +96,16 @@ export const getBudget_EntryById = async (req: Request, res: Response) => {
   }
 }
 
-export const updateBudget_Entry = async (req: Request, res: Response) => {
+export const updateOrder_Entry = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const search_Budget_Entry = await Budget_EntryRepository.find({
+    const search_Order_Entry = await order_EntryRepository.find({
       where: {
         id: id,
       },
     })
-    if (search_Budget_Entry != null) {
+    if (search_Order_Entry != null) {
       const {
-        product_name,
         length,
         width,
         height,
@@ -87,12 +114,11 @@ export const updateBudget_Entry = async (req: Request, res: Response) => {
         unit_cost,
         additional_information,
       } = req.body
-      const Budget_Entry = await Budget_EntryRepository.update(
+      const Order_Entry = await order_EntryRepository.update(
         {
           id,
         },
         {
-          product_name,
           length,
           width,
           height,
@@ -103,27 +129,27 @@ export const updateBudget_Entry = async (req: Request, res: Response) => {
         },
       )
       res.status(200).json({
-        message: 'Budget_Entry  Successfully Updated!',
+        message: 'Order_Entry Successfully Updated!',
       })
     } else {
-      res.status(404).send({ message: 'Budget_Entry not found!' })
+      res.status(404).send({ message: 'Order_Entrynot found!' })
     }
   } catch (err) {
-    res.status(404).send({ message: 'Budget_Entry not found!' })
+    res.status(404).send({ message: 'Order_Entrynot found!' })
   }
 }
 
-export const deleteBudget_Entry = async (req: Request, res: Response) => {
+export const deleteOrder_Entry = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const Budget_Entry = await Budget_EntryRepository.findOneById(id)
-    if (Budget_Entry !== null) {
-      await Budget_EntryRepository.delete({ id })
+    const Order_Entry = await order_EntryRepository.findOneById(id)
+    if (Order_Entry !== null) {
+      await order_EntryRepository.delete({ id })
       res.status(200).send({
-        message: 'Budget_Entry Deleted Successfully!',
+        message: 'Order_EntryDeleted Successfully!',
       })
     } else {
-      res.status(404).send({ message: 'Budget_Entry not found!' })
+      res.status(404).send({ message: 'Order_Entrynot found!' })
     }
   } catch (error) {
     res.status(500).json({
@@ -133,9 +159,9 @@ export const deleteBudget_Entry = async (req: Request, res: Response) => {
 }
 
 module.exports = {
-  addBudget_Entry,
-  getAllBudget_Entry,
-  getBudget_EntryById,
-  updateBudget_Entry,
-  deleteBudget_Entry,
+  getAllOrder_Entry,
+  addOrder_Entry,
+  getOrder_EntryById,
+  updateOrder_Entry,
+  deleteOrder_Entry,
 }

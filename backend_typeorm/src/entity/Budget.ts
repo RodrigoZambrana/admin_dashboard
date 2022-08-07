@@ -56,11 +56,10 @@ export class Budget extends BaseEntity {
   })
   budget_entries: Budget_Entry[]
 
-  addEntry(budget_entry: Budget_Entry) {
+  addEntry() {
     if (this.budget_entries == null) {
       this.budget_entries = new Array<Budget_Entry>()
     }
-    this.budget_entries.push(budget_entry)
   }
 
   @CreateDateColumn()

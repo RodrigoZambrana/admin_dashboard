@@ -6,8 +6,10 @@ import {
   ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm'
 import { SubCategory } from './SubCategory'
+import { Order_Entry } from './OrderEntry'
 
 export enum selling_unit {
   SUQARE_METER = 'Metros Cuadrados',
@@ -62,6 +64,12 @@ export class Product extends BaseEntity {
 
   @ManyToOne(() => SubCategory, (subcategory) => subcategory.products)
   subcategory: SubCategory
+
+  @OneToMany(() => Order_Entry, (order_entry) => order_entry.order, {
+    // eager: true,
+    // cascade: true,
+  })
+  order_entries: Order_Entry[]
 
   @CreateDateColumn()
   created_at: Date

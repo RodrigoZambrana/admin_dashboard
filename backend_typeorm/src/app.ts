@@ -26,7 +26,7 @@ app.use('/budget', budgetRoutes)
 app.use('/budget_entry', budget_entryRoutes)
 app.use('/customer', customerRoutes)
 app.use('/address', addressRoutes)
-// app.use('/order', orderRoutes)
-// app.use('/order_entry', order_entryRoutes)
+app.use('/order', orderRoutes)
+app.use('/order_entry', order_entryRoutes)
 
 export default app

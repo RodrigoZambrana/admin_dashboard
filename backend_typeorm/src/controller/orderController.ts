@@ -1,18 +1,20 @@
 import { Request, Response } from 'express'
-import { Budget } from '../entity/Budget'
+import { Order } from '../entity/Order'
 import { validate } from 'class-validator'
 import { getRepository } from 'typeorm'
 import { AppDataSource } from '../db'
 
-const BudgetRepository = AppDataSource.getRepository(Budget)
+const orderRepository = AppDataSource.getRepository(Order)
 
-//budgets and  budget entries
+//Orders and  Order entries
 export const getAllOrders = async (req: Request, res: Response) => {
   try {
-    const budgets = await BudgetRepository.find({
-      relations: ['budget_entries'],
+    const orders = await orderRepository.find({
+      relations: {
+        order_entries: true,
+      },
     })
-    res.json(budgets)
+    res.json(orders)
   } catch (error) {
     res.status(500).json({
       message: error,
@@ -23,33 +25,31 @@ export const getAllOrders = async (req: Request, res: Response) => {
 export const addOrder = async (req: Request, res: Response) => {
   try {
     const {
-      customer_id,
-      customer_name,
-      customer_telephone,
-      customer_email,
-      customer_address,
+      budget_id,
+      advanced_payment,
+      production_cost,
+      sub_total,
       discount_percentage,
-      valid_days,
+      additional_information,
       status,
     } = req.body
 
-    const newBudget = new Budget()
-    newBudget.customer_id = customer_id
-    newBudget.customer_name = customer_name
-    newBudget.customer_telephone = customer_telephone
-    newBudget.customer_email = customer_email
-    newBudget.customer_address = customer_address
-    newBudget.discount_percentage = discount_percentage
-    newBudget.valid_days = valid_days
-    newBudget.status = status
+    const newOrder = new Order()
+    newOrder.budget_id = budget_id
+    newOrder.advanced_payment = advanced_payment
+    newOrder.production_cost = production_cost
+    newOrder.sub_total = sub_total
+    newOrder.discount_percentage = discount_percentage
+    newOrder.additional_information = additional_information
+    newOrder.status = status
 
-    const errors = await validate(newBudget)
+    const errors = await validate(newOrder)
     if (errors.length > 0) {
       throw new Error(`Validation failed!`)
     } else {
-      await newBudget.save()
+      await newOrder.save()
       res.status(200).json({
-        message: 'Budget  Successfully Added!',
+        message: 'Order  Successfully Added!',
       })
     }
   } catch (error) {
@@ -62,19 +62,19 @@ export const addOrder = async (req: Request, res: Response) => {
 export const getOrderById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const search_Budget = await BudgetRepository.find({
+    const search_Order = await orderRepository.find({
       relations: {
-        budget_entries: true,
+        order_entries: true,
       },
       where: {
         id: id,
       },
     })
 
-    if (search_Budget != null) {
-      res.json(search_Budget)
+    if (search_Order != null) {
+      res.json(search_Order)
     } else {
-      res.status(404).send({ message: 'Budget id not found!' })
+      res.status(404).send({ message: 'Order id not found!' })
     }
   } catch (error) {
     res.status(500).json({
@@ -86,45 +86,57 @@ export const getOrderById = async (req: Request, res: Response) => {
 export const updateOrder = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const search_Budget = await BudgetRepository.find({
+    const search_Order = await orderRepository.find({
       where: {
         id: id,
       },
     })
-    if (search_Budget != null) {
-      const { name, image_url, showing } = req.body
-      const budget = await Budget.update(
+    if (search_Order != null) {
+      const {
+        budget_id,
+        advanced_payment,
+        production_cost,
+        sub_total,
+        discount_percentage,
+        additional_information,
+        status,
+      } = req.body
+      const Order = await orderRepository.update(
         {
           id,
         },
         {
-          // name: name,
-          // image_url: image_url,
-          // showing: showing,
+          budget_id: budget_id,
+          advanced_payment: advanced_payment,
+          production_cost: production_cost,
+          sub_total: sub_total,
+          discount_percentage: discount_percentage,
+          additional_information: additional_information,
+          status: status,
         },
       )
       res.status(200).json({
-        message: 'Budget  Successfully Updated!',
+        message: 'Order  Successfully Updated!',
       })
     } else {
-      res.status(404).send({ message: 'Budget not found!' })
+      res.status(404).send({ message: 'Order not found!' })
     }
   } catch (err) {
-    res.status(404).send({ message: 'Budget not found!' })
+    res.status(404).send({ message: 'Order not found!' })
   }
 }
 
 export const deleteOrder = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
-    const Budget = await BudgetRepository.findOneById(id)
-    if (Budget !== null) {
-      await BudgetRepository.delete({ id })
+    const Order = await orderRepository.findOneById(id)
+    if (Order !== null) {
+      await orderRepository.delete({ id })
       res.status(200).send({
-        message: 'Budget Deleted Successfully!',
+        message: 'Order Deleted Successfully!',
       })
     } else {
-      res.status(404).send({ message: 'Budget not found!' })
+      res.status(404).send({ message: 'Order not found!' })
     }
   } catch (error) {
     res.status(500).json({
@@ -135,8 +147,8 @@ export const deleteOrder = async (req: Request, res: Response) => {
 
 module.exports = {
   getAllOrders,
+  addOrder,
   getOrderById,
-  // getOrderByUser,
   updateOrder,
   deleteOrder,
 }

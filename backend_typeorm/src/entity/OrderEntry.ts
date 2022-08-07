@@ -6,6 +6,7 @@ import {
   ManyToOne,
 } from 'typeorm'
 import { Order } from './Order'
+import { Product } from './Product'
 
 @Entity()
 export class Order_Entry extends BaseEntity {
@@ -35,4 +36,7 @@ export class Order_Entry extends BaseEntity {
 
   @ManyToOne(() => Order, (order) => order.order_entries)
   order: Order
+
+  @ManyToOne(() => Product, (product) => product.order_entries)
+  product: Product
 }

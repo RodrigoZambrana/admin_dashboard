@@ -39,9 +39,9 @@ export class Order extends BaseEntity {
   sub_total: number /*Monto sin IVA*/
 
   @Column({ default: 0 })
-  discountPercentage: number
+  discount_percentage: number
 
-  @Column()
+  @Column({ nullable: true })
   additional_information: string
 
   @Column({
@@ -60,12 +60,11 @@ export class Order extends BaseEntity {
   })
   order_entries: Order_Entry[]
 
-  // addEntry(order_entry: Order_Entry) {
-  //   if (this.order_entries == null) {
-  //     this.order_entries = new Array<Order_Entry>()
-  //   }
-  //   this.order_entries.push(order_entry)
-  // }
+  addEntry() {
+    if (this.order_entries == null) {
+      this.order_entries = new Array<Order_Entry>()
+    }
+  }
 
   @CreateDateColumn()
   created_at: Date

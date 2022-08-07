@@ -7,6 +7,8 @@ import { Customer } from './entity/Customer'
 import { Address } from './entity/Address'
 import { Budget } from './entity/Budget'
 import { Budget_Entry } from './entity/BudgetEntry'
+import { Order } from './entity/Order'
+import { Order_Entry } from './entity/OrderEntry'
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
@@ -22,9 +24,11 @@ export const AppDataSource = new DataSource({
     Category,
     SubCategory,
     Product,
-    Customer,
-    Address,
     Budget,
     Budget_Entry,
+    Customer,
+    Address,
+    Order,
+    Order_Entry,
   ],
 })

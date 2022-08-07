@@ -92,15 +92,29 @@ export const updateBudget = async (req: Request, res: Response) => {
       },
     })
     if (search_Budget != null) {
-      const { name, image_url, showing } = req.body
+      const {
+        customer_id,
+        customer_name,
+        customer_telephone,
+        customer_email,
+        customer_address,
+        discount_percentage,
+        valid_days,
+        status,
+      } = req.body
       const budget = await Budget.update(
         {
           id,
         },
         {
-          // name: name,
-          // image_url: image_url,
-          // showing: showing,
+          customer_id,
+          customer_name,
+          customer_telephone,
+          customer_email,
+          customer_address,
+          discount_percentage,
+          valid_days,
+          status,
         },
       )
       res.status(200).json({

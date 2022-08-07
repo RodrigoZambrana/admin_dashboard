@@ -5,6 +5,7 @@ import {
   getAddressById,
   updateAddress,
   deleteAddress,
+  getAddressByCustomerId,
 } from '../controller/addressController'
 
 const router = Router()
@@ -14,6 +15,9 @@ router.get('/', getAllAddress)
 
 //add a category
 router.post('/:id', addAddress)
+
+//get an address for a client
+router.get('/customer/:id', getAddressByCustomerId)
 
 //get a category
 router.get('/:id', getAddressById)

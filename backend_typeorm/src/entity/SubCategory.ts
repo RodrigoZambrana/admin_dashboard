@@ -39,10 +39,9 @@ export class SubCategory extends BaseEntity {
   })
   products: Product[]
 
-  addProduct(product: Product) {
+  addProduct() {
     if (this.products == null) {
       this.products = new Array<Product>()
     }
-    this.products.push(product)
   }
 }

@@ -19,7 +19,7 @@ export const addAddress = async (req: Request, res: Response) => {
       if (errors.length > 0) {
         throw new Error(`Validation failed!`)
       } else {
-        customer.addresses = [newAddress]
+        customer.addresses.push(newAddress)
         await customer.save()
         res.status(200).json({
           message: 'Address  Successfully Added!',
@@ -119,10 +119,35 @@ export const deleteAddress = async (req: Request, res: Response) => {
   }
 }
 
+export const getAddressByCustomerId = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id)
+    const search_Address = await addressRepository.find({
+      relations: ['customer'],
+      where: {
+        customer: {
+          id: id,
+        },
+      },
+    })
+
+    if (search_Address != null) {
+      res.json(search_Address)
+    } else {
+      res.status(404).send({ message: 'Address id not found!' })
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+    })
+  }
+}
+
 module.exports = {
   addAddress,
   getAllAddress,
   getAddressById,
   updateAddress,
   deleteAddress,
+  getAddressByCustomerId,
 }

@@ -19,7 +19,7 @@ export const addBudget_Entry = async (req: Request, res: Response) => {
       if (errors.length > 0) {
         throw new Error(`Validation failed!`)
       } else {
-        budget.budget_entries = [newBudget_Entry]
+        budget.budget_entries.push(newBudget_Entry)
         await budget.save()
         res.status(200).json({
           message: 'Budget_Entry  Successfully Added!',

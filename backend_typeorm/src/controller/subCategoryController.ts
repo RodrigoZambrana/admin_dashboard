@@ -19,7 +19,7 @@ export const addSubCategory = async (req: Request, res: Response) => {
       if (errors.length > 0) {
         throw new Error(`Validation failed!`)
       } else {
-        category.subCategories = [newSubCategory]
+        category.subCategories.push(newSubCategory)
         await category.save()
         res.status(200).json({
           message: 'SubCategory  Successfully Added!',
@@ -82,7 +82,7 @@ export const updateSubCategory = async (req: Request, res: Response) => {
       },
     })
     if (search_SubCategory != null) {
-      const { name, image_url, showing } = req.body
+      const { name, image_url } = req.body
       const subCategory = await subCategoryRepository.update(
         {
           id,

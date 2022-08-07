@@ -8,6 +8,18 @@ import { AppDataSource } from '../db'
 const Budget_EntryRepository = AppDataSource.getRepository(Budget_Entry)
 const budgetRepository = AppDataSource.getRepository(Budget)
 
+//categories and products of Budget_Entry
+export const getAllBudget_Entry = async (req: Request, res: Response) => {
+  try {
+    const subCategories = await Budget_EntryRepository.find()
+    res.json(subCategories)
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+    })
+  }
+}
+
 export const addBudget_Entry = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id)
@@ -19,7 +31,7 @@ export const addBudget_Entry = async (req: Request, res: Response) => {
       if (errors.length > 0) {
         throw new Error(`Validation failed!`)
       } else {
-        budget.budget_entries = [newBudget_Entry]
+        budget.budget_entries.push(newBudget_Entry)
         await budget.save()
         res.status(200).json({
           message: 'Budget_Entry  Successfully Added!',
@@ -28,18 +40,6 @@ export const addBudget_Entry = async (req: Request, res: Response) => {
     } else {
       res.status(404).send({ message: 'Budget_Entry id not found!' })
     }
-  } catch (error) {
-    res.status(500).json({
-      message: error,
-    })
-  }
-}
-
-//categories and products of Budget_Entry
-export const getAllBudget_Entry = async (req: Request, res: Response) => {
-  try {
-    const subCategories = await Budget_EntryRepository.find()
-    res.json(subCategories)
   } catch (error) {
     res.status(500).json({
       message: error,

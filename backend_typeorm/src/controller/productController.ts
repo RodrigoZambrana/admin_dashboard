@@ -20,7 +20,7 @@ export const addProduct = async (req: Request, res: Response) => {
       if (errors.length > 0) {
         throw new Error(`Validation failed!`)
       } else {
-        subCategory.products = [newProduct]
+        subCategory.products.push(newProduct)
         await subCategory.save()
         res.status(200).json({
           message: 'Product  Successfully Added!',

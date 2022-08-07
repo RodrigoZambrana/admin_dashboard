@@ -22,7 +22,7 @@ router.post('/add', addBudget)
 router.get('/:id', getBudgetById)
 
 //update a budget
-router.put('/edit/:id', updateBudget)
+router.put('/:id', updateBudget)
 
 //delete a budget
 router.patch('/:id', deleteBudget)

@@ -2,27 +2,27 @@ import requests from "./httpService";
 
 const CategoryServices = {
   getAllCategory() {
-    return requests.get("/categories");
+    return requests.get("/category");
   },
 
   getCategoryById(id) {
-    return requests.get(`/categories/${id}`);
+    return requests.get(`/category/${id}`);
   },
 
   addCategory(body) {
-    return requests.post("/categories/add", body);
+    return requests.post("/category/add", body);
   },
 
   updateCategory(id, body) {
-    return requests.put(`/categories/${id}`, body);
+    return requests.put(`/category/${id}`, body);
   },
 
   updateStatus(id, body) {
-    return requests.put(`/categories/status/${id}`, body);
+    return requests.put(`/category/status/${id}`, body);
   },
 
   deleteCategory(id, body) {
-    return requests.patch(`/categories/${id}`, body);
+    return requests.patch(`/category/${id}`, body);
   },
 };
 

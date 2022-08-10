@@ -1,16 +1,16 @@
-import requests from './httpService';
+import requests from "./httpService";
 
 const OrderServices = {
   getAllOrders(body, headers) {
-    return requests.get('/orders', body, headers);
+    return requests.get("/order", body, headers);
   },
 
   getOrderByUser(id, body) {
-    return requests.get(`/orders/user/${id}`, body);
+    return requests.get(`/order/user/${id}`, body);
   },
 
   getOrderById(id, body) {
-    return requests.get(`/orders/${id}`, body);
+    return requests.get(`/order/${id}`, body);
   },
 
   updateOrder(id, body, headers) {
@@ -18,7 +18,7 @@ const OrderServices = {
   },
 
   deleteOrder(id) {
-    return requests.delete(`/orders/${id}`);
+    return requests.delete(`/order/${id}`);
   },
 };
 

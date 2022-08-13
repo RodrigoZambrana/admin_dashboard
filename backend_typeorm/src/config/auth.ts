@@ -1,12 +1,12 @@
-import { Admin } from "../entity/Admin";
-import jwt from "jsonwebtoken";
-import config from "../config/config";
-import { Request, Response, NextFunction } from "express";
+import { Admin } from '../entity/Admin'
+import jwt from 'jsonwebtoken'
+import config from '../config/config'
+import { Request, Response, NextFunction } from 'express'
 
 export const signInToken = (user: Admin) => {
   return jwt.sign(
     {
-      _id: user.id,
+      id: user.id,
       name: user.name,
       email: user.email,
       address: user.address,
@@ -15,65 +15,65 @@ export const signInToken = (user: Admin) => {
     },
     config.server.token.secret,
     {
-      expiresIn: "2d",
-    }
-  );
-};
+      expiresIn: '2d',
+    },
+  )
+}
 
 export const tokenForVerify = (user: Admin) => {
   return jwt.sign(
     {
-      _id: user.id,
+      id: user.id,
       name: user.name,
       email: user.email,
       password: user.password,
     },
     config.server.token.issuer,
-    { expiresIn: "15m" }
-  );
-};
+    { expiresIn: '15m' },
+  )
+}
 
 export const isAuth = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
-    let token = req.headers.authorization?.split(" ")[1];
+    let token = req.headers.authorization?.split(' ')[1]
     if (token) {
       jwt.verify(token, config.server.token.secret, (error, decoded) => {
         if (error) {
           return res.status(404).json({
             message: error,
             error,
-          });
+          })
         } else {
-          res.locals.jwt = decoded;
-          next();
+          res.locals.jwt = decoded
+          next()
         }
-      });
+      })
     }
   } catch (error) {
     res.status(401).send({
       message: error,
-    });
+    })
   }
-};
+}
 
 export const isAdmin = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
-  const admin = await Admin.findOne({});
+  const admin = await Admin.findOne({})
   if (admin) {
-    next();
+    next()
   } else {
     res.status(401).send({
-      message: "User is not Admin",
-    });
+      message: 'User is not Admin',
+    })
   }
-};
+}
 
 // export const sendEmail = (
 //   body: { from: string | undefined; to: string; subject: string; html: string },
@@ -135,4 +135,4 @@ module.exports = {
   isAuth,
   isAdmin,
   // sendEmail,
-};
+}

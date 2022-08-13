@@ -1,31 +1,37 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  CreateDateColumn,
+} from 'typeorm'
 
 @Entity()
 export class Admin extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column()
-  name: string;
+  name: string
 
   @Column()
-  address: string;
+  address: string
 
   @Column()
-  email: string;
+  email: string
 
   @Column()
-  password: string;
+  password: string
 
   @Column()
-  phone: string;
+  phone: string
 
   @Column()
-  role: string;
+  role: string
 
   @Column()
-  image: string;
+  image: string
 
-  @Column()
-  joining_data: Date;
+  @CreateDateColumn()
+  joining_data: Date
 }

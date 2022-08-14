@@ -1,19 +1,25 @@
-import React from 'react';
-import { Scrollbars } from 'react-custom-scrollbars-2';
-import { Card, CardBody } from '@windmill/react-ui';
+import React from "react";
+import { Scrollbars } from "react-custom-scrollbars-2";
+import { Card, CardBody } from "@windmill/react-ui";
 
-import Title from '../form/Title';
-import Error from '../form/Error';
-import LabelArea from '../form/LabelArea';
-import InputArea from '../form/InputArea';
-import SelectRole from '../form/SelectRole';
-import DrawerButton from '../form/DrawerButton';
-import Uploader from '../image-uploader/Uploader';
-import useStaffSubmit from '../../hooks/useStaffSubmit';
+import Title from "../form/Title";
+import Error from "../form/Error";
+import LabelArea from "../form/LabelArea";
+import InputArea from "../form/InputArea";
+import SelectRole from "../form/SelectRole";
+import DrawerButton from "../form/DrawerButton";
+import Uploader from "../image-uploader/Uploader";
+import useStaffSubmit from "../../hooks/useStaffSubmit";
 
 const StaffDrawer = ({ id }) => {
-  const { register, handleSubmit, onSubmit, errors, imageUrl, setImageUrl } =
-    useStaffSubmit(id);
+  const {
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+    imageUrl,
+    setImageUrl,
+  } = useStaffSubmit(id);
 
   return (
     <>
@@ -69,21 +75,6 @@ const StaffDrawer = ({ id }) => {
                     <Error errorName={errors.email} />
                   </div>
                 </div>
-
-                <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-                  <LabelArea label="Password" />
-                  <div className="col-span-8 sm:col-span-4">
-                    <InputArea
-                      register={register}
-                      label="Password"
-                      name="password"
-                      type="password"
-                      placeholder="Password"
-                    />
-                    <Error errorName={errors.password} />
-                  </div>
-                </div>
-
                 <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
                   <LabelArea label="Contact Number" />
                   <div className="col-span-8 sm:col-span-4">
@@ -95,20 +86,6 @@ const StaffDrawer = ({ id }) => {
                       placeholder="Phone number"
                     />
                     <Error errorName={errors.phone} />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-                  <LabelArea label="Joining Date" />
-                  <div className="col-span-8 sm:col-span-4">
-                    <InputArea
-                      register={register}
-                      label="Joining Date"
-                      name="joiningDate"
-                      type="datetime-local"
-                      placeholder="Joining date"
-                    />
-                    <Error errorName={errors.joiningDate} />
                   </div>
                 </div>
 

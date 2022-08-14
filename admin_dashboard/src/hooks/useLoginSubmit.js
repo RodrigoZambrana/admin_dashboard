@@ -19,25 +19,26 @@ const useLoginSubmit = () => {
   const onSubmit = ({ name, email, verifyEmail, password, role }) => {
     setLoading(true);
 
-    if (verifyEmail) {
-      AdminServices.forgetPassword({ verifyEmail })
-        .then((res) => {
-          setLoading(false);
-          notifySuccess(res.message);
-        })
-        .catch((err) => {
-          setLoading(false);
-          notifyError(err ? err.response.data.message : err.message);
-        });
-    } else if (name) {
+    // if (verifyEmail) {
+    //   AdminServices.forgetPassword({ verifyEmail })
+    //     .then((res) => {
+    //       setLoading(false);
+    //       notifySuccess(res.message);
+    //     })
+    //     .catch((err) => {
+    //       setLoading(false);
+    //       notifyError(err ? err.response.data.message : err.message);
+    //     });
+    // } else
+    if (name) {
       AdminServices.registerAdmin({ name, email, password, role })
         .then((res) => {
           if (res) {
             setLoading(false);
             notifySuccess("Registro exitoso!");
-            dispatch({ type: "USER_LOGIN", payload: res });
-            Cookies.set("adminInfo", JSON.stringify(res));
-            history.replace("/");
+            // dispatch({ type: 'USER_LOGIN', payload: res })
+            // Cookies.set('adminInfo', JSON.stringify(res))
+            // history.replace('/')
           }
         })
         .catch((err) => {

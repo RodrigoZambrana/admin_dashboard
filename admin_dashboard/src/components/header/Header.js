@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import { Avatar, Badge, WindmillContext } from '@windmill/react-ui';
-import { Scrollbars } from 'react-custom-scrollbars-2';
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
+import { Avatar, Badge, WindmillContext } from '@windmill/react-ui'
+import { Scrollbars } from 'react-custom-scrollbars-2'
 import {
   IoMenu,
   IoMoonSharp,
@@ -12,46 +12,46 @@ import {
   IoLogOutOutline,
   IoGridOutline,
   IoClose,
-} from 'react-icons/io5';
+} from 'react-icons/io5'
 
-import { AdminContext } from '../../context/AdminContext';
-import { SidebarContext } from '../../context/SidebarContext';
+import { AdminContext } from '../../context/AdminContext'
+import { SidebarContext } from '../../context/SidebarContext'
 
 const Header = () => {
-  const { toggleSidebar } = useContext(SidebarContext);
-  const { state, dispatch } = useContext(AdminContext);
-  const { adminInfo } = state;
-  const { mode, toggleMode } = useContext(WindmillContext);
-  const [profileOpen, setProfileOpen] = useState(false);
-  const [notificationOpen, setNotificationOpen] = useState(false);
-  const pRef = useRef();
-  const nRef = useRef();
+  const { toggleSidebar } = useContext(SidebarContext)
+  const { state, dispatch } = useContext(AdminContext)
+  const { adminInfo } = state
+  const { mode, toggleMode } = useContext(WindmillContext)
+  const [profileOpen, setProfileOpen] = useState(false)
+  const [notificationOpen, setNotificationOpen] = useState(false)
+  const pRef = useRef()
+  const nRef = useRef()
 
   const handleLogOut = () => {
-    dispatch({ type: 'USER_LOGOUT' });
-    Cookies.remove('adminInfo');
-  };
+    dispatch({ type: 'USER_LOGOUT' })
+    Cookies.remove('adminInfo')
+  }
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!pRef?.current?.contains(e.target)) {
-        setProfileOpen(false);
+        setProfileOpen(false)
       }
       if (!nRef?.current?.contains(e.target)) {
-        setNotificationOpen(false);
+        setNotificationOpen(false)
       }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-  }, [pRef, nRef]);
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+  }, [pRef, nRef])
 
   const handleNotificationOpen = () => {
-    setNotificationOpen(!notificationOpen);
-    setProfileOpen(false);
-  };
+    setNotificationOpen(!notificationOpen)
+    setProfileOpen(false)
+  }
   const handleProfileOpen = () => {
-    setProfileOpen(!profileOpen);
-    setNotificationOpen(false);
-  };
+    setProfileOpen(!profileOpen)
+    setNotificationOpen(false)
+  }
 
   return (
     <>
@@ -91,7 +91,7 @@ const Header = () => {
               >
                 <IoNotificationsSharp className="w-5 h-5" aria-hidden="true" />
                 <span className="absolute z-10 top-0 right-0 inline-flex items-center justify-center p-1 h-5 w-5 text-xs font-medium leading-none text-red-100 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
-                  6
+                  0
                 </span>
               </button>
 
@@ -100,7 +100,7 @@ const Header = () => {
                   <div className="origin-top-right absolute right-0 mt-2 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="notification-box">
                       <Scrollbars>
-                        <ul className="block text-sm border-t border-gray-100 dark:border-gray-700 rounded-md">
+                        {/* <ul className="block text-sm border-t border-gray-100 dark:border-gray-700 rounded-md">
                           <li className="flex justify-between items-center font-serif font-normal text-sm py-3 border-b border-gray-100 dark:border-gray-700 px-3 transition-colors duration-150 hover:bg-gray-50 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-900 dark:hover:text-gray-100 cursor-pointer">
                             <div className="flex items-center">
                               <Avatar
@@ -272,7 +272,7 @@ const Header = () => {
                               <IoClose />
                             </span>
                           </li>
-                        </ul>
+                        </ul> */}
                       </Scrollbars>
                     </div>
                   </div>
@@ -339,7 +339,7 @@ const Header = () => {
         </div>
       </header>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

@@ -7,7 +7,7 @@ import {
   FiGift,
   FiList,
   FiSettings,
-} from "react-icons/fi";
+} from 'react-icons/fi'
 /**
  * ⚠ These are used just to render the Sidebar!
  * You can include any link here, local or external.
@@ -17,55 +17,51 @@ import {
  */
 const sidebar = [
   {
-    path: "/dashboard", // the url
+    path: '/dashboard', // the url
     icon: FiGrid, // icon
-    name: "Estadisticas", // name that appear in Sidebar
+    name: 'Principal', // name that appear in Sidebar
   },
   {
-    path: "/products",
+    path: '/products',
     icon: FiShoppingBag,
-    name: "Productos",
+    name: 'Productos',
   },
   {
-    path: "/category",
+    path: '/category',
     icon: FiList,
-    name: "Categorias",
+    name: 'Categorias',
   },
   {
-    path: "/customers",
+    path: '/customers',
     icon: FiUsers,
-    name: "Clientes",
+    name: 'Clientes',
   },
   {
-    path: "/orders",
+    path: '/orders',
     icon: FiCompass,
-    name: "Pedidos",
+    name: 'Pedidos',
   },
   {
-    path: "/coupons",
+    path: '/coupons',
     icon: FiGift,
-    name: "Coupones",
-  },
-  {
-    path: "/our-staff",
-    icon: FiUser,
-    name: "Presupuestos",
+    name: 'Coupones',
   },
   {
     icon: FiSettings,
-    name: "Pages",
+    name: 'Avanzado',
     routes: [
       // submenu
       {
-        path: "/app/404",
-        name: "404",
+        path: '/our-staff',
+        icon: FiUser,
+        name: 'Usuarios',
       },
       {
-        path: "/app/blank",
-        name: "Blank",
+        path: '/404',
+        name: '404',
       },
     ],
   },
-];
+]
 
-export default sidebar;
+export default sidebar

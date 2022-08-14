@@ -1,5 +1,5 @@
-import React from "react";
-import { Bar, Doughnut } from "react-chartjs-2";
+import React from 'react'
+import { Bar, Doughnut } from 'react-chartjs-2'
 import {
   Table,
   TableHeader,
@@ -7,23 +7,23 @@ import {
   TableFooter,
   TableContainer,
   Pagination,
-} from "@windmill/react-ui";
-import { ImStack, ImCreditCard } from "react-icons/im";
-import { FiShoppingCart, FiTruck, FiRefreshCw, FiCheck } from "react-icons/fi";
+} from '@windmill/react-ui'
+import { ImStack, ImCreditCard } from 'react-icons/im'
+import { FiShoppingCart, FiTruck, FiRefreshCw, FiCheck } from 'react-icons/fi'
 
-import useAsync from "../hooks/useAsync";
-import useFilter from "../hooks/useFilter";
-import OrderServices from "../services/OrderServices";
-import Loading from "../components/preloader/Loading";
-import ChartCard from "../components/chart/ChartCard";
-import CardItem from "../components/dashboard/CardItem";
-import PageTitle from "../components/Typography/PageTitle";
-import OrderTable from "../components/dashboard/OrderTable";
-import CardItemTwo from "../components/dashboard/CardItemTwo";
-import { barOptions, doughnutOptions } from "../utils/chartsData";
+import useAsync from '../hooks/useAsync'
+import useFilter from '../hooks/useFilter'
+import OrderServices from '../services/OrderServices'
+import Loading from '../components/preloader/Loading'
+import ChartCard from '../components/chart/ChartCard'
+import CardItem from '../components/dashboard/CardItem'
+import PageTitle from '../components/Typography/PageTitle'
+import OrderTable from '../components/dashboard/OrderTable'
+import CardItemTwo from '../components/dashboard/CardItemTwo'
+import { barOptions, doughnutOptions } from '../utils/chartsData'
 
 const Dashboard = () => {
-  const { data, loading } = useAsync(OrderServices.getAllOrders);
+  const { data, loading } = useAsync(OrderServices.getAllOrders)
 
   const {
     handleChangePage,
@@ -36,13 +36,13 @@ const Dashboard = () => {
     todayOrder,
     monthlyOrder,
     totalOrder,
-  } = useFilter(data);
+  } = useFilter(data)
 
   return (
     <>
-      <PageTitle>Vista principal</PageTitle>
+      <PageTitle>Pedidos Mensuales</PageTitle>
 
-      <div className="grid gap-4 mb-8 md:grid-cols-3 xl:grid-cols-3">
+      {/* <div className="grid gap-4 mb-8 md:grid-cols-3 xl:grid-cols-3">
         <CardItemTwo
           title="Ventas de Hoy"
           Icon={ImStack}
@@ -61,7 +61,7 @@ const Dashboard = () => {
           price={totalOrder}
           className="text-white dark:text-green-100 bg-green-500"
         />
-      </div>
+      </div> */}
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <CardItem
@@ -99,7 +99,7 @@ const Dashboard = () => {
         </ChartCard>
       </div> */}
 
-      <PageTitle>Ventas recientes</PageTitle>
+      <PageTitle>Lista de Pedidos</PageTitle>
       {loading && <Loading loading={loading} />}
       {dataTable && !loading && (
         <TableContainer className="mb-8">
@@ -114,7 +114,7 @@ const Dashboard = () => {
                 <TableCell>Estado</TableCell>
               </tr>
             </TableHeader>
-            <OrderTable orders={dataTable} />
+            {/* <OrderTable orders={dataTable} /> */}
           </Table>
           <TableFooter>
             <Pagination
@@ -127,7 +127,7 @@ const Dashboard = () => {
         </TableContainer>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

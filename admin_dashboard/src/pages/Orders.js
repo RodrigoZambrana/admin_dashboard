@@ -1,5 +1,5 @@
-import React from 'react';
-import { CSVDownloader } from 'react-papaparse';
+import React from 'react'
+import { CSVDownloader } from 'react-papaparse'
 import {
   Table,
   TableHeader,
@@ -11,20 +11,20 @@ import {
   Card,
   CardBody,
   Pagination,
-} from '@windmill/react-ui';
-import { IoCloudDownloadOutline } from 'react-icons/io5';
+} from '@windmill/react-ui'
+import { IoCloudDownloadOutline } from 'react-icons/io5'
 
-import orderData from '../utils/orders';
-import useAsync from '../hooks/useAsync';
-import useFilter from '../hooks/useFilter';
-import NotFound from '../components/table/NotFound';
-import OrderServices from '../services/OrderServices';
-import Loading from '../components/preloader/Loading';
-import OrderTable from '../components/order/OrderTable';
-import PageTitle from '../components/Typography/PageTitle';
+import orderData from '../utils/orders'
+import useAsync from '../hooks/useAsync'
+import useFilter from '../hooks/useFilter'
+import NotFound from '../components/table/NotFound'
+import OrderServices from '../services/OrderServices'
+import Loading from '../components/preloader/Loading'
+import OrderTable from '../components/order/OrderTable'
+import PageTitle from '../components/Typography/PageTitle'
 
 const Orders = () => {
-  const { data, loading } = useAsync(OrderServices.getAllOrders);
+  const { data, loading } = useAsync(OrderServices.getAllOrders)
 
   const {
     orderRef,
@@ -36,7 +36,7 @@ const Orders = () => {
     dataTable,
     serviceData,
     handleSubmitOrder,
-  } = useFilter(data);
+  } = useFilter(data)
 
   return (
     <>
@@ -99,38 +99,38 @@ const Orders = () => {
 
       {loading ? (
         <Loading loading={loading} />
-      ) : serviceData.length !== 0 ? (
-        <TableContainer className="mb-8">
-          <Table>
-            <TableHeader>
-              <tr>
-                <TableCell>SR NO</TableCell>
-                <TableCell>Time</TableCell>
-                <TableCell>Shipping Address</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Method</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell className="text-center">Status</TableCell>
-                <TableCell className="text-center">Action</TableCell>
-                <TableCell className="text-right">Invoice</TableCell>
-              </tr>
-            </TableHeader>
-            <OrderTable orders={dataTable} />
-          </Table>
-          <TableFooter>
-            <Pagination
-              totalResults={totalResults}
-              resultsPerPage={resultsPerPage}
-              onChange={handleChangePage}
-              label="Table navigation"
-            />
-          </TableFooter>
-        </TableContainer>
       ) : (
+        // ) : serviceData.length !== 0 ? (
+        //   <TableContainer className="mb-8">
+        //     <Table>
+        //       <TableHeader>
+        //         <tr>
+        //           <TableCell>SR NO</TableCell>
+        //           <TableCell>Time</TableCell>
+        //           <TableCell>Shipping Address</TableCell>
+        //           <TableCell>Phone</TableCell>
+        //           <TableCell>Method</TableCell>
+        //           <TableCell>Amount</TableCell>
+        //           <TableCell className="text-center">Status</TableCell>
+        //           <TableCell className="text-center">Action</TableCell>
+        //           <TableCell className="text-right">Invoice</TableCell>
+        //         </tr>
+        //       </TableHeader>
+        //       <OrderTable orders={dataTable} />
+        //     </Table>
+        //     <TableFooter>
+        //       <Pagination
+        //         totalResults={totalResults}
+        //         resultsPerPage={resultsPerPage}
+        //         onChange={handleChangePage}
+        //         label="Table navigation"
+        //       />
+        //     </TableFooter>
+        //   </TableContainer>
         <NotFound title="Order" />
       )}
     </>
-  );
-};
+  )
+}
 
-export default Orders;
+export default Orders

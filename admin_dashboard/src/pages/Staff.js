@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import {
   Table,
   TableHeader,
@@ -11,20 +11,20 @@ import {
   Card,
   CardBody,
   Pagination,
-} from '@windmill/react-ui';
-import { FiPlus } from 'react-icons/fi';
+} from "@windmill/react-ui";
+import { FiPlus } from "react-icons/fi";
 
-import useAsync from '../hooks/useAsync';
-import useFilter from '../hooks/useFilter';
-import NotFound from '../components/table/NotFound';
-import Loading from '../components/preloader/Loading';
-import StaffTable from '../components/staff/StaffTable';
-import AdminServices from '../services/AdminServices';
-import { AdminContext } from '../context/AdminContext';
-import { SidebarContext } from '../context/SidebarContext';
-import PageTitle from '../components/Typography/PageTitle';
-import MainDrawer from '../components/drawer/MainDrawer';
-import StaffDrawer from '../components/drawer/StaffDrawer';
+import useAsync from "../hooks/useAsync";
+import useFilter from "../hooks/useFilter";
+import NotFound from "../components/table/NotFound";
+import Loading from "../components/preloader/Loading";
+import StaffTable from "../components/staff/StaffTable";
+import AdminServices from "../services/AdminServices";
+import { AdminContext } from "../context/AdminContext";
+import { SidebarContext } from "../context/SidebarContext";
+import PageTitle from "../components/Typography/PageTitle";
+import MainDrawer from "../components/drawer/MainDrawer";
+import StaffDrawer from "../components/drawer/StaffDrawer";
 
 const Staff = () => {
   const { state } = useContext(AdminContext);
@@ -48,7 +48,7 @@ const Staff = () => {
 
   return (
     <>
-      <PageTitle>All Staff</PageTitle>
+      <PageTitle>Usarios del sistema</PageTitle>
       <MainDrawer>
         <StaffDrawer />
       </MainDrawer>
@@ -109,14 +109,13 @@ const Staff = () => {
           <Table>
             <TableHeader>
               <tr>
-                <TableCell>Id</TableCell>
-                <TableCell>Name</TableCell>
+                <TableCell>Foto</TableCell>
+                <TableCell>Nombre</TableCell>
                 <TableCell>Email</TableCell>
-                <TableCell>Contact</TableCell>
-                <TableCell>Joining Date</TableCell>
-                <TableCell>Role</TableCell>
+                <TableCell>Telefono</TableCell>
+                <TableCell>Rol</TableCell>
 
-                <TableCell className="text-right">Actions</TableCell>
+                <TableCell className="text-right">Editar</TableCell>
               </tr>
             </TableHeader>
             <StaffTable staffs={dataTable} />

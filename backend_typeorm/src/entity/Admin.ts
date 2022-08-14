@@ -4,34 +4,31 @@ import {
   PrimaryGeneratedColumn,
   BaseEntity,
   CreateDateColumn,
-} from 'typeorm'
+} from "typeorm";
 
 @Entity()
 export class Admin extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  address: string
+  email: string;
 
   @Column()
-  email: string
+  password: string;
 
   @Column()
-  password: string
+  phone: string;
 
   @Column()
-  phone: string
+  role: string;
 
   @Column()
-  role: string
-
-  @Column()
-  image: string
+  image: string;
 
   @CreateDateColumn()
-  joining_data: Date
+  joining_data: Date;
 }

@@ -5,10 +5,10 @@ const Status = ({ status }) => {
   return (
     <>
       <span className="font-serif">
-        {status === "Pending" && <Badge type="warning">{status}</Badge>}
-        {status === "Processing" && <Badge>{status}</Badge>}
-        {status === "Delivered" && <Badge type="success">{status}</Badge>}
-        {status === "Canceled" && <Badge type="danger">{status}</Badge>}
+        {status === "Pendiente" && <Badge type="warning">{status}</Badge>}
+        {status === "Para Instalar" && <Badge>{status}</Badge>}
+        {status === "Finalizado" && <Badge type="success">{status}</Badge>}
+        {status === "Cancelado" && <Badge type="danger">{status}</Badge>}
       </span>
     </>
   );

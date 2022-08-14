@@ -7,68 +7,66 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-} from 'typeorm'
+} from "typeorm";
 
-import { Order_Entry } from './OrderEntry'
-import { Customer } from './Customer'
+import { Order_Entry } from "./OrderEntry";
+import { Customer } from "./Customer";
 
 export enum order_status {
-  PARA_ARMAR = 'Para Armar',
-  PARA_PEDIR = 'Para Pedir',
-  PEDIDO = 'Pedido',
-  PENDIENTE_INSTALACION = 'Para Instalar',
-  PENDIENTE_PAGO = 'Pago Pendiente',
-  FINALIZADA = 'Finalizada',
+  PENDING = "Pendiente",
+  PENDING_INSTALL = "Para Instalar",
+  FINALIZAD0 = "Finalizado",
+  CANCELADO = "Cancelado",
 }
 
 @Entity()
 export class Order extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column({ nullable: true })
-  budget_id: number
+  budget_id: number;
 
   @Column({ nullable: true, default: 0 })
-  advanced_payment: number //seña
+  advanced_payment: number; //seña
 
   @Column({ default: 0 })
-  production_cost: number /*Precio de costo*/
+  production_cost: number; /*Precio de costo*/
 
   @Column({ default: 0 })
-  sub_total: number /*Monto sin IVA*/
+  sub_total: number; /*Monto sin IVA*/
 
   @Column({ default: 0 })
-  discount_percentage: number
+  discount_percentage: number;
 
   @Column({ nullable: true })
-  additional_information: string
+  additional_information: string;
 
   @Column({
-    type: 'enum',
+    type: "enum",
     enum: order_status,
   })
-  status: order_status
+  status: order_status;
 
   @ManyToOne(() => Customer, (customer) => customer.orders)
-  customer: Customer
+  customer: Customer;
 
   @OneToMany(() => Order_Entry, (order_entry) => order_entry.order, {
     eager: true,
     cascade: true,
-    onDelete: 'CASCADE',
+    onDelete: "CASCADE",
   })
-  order_entries: Order_Entry[]
+  order_entries: Order_Entry[];
 
   addEntry() {
     if (this.order_entries == null) {
-      this.order_entries = new Array<Order_Entry>()
+      this.order_entries = new Array<Order_Entry>();
     }
   }
 
   @CreateDateColumn()
-  created_at: Date
+  created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: Date
+  updated_at: Date;
 }

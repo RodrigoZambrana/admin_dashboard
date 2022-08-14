@@ -45,17 +45,17 @@ const useFilter = (data) => {
 
     if (location.pathname === "/dashboard") {
       const orderPending = services.filter(
-        (statusP) => statusP.status === "Pending"
+        (statusP) => statusP.status === "Pendiente"
       );
       setPending(orderPending);
 
       const orderProcessing = services.filter(
-        (statusO) => statusO.status === "Processing"
+        (statusO) => statusO.status === "Para Instalar"
       );
       setProcessing(orderProcessing);
 
       const orderDelivered = services.filter(
-        (statusD) => statusD.status === "Delivered"
+        (statusD) => statusD.status === "Finalizado"
       );
       setDelivered(orderDelivered);
 
@@ -72,13 +72,13 @@ const useFilter = (data) => {
       //monthly order calculation
       const monthlyServices = services.filter((order) =>
         dayjs(order.createdAt).isBetween(
-          new Date().setDate(new Date().getDate() - 30),
-          new Date()
+          dayjs().startOf("Month"),
+          dayjs().endOf("Month")
         )
       );
 
       const monthlyOrder = monthlyServices.reduce(
-        (preValue, currentValue) => preValue + currentValue.total,
+        (preValue, currentValue) => preValue + currentValue.sub_total,
         0
       );
       setMonthlyOrder(monthlyOrder);

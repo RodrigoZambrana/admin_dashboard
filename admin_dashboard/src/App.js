@@ -5,6 +5,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import "./App.css";
+
 import { ToastContainer } from "./utils/toast";
 import AccessibleNavigationAnnouncer from "./components/AccessibleNavigationAnnouncer";
 import PrivateRoute from "./components/login/PrivateRoute";
@@ -23,9 +25,6 @@ const App = () => {
         <AccessibleNavigationAnnouncer />
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/forgot-password" component={ForgetPassword} />
-          <Route path="/reset-password/:token" component={ResetPassword} />
           <PrivateRoute>
             <Route path="/" component={Layout} />
           </PrivateRoute>

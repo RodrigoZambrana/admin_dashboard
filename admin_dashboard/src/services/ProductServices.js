@@ -2,35 +2,35 @@ import requests from "./httpService";
 
 const ProductServices = {
   getAllProducts() {
-    return requests.get("/products");
+    return requests.get("/product");
   },
 
   getStockOutProducts() {
-    return requests.get("/products/stock-out");
+    return requests.get("/product/stock-out");
   },
 
   getProductById(id) {
-    return requests.post(`/products/${id}`);
+    return requests.post(`/product/${id}`);
   },
 
   addProduct(body) {
-    return requests.post("/products/add", body);
+    return requests.post("/product/add", body);
   },
 
   addAllProducts(body) {
-    return requests.post("/products/all", body);
+    return requests.post("/product/all", body);
   },
 
   updateProduct(id, body) {
-    return requests.put(`/products/${id}`, body);
+    return requests.put(`/product/${id}`, body);
   },
 
   updateStatus(id, body) {
-    return requests.put(`/products/status/${id}`, body);
+    return requests.put(`/product/status/${id}`, body);
   },
 
   deleteProduct(id) {
-    return requests.delete(`/products/${id}`);
+    return requests.delete(`/product/${id}`);
   },
 };
 

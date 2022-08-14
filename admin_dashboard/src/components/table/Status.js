@@ -7,7 +7,7 @@ const Status = ({ status }) => {
       <span className="font-serif">
         {status === "Pendiente" && <Badge type="warning">{status}</Badge>}
         {status === "Para Instalar" && <Badge>{status}</Badge>}
-        {status === "Finalizado" && <Badge type="success">{status}</Badge>}
+        {status === "Finalizado" && <Badge type="success">Instalado</Badge>}
         {status === "Cancelado" && <Badge type="danger">{status}</Badge>}
       </span>
     </>

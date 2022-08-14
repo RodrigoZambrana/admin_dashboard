@@ -7,73 +7,76 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-} from 'typeorm'
-import { SubCategory } from './SubCategory'
-import { Order_Entry } from './OrderEntry'
+} from "typeorm";
+import { SubCategory } from "./SubCategory";
+import { Order_Entry } from "./OrderEntry";
 
 export enum selling_unit {
-  SUQARE_METER = 'Metros Cuadrados',
-  METER = 'Metros lineales',
-  UNIT = 'Unidad',
+  SUQARE_METER = "Metros Cuadrados",
+  METER = "Metros lineales",
+  UNIT = "Unidad",
 }
 
 export enum providers {
-  VEROSOL = 'Verosol',
-  PROPERFIL = 'Properfil',
-  LIDASUR = 'Lidasur',
-  URUCORTINAS = 'urucortinas',
+  VEROSOL = "Verosol",
+  PROPERFIL = "Properfil",
+  LIDASUR = "Lidasur",
+  URUCORTINAS = "urucortinas",
 }
 
 @Entity()
 export class Product extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  price: number //precio de costo
+  price: number; //precio de costo
 
   @Column()
-  sale_price: number //precio de venta IVA incluido
+  sale_price: number; //precio de venta IVA incluido
 
   @Column()
-  former_price: number //precio anterior-para peomociones
+  former_price: number; //precio anterior-para peomociones
 
   @Column()
-  stock: number
+  stock: number;
 
   @Column()
-  image: string
+  image: string;
 
-  @Column('simple-array')
-  tags: string[]
+  @Column({ default: false })
+  showing: boolean;
+
+  @Column("simple-array")
+  tags: string[];
 
   @Column({
-    type: 'enum',
+    type: "enum",
     enum: providers,
   })
-  provider: providers
+  provider: providers;
 
   @Column({
-    type: 'enum',
+    type: "enum",
     enum: selling_unit,
   })
-  unit: selling_unit
+  unit: selling_unit;
 
   @ManyToOne(() => SubCategory, (subcategory) => subcategory.products)
-  subcategory: SubCategory
+  subcategory: SubCategory;
 
   @OneToMany(() => Order_Entry, (order_entry) => order_entry.order, {
     // eager: true,
     // cascade: true,
   })
-  order_entries: Order_Entry[]
+  order_entries: Order_Entry[];
 
   @CreateDateColumn()
-  created_at: Date
+  created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: Date
+  updated_at: Date;
 }

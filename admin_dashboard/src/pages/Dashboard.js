@@ -8,19 +8,15 @@ import {
   TableContainer,
   Pagination,
 } from "@windmill/react-ui";
-import { ImStack, ImCreditCard } from "react-icons/im";
 import { FiShoppingCart, FiTruck, FiRefreshCw, FiCheck } from "react-icons/fi";
 
 import useAsync from "../hooks/useAsync";
 import useFilter from "../hooks/useFilter";
 import OrderServices from "../services/OrderServices";
 import Loading from "../components/preloader/Loading";
-import ChartCard from "../components/chart/ChartCard";
 import CardItem from "../components/dashboard/CardItem";
 import PageTitle from "../components/Typography/PageTitle";
 import OrderTable from "../components/dashboard/OrderTable";
-import CardItemTwo from "../components/dashboard/CardItemTwo";
-import { barOptions, doughnutOptions } from "../utils/chartsData";
 
 const Dashboard = () => {
   const { data, loading } = useAsync(OrderServices.getAllOrders);
@@ -33,9 +29,6 @@ const Dashboard = () => {
     pending,
     processing,
     delivered,
-    todayOrder,
-    monthlyOrder,
-    totalOrder,
   } = useFilter(data);
 
   return (
@@ -62,7 +55,7 @@ const Dashboard = () => {
           className="text-teal-600 dark:text-teal-100 bg-teal-100 dark:bg-teal-500"
         />
         <CardItem
-          title="Pedidos finalizados"
+          title="Pedidos instalados"
           Icon={FiCheck}
           quantity={delivered.length}
           className="text-green-600 dark:text-green-100 bg-green-100 dark:bg-green-500"
@@ -78,11 +71,11 @@ const Dashboard = () => {
               <tr>
                 <TableCell>Fecha</TableCell>
                 <TableCell>Cliente</TableCell>
-                <TableCell>Direccion</TableCell>
+                <TableCell>Dirección</TableCell>
                 <TableCell>Teléfono</TableCell>
                 <TableCell>Estado</TableCell>
                 <TableCell>Seña</TableCell>
-                <TableCell>Monto Cobrado</TableCell>
+                <TableCell>Importe Total</TableCell>
                 <TableCell>Saldo Pendiente</TableCell>
               </tr>
             </TableHeader>

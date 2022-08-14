@@ -1,19 +1,18 @@
-import React from 'react';
-import { Scrollbars } from 'react-custom-scrollbars-2';
-import { Textarea, Select } from '@windmill/react-ui';
-import ReactTagInput from '@pathofdev/react-tag-input';
+import React from "react";
+import { Scrollbars } from "react-custom-scrollbars-2";
+import { Textarea, Select } from "@windmill/react-ui";
+import ReactTagInput from "@pathofdev/react-tag-input";
 
-import Title from '../form/Title';
-import Error from '../form/Error';
-import LabelArea from '../form/LabelArea';
-import InputArea from '../form/InputArea';
-import InputValue from '../form/InputValue';
-import SelectOption from '../form/SelectOption';
-import DrawerButton from '../form/DrawerButton';
-import Uploader from '../image-uploader/Uploader';
-import ChildrenCategory from '../category/ChildrenCategory';
-import ParentCategory from '../category/ParentCategory';
-import useProductSubmit from '../../hooks/useProductSubmit';
+import Title from "../form/Title";
+import Error from "../form/Error";
+import LabelArea from "../form/LabelArea";
+import InputArea from "../form/InputArea";
+import InputValue from "../form/InputValue";
+import SelectOption from "../form/SelectOption";
+import DrawerButton from "../form/DrawerButton";
+import Uploader from "../image-uploader/Uploader";
+import ChildrenCategory from "../category/ChildrenCategory";
+import useProductSubmit from "../../hooks/useProductSubmit";
 
 const ProductDrawer = ({ id }) => {
   const {
@@ -102,11 +101,11 @@ const ProductDrawer = ({ id }) => {
               <div className="col-span-8 sm:col-span-4">
                 <Textarea
                   className="border text-sm focus:outline-none block w-full bg-gray-100 border-transparent focus:bg-white"
-                  {...register('description', {
-                    required: 'Description is required!',
+                  {...register("description", {
+                    required: "Description is required!",
                     minLength: {
                       value: 20,
-                      message: 'Minimum 20 character!',
+                      message: "Minimum 20 character!",
                     },
                   })}
                   name="description"
@@ -117,45 +116,6 @@ const ProductDrawer = ({ id }) => {
                 <Error errorName={errors.description} />
               </div>
             </div>
-
-            <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Parent Category" />
-              <div className="col-span-8 sm:col-span-4">
-                <Select
-                  className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
-                  name="parent"
-                  {...register('parent', {
-                    required: 'Product parent category is required!',
-                  })}
-                >
-                  <option value="" defaultValue hidden>
-                    Select parent category
-                  </option>
-                  <ParentCategory />
-                </Select>
-                <Error errorName={errors.parent} />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Child Category" />
-              <div className="col-span-8 sm:col-span-4">
-                <Select
-                  className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
-                  name="children"
-                  {...register('children', {
-                    required: 'Product children category is required!',
-                  })}
-                >
-                  <option value="" defaultValue hidden>
-                    Select child category
-                  </option>
-                  <ChildrenCategory value={watch('parent')} />
-                </Select>
-                <Error errorName={errors.children} />
-              </div>
-            </div>
-
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
               <LabelArea label="Product Type" />
               <div className="col-span-8 sm:col-span-4">
@@ -167,24 +127,6 @@ const ProductDrawer = ({ id }) => {
                 <Error errorName={errors.type} />
               </div>
             </div>
-
-            {/* <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Flash Sale" />
-              <div className="col-span-8 sm:col-span-4">
-                <Select
-                  className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
-                  name="flashSale"
-                  {...register('flashSale', {
-                    required: 'Flash Sale is required!',
-                  })}
-                >
-                  <option value="No">No</option>
-                  <option value="Yes">Yes</option>
-                </Select>
-                <Error errorName={errors.flashSale} />
-              </div>
-            </div> */}
-
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
               <LabelArea label="Unit (kg/pc/lb/ml/g...etc)" />
               <div className="col-span-8 sm:col-span-4">

@@ -80,13 +80,10 @@ const Staff = () => {
                 <option value="All" defaultValue hidden>
                   Staff Role
                 </option>
-                <option value="Admin">Admin</option>
-                <option value="CEO">CEO</option>
-                <option value="Manager">Manager</option>
-                <option value="Accountant">Accountant</option>
-                <option value="Driver"> Driver </option>
-                <option value="Security Guard">Security Guard</option>
-                <option value="Deliver Person">Delivery Person</option>
+                <option value="superAdmin">Super Admin</option>
+                <option value="admin">Admin</option>
+                <option value="staff">Staff</option>
+                <option value="accountant">Contador</option>
               </Select>
             </div>
 

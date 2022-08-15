@@ -12,6 +12,7 @@ import SelectOption from "../form/SelectOption";
 import DrawerButton from "../form/DrawerButton";
 import Uploader from "../image-uploader/Uploader";
 import ChildrenCategory from "../category/ChildrenCategory";
+import ParentCategory from "../category/ParentCategory";
 import useProductSubmit from "../../hooks/useProductSubmit";
 
 const ProductDrawer = ({ id }) => {
@@ -32,13 +33,13 @@ const ProductDrawer = ({ id }) => {
       <div className="w-full relative p-6 border-b border-gray-100 bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">
         {id ? (
           <Title
-            title="Update Product"
-            description="Updated your product and necessary information from here"
+            title="Actualizar Producto"
+            description="Actualizar información de producto"
           />
         ) : (
           <Title
-            title="Add Product"
-            description="Add your product and necessary information from here"
+            title="Agregar Producto"
+            description="Ingrese la información del nuevo producto"
           />
         )}
       </div>
@@ -46,70 +47,38 @@ const ProductDrawer = ({ id }) => {
         <form onSubmit={handleSubmit(onSubmit)} className="block">
           <div className="px-6 pt-8 flex-grow w-full h-full max-h-full pb-40 md:pb-32 lg:pb-32 xl:pb-32">
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Product Image" />
+              <LabelArea label="Imagen" />
               <div className="col-span-8 sm:col-span-4">
                 <Uploader imageUrl={imageUrl} setImageUrl={setImageUrl} />
               </div>
             </div>
-
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Product SKU" />
+              <LabelArea label="Nombre de Producto" />
               <div className="col-span-8 sm:col-span-4">
                 <InputArea
                   register={register}
-                  required="false"
-                  label="Product SKU"
-                  name="sku"
+                  label="Nombre de Producto"
+                  name="name"
                   type="text"
-                  placeholder="Product SKU"
-                />
-                <Error errorName={errors.sku} />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Product Title/Name" />
-              <div className="col-span-8 sm:col-span-4">
-                <InputArea
-                  register={register}
-                  label="Product Title/Name"
-                  name="title"
-                  type="text"
-                  placeholder="Product title"
+                  placeholder="Nombre de Producto"
                 />
                 <Error errorName={errors.title} />
               </div>
             </div>
-
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Product Slug" />
-              <div className="col-span-8 sm:col-span-4">
-                <InputArea
-                  register={register}
-                  required="false"
-                  label="Product Slug"
-                  name="slug"
-                  type="text"
-                  placeholder="Product slug"
-                />
-                <Error errorName={errors.slug} />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Product Description" />
+              <LabelArea label="Descripcion" />
               <div className="col-span-8 sm:col-span-4">
                 <Textarea
                   className="border text-sm focus:outline-none block w-full bg-gray-100 border-transparent focus:bg-white"
                   {...register("description", {
                     required: "Description is required!",
                     minLength: {
-                      value: 20,
-                      message: "Minimum 20 character!",
+                      value: 10,
+                      message: "Minimum 10 character!",
                     },
                   })}
                   name="description"
-                  placeholder="Product details"
+                  placeholder="Descripción"
                   rows="4"
                   spellCheck="false"
                 />
@@ -117,18 +86,44 @@ const ProductDrawer = ({ id }) => {
               </div>
             </div>
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Product Type" />
+              <LabelArea label="Parent Category" />
               <div className="col-span-8 sm:col-span-4">
-                <SelectOption
-                  register={register}
-                  label="Product type"
-                  name="type"
-                />
-                <Error errorName={errors.type} />
+                <Select
+                  className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
+                  name="category"
+                  {...register("parent", {
+                    required: "Product parent category is required!",
+                  })}
+                >
+                  <option value="" defaultValue hidden>
+                    Select parent category
+                  </option>
+                  <ParentCategory />
+                </Select>
+                <Error errorName={errors.parent} />
               </div>
             </div>
+            {/* 
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Unit (kg/pc/lb/ml/g...etc)" />
+              <LabelArea label="Child Category" />
+              <div className="col-span-8 sm:col-span-4">
+                <Select
+                  className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
+                  name="children"
+                  {...register("children", {
+                    required: "Product children category is required!",
+                  })}
+                >
+                  <option value="" defaultValue hidden>
+                    Select child category
+                  </option>
+                  <ChildrenCategory value={watch("parent")} />
+                </Select>
+                <Error errorName={errors.children} />
+              </div>
+            </div> */}
+            <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
+              <LabelArea label="Unidad de medida (kg/pc/lb/ml/g...etc)" />
               <div className="col-span-8 sm:col-span-4">
                 <InputArea
                   register={register}

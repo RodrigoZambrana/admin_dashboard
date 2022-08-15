@@ -15,7 +15,6 @@ export const addProduct = async (req: Request, res: Response) => {
     if (subCategory !== null) {
       let newProduct = new Product();
       newProduct = req.body;
-      console.log(newProduct);
       const errors = await validate(newProduct);
       if (errors.length > 0) {
         throw new Error(`Validation failed!`);
@@ -55,7 +54,14 @@ export const getAllProduct = async (req: Request, res: Response) => {
 export const getProductById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
-    const search_Product = await productRepository.findOneById(id);
+    const search_Product = await productRepository.findOne({
+      relations: {
+        subcategory: true,
+      },
+      where: {
+        id: id,
+      },
+    });
 
     if (search_Product != null) {
       res.json(search_Product);
@@ -135,10 +141,26 @@ export const deleteProduct = async (req: Request, res: Response) => {
   }
 };
 
+export const updateStatus = async (req: Request, res: Response) => {
+  const newStatus = req.body.status;
+  const id = Number(req.params.id);
+  const product = await productRepository.findOneById(id);
+  if (product !== null) {
+    product.showing = newStatus;
+    product.save();
+    res.status(200).send({
+      message: "Status Successfully!",
+    });
+  } else {
+    res.status(404).send({ message: "Product not found!" });
+  }
+};
+
 module.exports = {
   addProduct,
   getAllProduct,
   getProductById,
   updateProduct,
   deleteProduct,
+  updateStatus,
 };

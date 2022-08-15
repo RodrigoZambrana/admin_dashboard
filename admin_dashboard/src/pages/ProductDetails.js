@@ -28,7 +28,7 @@ const ProductDetails = () => {
         <div className="inline-block overflow-y-auto h-full align-middle transition-all transform">
           <div className="flex flex-col lg:flex-row md:flex-row w-full overflow-hidden">
             <div className="flex-shrink-0 flex items-center justify-center h-auto">
-              <img src={data.image} alt={data.title} />
+              <img src={data.image} alt={data.name} />
             </div>
             <div className="w-full flex flex-col p-5 md:p-8 text-left">
               <div className="mb-5 block ">
@@ -43,7 +43,7 @@ const ProductDetails = () => {
                   </p>
                 </div>
                 <h2 className="text-heading text-lg md:text-xl lg:text-2xl font-semibold font-serif dark:text-gray-400">
-                  {data.title}
+                  {data.name}
                 </h2>
                 <p className="uppercase font-serif font-medium text-gray-500 dark:text-gray-400 text-sm">
                   Código :{" "}
@@ -53,8 +53,16 @@ const ProductDetails = () => {
                 </p>
               </div>
               <p className="text-sm leading-6 text-gray-500 dark:text-gray-400 md:leading-7">
-                {data.description}
+                {data.subcategory.description}
               </p>
+              <div className="flex flex-col mt-4">
+                <p className="font-serif font-semibold py-1 text-gray-500 text-sm">
+                  <span className="text-gray-700 dark:text-gray-400">
+                    SubCategoria:{" "}
+                  </span>{" "}
+                  {data.subcategory.name}
+                </p>
+              </div>
               <div className="mt-6">
                 <button
                   onClick={() => handleUpdate(id)}

@@ -38,14 +38,17 @@ export class Product extends BaseEntity {
   @Column()
   sale_price: number; //precio de venta IVA incluido
 
-  @Column()
+  @Column({ default: 0 })
   former_price: number; //precio anterior-para peomociones
 
-  @Column()
+  @Column({ default: 50 })
   stock: number;
 
-  @Column()
+  @Column({ nullable: true })
   image: string;
+
+  @Column({ nullable: true })
+  description: string;
 
   @Column({ default: false })
   showing: boolean;

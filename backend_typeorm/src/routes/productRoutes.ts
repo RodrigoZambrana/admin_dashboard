@@ -5,6 +5,7 @@ import {
   addProduct,
   updateProduct,
   deleteProduct,
+  updateStatus,
 } from "../controller/productController";
 
 const router = Router();
@@ -22,5 +23,8 @@ router.put("/:id", updateProduct);
 
 //delete a product
 router.patch("/:id", deleteProduct);
+
+//update a product status
+router.put("/status/:id", updateStatus);
 
 export default router;

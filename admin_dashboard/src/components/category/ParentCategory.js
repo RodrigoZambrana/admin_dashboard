@@ -7,9 +7,9 @@ const ParentCategory = () => {
   const { data } = useAsync(CategoryServices.getAllCategory); //   console.log(value);
   return (
     <>
-      {data.map((parent) => (
-        <option key={parent._id} value={parent.parent}>
-          {parent.parent}
+      {data.map((category) => (
+        <option key={category.id} value={category.id}>
+          {category.name}
         </option>
       ))}
     </>

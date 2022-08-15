@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Select } from "@windmill/react-ui";
+import useAsync from "../../hooks/useAsync";
+import CategoryServices from "../../services/CategoryServices";
 
-const SelectOption = ({ register, name, label}) => {
+const SelectOption = ({ register, name, label }) => {
+  const { data } = useAsync(CategoryServices.getAllCategory);
+
   return (
     <>
       <Select
@@ -11,18 +15,16 @@ const SelectOption = ({ register, name, label}) => {
           required: `${label} is required!`,
         })}
       >
-        <option value="" defaultValue hidden>Select type</option>
-        <option value="Grocery">Grocery</option>
-        <option value="Foods">Foods</option>
-        <option value="Cloths">Cloths</option>
-        <option value="Health Care">Health Care </option>
-        <option value="Medicine">Medicine </option>
-        <option value="Books">Books </option>
-        <option value="Bags">Bags</option>
-        <option value="Sports & Fitness">Sports & Fitness </option>
-        <option value="Home Accessories">Home Accessories</option>
-        <option value="Furniture">Furniture</option>
-        <option value="Electronics">Electronics </option>
+        <option value="" defaultValue hidden>
+          Select type
+        </option>
+        {data.map((category) => {
+          category.subCategories.map((subCategories) => (
+            <option key={subCategories.id} value={subCategories.id}>
+              {subCategories.name}
+            </option>
+          ));
+        })}
       </Select>
     </>
   );

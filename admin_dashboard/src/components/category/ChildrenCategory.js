@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import useAsync from '../../hooks/useAsync';
-import CategoryServices from '../../services/CategoryServices';
-
+import useAsync from "../../hooks/useAsync";
+import CategoryServices from "../../services/CategoryServices";
 
 const ChildrenCategory = ({ value }) => {
   const [categories, setCategories] = useState([]);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { Textarea, Select } from "@windmill/react-ui";
 import ReactTagInput from "@pathofdev/react-tag-input";
@@ -14,6 +14,8 @@ import Uploader from "../image-uploader/Uploader";
 import ChildrenCategory from "../category/ChildrenCategory";
 import ParentCategory from "../category/ParentCategory";
 import useProductSubmit from "../../hooks/useProductSubmit";
+import useAsync from "../../hooks/useAsync";
+import CategoryServices from "../../services/CategoryServices";
 
 const ProductDrawer = ({ id }) => {
   const {
@@ -27,6 +29,21 @@ const ProductDrawer = ({ id }) => {
     tag,
     setTag,
   } = useProductSubmit(id);
+
+  const { data } = useAsync(CategoryServices.getAllCategory); //   console.log(value);
+  const [categoryId, setCategoryId] = useState(-1);
+  const [category, setCategory] = useState();
+
+  const handleCategoryChange = function (e) {
+    const categoryId = e.target.value;
+    setCategoryId(categoryId);
+
+    const filter = data.filter((category) => {
+      return category.id == categoryId;
+    });
+
+    setCategory(filter[0]);
+  };
 
   return (
     <>
@@ -90,38 +107,43 @@ const ProductDrawer = ({ id }) => {
               <div className="col-span-8 sm:col-span-4">
                 <Select
                   className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
-                  name="category"
-                  {...register("parent", {
-                    required: "Product parent category is required!",
-                  })}
+                  name="categorias"
+                  id="SelectCategorias"
+                  onChange={handleCategoryChange}
                 >
-                  <option value="" defaultValue hidden>
-                    Select parent category
+                  <option value={-1} defaultValue hidden>
+                    Seleccione una categoria
                   </option>
-                  <ParentCategory />
+                  {data.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
                 </Select>
                 <Error errorName={errors.parent} />
               </div>
             </div>
-            {/* 
+
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
               <LabelArea label="Child Category" />
               <div className="col-span-8 sm:col-span-4">
                 <Select
                   className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
-                  name="children"
-                  {...register("children", {
-                    required: "Product children category is required!",
-                  })}
+                  name="subCategorias"
+                  id="SelectSubCategorias"
                 >
-                  <option value="" defaultValue hidden>
-                    Select child category
+                  <option value={-1} defaultValue hidden>
+                    Seleccione una subcategoria
                   </option>
-                  <ChildrenCategory value={watch("parent")} />
+                  {categoryId > -1 &&
+                    category.subCategories.map((subcategory) => (
+                      <option key={subcategory.id} value={subcategory.id}>
+                        {subcategory.name}
+                      </option>
+                    ))}
                 </Select>
-                <Error errorName={errors.children} />
               </div>
-            </div> */}
+            </div>
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
               <LabelArea label="Unidad de medida (kg/pc/lb/ml/g...etc)" />
               <div className="col-span-8 sm:col-span-4">

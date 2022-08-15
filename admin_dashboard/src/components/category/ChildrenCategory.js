@@ -6,11 +6,11 @@ import CategoryServices from "../../services/CategoryServices";
 const ChildrenCategory = ({ value }) => {
   const [categories, setCategories] = useState([]);
 
-  const { data } = useAsync(CategoryServices.getAllCategory);
+  const { data } = useAsync(CategoryServices.getCategoryById(Number(value)));
   useEffect(() => {
     if (value) {
-      const result = data.filter((parent) =>
-        parent.parent.toLowerCase().includes(value.toLowerCase())
+      const result = data.filter((category) =>
+        category.parent.toLowerCase().includes(value.toLowerCase())
       );
       setCategories(result);
     } else {

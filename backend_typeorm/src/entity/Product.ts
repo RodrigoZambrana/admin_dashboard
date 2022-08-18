@@ -12,8 +12,8 @@ import { SubCategory } from "./SubCategory";
 import { Order_Entry } from "./OrderEntry";
 
 export enum selling_unit {
-  SUQARE_METER = "Metros Cuadrados",
-  METER = "Metros lineales",
+  SUQARE_METERS = "Metros Cuadrados",
+  METERS = "Metros lineales",
   UNIT = "Unidad",
 }
 
@@ -39,7 +39,7 @@ export class Product extends BaseEntity {
   sale_price: number; //precio de venta IVA incluido
 
   @Column({ default: 0 })
-  former_price: number; //precio anterior-para peomociones
+  discount: number; //precio anterior-para peomociones
 
   @Column({ default: 50 })
   stock: number;

@@ -13,7 +13,7 @@ const SelectProductProvider = ({ setUnit, register, name, label }) => {
         })}
       >
         <option value="" defaultValue hidden>
-          Proveedor
+          Seleccione Proveedor
         </option>
         <option value="urucortinas">urucortinas</option>
         <option value="verosol">Verosol</option>

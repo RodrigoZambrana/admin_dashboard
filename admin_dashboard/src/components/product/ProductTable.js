@@ -48,7 +48,9 @@ const ProductTable = ({ products }) => {
               <span className="text-sm">{product.provider}</span>
             </TableCell>
             <TableCell>
-              <span className="text-sm font-semibold">${product.price}</span>
+              <span className="text-sm font-semibold">
+                ${product.sale_price}
+              </span>
             </TableCell>
             <TableCell>
               <Link

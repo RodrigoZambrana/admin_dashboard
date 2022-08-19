@@ -6,7 +6,8 @@ import { notifyError, notifySuccess } from "../utils/toast";
 
 const useProductSubmit = (id) => {
   const [imageUrl, setImageUrl] = useState("");
-  const [children, setChildren] = useState("");
+  const [category, setCategory] = useState();
+  const [subcategory, setSubcategory] = useState();
   const [tag, setTag] = useState([]);
   const { isDrawerOpen, closeDrawer, setIsUpdate } = useContext(SidebarContext);
 
@@ -36,7 +37,7 @@ const useProductSubmit = (id) => {
       unit: data.unit,
       price: data.price,
       sale_price: data.sale_price,
-      discount: 0,
+      discount: data.discount,
       image: imageUrl,
       tag: JSON.stringify(tag),
       provider: data.provider,
@@ -64,33 +65,23 @@ const useProductSubmit = (id) => {
 
   useEffect(() => {
     if (!isDrawerOpen) {
-      setValue("sku");
-      setValue("title");
-      setValue("slug");
+      setValue("name");
       setValue("description");
-      setValue("parent");
-      setValue("children");
-      setValue("type");
+      setValue("category");
+      setValue("subcategory");
       setValue("unit");
-      setValue("quantity");
-      setValue("originalPrice");
-      setValue("salePrice");
+      setValue("price");
+      setValue("sale_price");
       setImageUrl("");
-      setChildren("");
+      setSubcategory(0);
       setTag([]);
-      clearErrors("sku");
-      clearErrors("title");
-      clearErrors("slug");
+      clearErrors("name");
       clearErrors("description");
-      clearErrors("parent");
-      clearErrors("children");
-      clearErrors("type");
+      clearErrors("category");
+      clearErrors("subcategory");
       clearErrors("unit");
-      clearErrors("quantity");
-      clearErrors("originalPrice");
-      clearErrors("salePrice");
-      clearErrors("tax1");
-      clearErrors("tax2");
+      clearErrors("price");
+      clearErrors("sale_price");
       return;
     }
 
@@ -98,18 +89,14 @@ const useProductSubmit = (id) => {
       ProductServices.getProductById(id)
         .then((res) => {
           if (res) {
-            setValue("sku", res.sku);
-            setValue("title", res.title);
-            setValue("slug", res.slug);
+            setValue("name", res.name);
             setValue("description", res.description);
-            setValue("parent", res.parent);
-            setValue("children", res.children);
-            setValue("type", res.type);
+            setValue("subcategory", res.subcategory.name);
             setValue("unit", res.unit);
-            setValue("quantity", res.quantity);
-            setValue("originalPrice", res.originalPrice);
-            setValue("salePrice", res.price);
-            setTag(JSON.parse(res.tag));
+            setValue("price", res.price);
+            setValue("sale_price", res.sale_price);
+            setValue("provider", res.provider);
+            setTag(JSON.parse(res.tags));
             setImageUrl(res.image);
           }
         })
@@ -121,8 +108,8 @@ const useProductSubmit = (id) => {
   }, [id, setValue, isDrawerOpen]);
 
   useEffect(() => {
-    setChildren(watch("children"));
-  }, [watch, children]);
+    setSubcategory(watch("subcategory"));
+  }, [watch, subcategory]);
 
   return {
     register,

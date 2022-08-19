@@ -5,43 +5,47 @@ import {
   BaseEntity,
   ManyToOne,
   OneToMany,
-} from 'typeorm'
-import { Category } from './Category'
-import { Product } from './Product'
+  JoinColumn,
+} from "typeorm";
+import { Category } from "./Category";
+import { Product } from "./Product";
 
 @Entity()
 export class SubCategory extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
+
+  @Column({ name: "categoryId" })
+  categoryId: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  image_url: string
+  image_url: string;
 
-  @Column('simple-array')
-  images: string[]
-
-  @Column()
-  description: string
+  @Column("simple-array")
+  images: string[];
 
   @Column()
-  additional_information: string
+  description: string;
+
+  @Column()
+  additional_information: string;
 
   @ManyToOne(() => Category, (category) => category.subCategories)
-  category: Category
+  category: Category;
 
   @OneToMany(() => Product, (product) => product.subcategory, {
     eager: true,
     cascade: true,
     //onDelete: 'CASCADE',
   })
-  products: Product[]
+  products: Product[];
 
   addProduct() {
     if (this.products == null) {
-      this.products = new Array<Product>()
+      this.products = new Array<Product>();
     }
   }
 }

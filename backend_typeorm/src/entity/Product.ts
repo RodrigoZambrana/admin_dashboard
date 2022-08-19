@@ -12,7 +12,7 @@ import { SubCategory } from "./SubCategory";
 import { Order_Entry } from "./OrderEntry";
 
 export enum selling_unit {
-  SUQARE_METERS = "Metros Cuadrados",
+  SQUARE_METERS = "Metros Cuadrados",
   METERS = "Metros lineales",
   UNIT = "Unidad",
 }

@@ -88,7 +88,7 @@ const Uploader = ({ setImageUrl, imageUrl }) => {
           <img
             className="inline-flex border rounded-md border-gray-100 dark:border-gray-600 w-24 max-h-24 p-2"
             src={imageUrl}
-            alt="product"
+            alt="img"
           />
         ) : (
           thumbs

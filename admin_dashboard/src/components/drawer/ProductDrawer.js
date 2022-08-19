@@ -41,7 +41,6 @@ const ProductDrawer = ({ id }) => {
     const filter = data.filter((category) => {
       return category.id == categoryId;
     });
-
     setCategory(filter[0]);
   };
 
@@ -80,7 +79,7 @@ const ProductDrawer = ({ id }) => {
                   type="text"
                   placeholder="Nombre de Producto"
                 />
-                <Error errorName={errors.title} />
+                <Error errorName={errors.name} />
               </div>
             </div>
 
@@ -89,8 +88,9 @@ const ProductDrawer = ({ id }) => {
               <div className="col-span-8 sm:col-span-4">
                 <Select
                   className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
-                  name="categorias"
-                  id="SelectCategorias"
+                  name="categoryId"
+                  id="categoryId"
+                  register={register}
                   onChange={handleCategoryChange}
                 >
                   <option value={-1} defaultValue hidden>
@@ -112,8 +112,8 @@ const ProductDrawer = ({ id }) => {
                 <Select
                   register={register}
                   className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
-                  name="subcategory"
-                  id="subcategory"
+                  name="subcategoryId"
+                  id="subcategoryId"
                 >
                   <option value={-1} defaultValue hidden>
                     Seleccione una subcategoria
@@ -133,13 +133,14 @@ const ProductDrawer = ({ id }) => {
                 <SelectProductUnit
                   register={register}
                   label="Unidad"
+                  id="unit"
                   name="unit"
                 />
                 <Error errorName={errors.unit} />
               </div>
             </div>
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-              <LabelArea label="Unidad de medida (m/m2/unidad)" />
+              <LabelArea label="Proveedor" />
               <div className="col-span-8 sm:col-span-4">
                 <SelectProductProvider
                   register={register}

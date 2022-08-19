@@ -15,9 +15,9 @@ const SelectProductUnit = ({ setUnit, register, name, label }) => {
         <option value="" defaultValue hidden>
           Unidad de Medida
         </option>
-        <option value="METERS">Metros lineales</option>
-        <option value="SUQARE_METERS">Metros Cuadrados</option>
-        <option value="UNIT">Unidad</option>
+        <option value="Metros Cuadrados">Metros Cuadrados</option>
+        <option value="Metros lineales">Metros Lineales </option>
+        <option value="unidad">Unidad</option>
       </Select>
     </>
   );

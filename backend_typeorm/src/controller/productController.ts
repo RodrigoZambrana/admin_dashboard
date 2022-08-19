@@ -103,7 +103,6 @@ export const updateProduct = async (req: Request, res: Response) => {
           name: name,
           price: price,
           sale_price: sale_price,
-          former_price: former_price,
           stock: stock,
           image: image,
           tags: tags,

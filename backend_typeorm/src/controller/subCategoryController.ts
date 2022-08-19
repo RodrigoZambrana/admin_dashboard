@@ -38,11 +38,7 @@ export const addSubCategory = async (req: Request, res: Response) => {
 //categories and products of subcategory
 export const getAllSubCategory = async (req: Request, res: Response) => {
   try {
-    const subCategories = await subCategoryRepository.find({
-      relations: {
-        category: true,
-      },
-    });
+    const subCategories = await subCategoryRepository.find({});
     res.json(subCategories);
   } catch (error) {
     res.status(500).json({

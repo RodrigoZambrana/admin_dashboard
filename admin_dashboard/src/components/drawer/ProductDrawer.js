@@ -31,17 +31,27 @@ const ProductDrawer = ({ id }) => {
   } = useProductSubmit(id);
 
   const { data } = useAsync(CategoryServices.getAllCategory); //   console.log(value);
+  const [selectedCategory, setSelectedCategory] = useState();
   const [categoryId, setCategoryId] = useState(-1);
-  const [category, setCategory] = useState();
+  const [subcategory, setSubcategory] = useState();
+
+  // const [categories, setCategories] = useState();
 
   const handleCategoryChange = function (e) {
     const categoryId = e.target.value;
     setCategoryId(categoryId);
+    console.log(categoryId);
 
     const filter = data.filter((category) => {
       return category.id == categoryId;
     });
-    setCategory(filter[0]);
+    setSelectedCategory(filter[0]);
+  };
+
+  const handleSubCategoryChange = function (e) {
+    const s = e.target.value;
+    setSubcategory(s);
+    console.log(s);
   };
 
   return (
@@ -88,19 +98,21 @@ const ProductDrawer = ({ id }) => {
               <div className="col-span-8 sm:col-span-4">
                 <Select
                   className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
-                  name="categoryId"
-                  id="categoryId"
+                  name="category"
+                  id="category"
                   register={register}
                   onChange={handleCategoryChange}
+                  value={categoryId}
                 >
                   <option value={-1} defaultValue hidden>
                     Seleccione una categoria
                   </option>
-                  {data.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))}
+                  {data.length > 0 &&
+                    data.map((category) => (
+                      <option key={category.id} value={category.id}>
+                        {category.name}
+                      </option>
+                    ))}
                 </Select>
                 <Error errorName={errors.parent} />
               </div>
@@ -112,14 +124,17 @@ const ProductDrawer = ({ id }) => {
                 <Select
                   register={register}
                   className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
-                  name="subcategoryId"
-                  id="subcategoryId"
+                  name="subcategory"
+                  id="subcategory"
+                  onChange={handleSubCategoryChange}
+                  value={subcategory}
                 >
                   <option value={-1} defaultValue hidden>
                     Seleccione una subcategoria
                   </option>
                   {categoryId > -1 &&
-                    category.subCategories.map((subcategory) => (
+                    selectedCategory.subCategories.length > 0 &&
+                    selectedCategory.subCategories.map((subcategory) => (
                       <option key={subcategory.id} value={subcategory.id}>
                         {subcategory.name}
                       </option>

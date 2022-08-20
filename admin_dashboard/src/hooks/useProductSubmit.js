@@ -32,8 +32,8 @@ const useProductSubmit = (id) => {
 
     const productData = {
       name: data.title,
-      category: data.category,
-      subcategory: data.subcategory,
+      category: data.subcategory.categoryId,
+      subcategory: data.subcategory.id,
       unit: data.unit,
       price: data.price,
       sale_price: data.sale_price,
@@ -73,7 +73,6 @@ const useProductSubmit = (id) => {
       setValue("price");
       setValue("sale_price");
       setImageUrl("");
-      setSubcategory(0);
       setTag([]);
       clearErrors("name");
       clearErrors("description");
@@ -90,14 +89,15 @@ const useProductSubmit = (id) => {
         .then((res) => {
           if (res) {
             setValue("name", res.name);
-            setValue("description", res.description);
             setValue("subcategory", res.subcategory.name);
+            setValue("category", res.subcategory.categoryId);
             setValue("unit", res.unit);
             setValue("price", res.price);
             setValue("sale_price", res.sale_price);
             setValue("provider", res.provider);
             setTag(JSON.parse(res.tags));
             setImageUrl(res.image);
+            setValue("description", res.description);
           }
         })
         .catch((err) => {

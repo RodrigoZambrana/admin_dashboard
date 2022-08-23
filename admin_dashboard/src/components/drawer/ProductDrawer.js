@@ -37,9 +37,9 @@ const ProductDrawer = ({ id }) => {
   const [categoryId, setCategoryId] = useState()
 
   useEffect(() => {
-    setSelectedCategory(subcategories)
     setCategoryId(categoryTest)
-    console.log('categoryID:' + categoryId)
+    setSelectedCategory(subcategories)
+    console.log('categoryID:' + categoryTest)
   }, [subcategories])
 
   const handleCategoryChange = function (e) {
@@ -102,7 +102,7 @@ const ProductDrawer = ({ id }) => {
                   })}
                   onChange={handleCategoryChange}
                 >
-                  <option defaultValue hidden>
+                  <option hidden defaultValue>
                     Seleccione una categoria
                   </option>
                   {data.length > 0 &&
@@ -125,20 +125,16 @@ const ProductDrawer = ({ id }) => {
                   {...register('subcategory', {
                     required: 'Product parent category is required!',
                   })}
-                  // onChange={handleSubCategoryChange}
                 >
                   {categoryId > -1 &&
                     selectedCategory.subCategories.length > 0 &&
                     selectedCategory.subCategories.map((subcategory) => (
-                      <option
-                        defaultValue
-                        key={subcategory.id}
-                        value={subcategory.id}
-                      >
+                      <option key={subcategory.id} value={subcategory.id}>
                         {subcategory.name}
                       </option>
                     ))}
                 </Select>
+                <Error errorName={errors.children} />
               </div>
             </div>
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">

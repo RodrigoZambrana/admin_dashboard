@@ -18,10 +18,11 @@ export enum selling_unit {
 }
 
 export enum providers {
-  VEROSOL = "Verosol",
-  PROPERFIL = "Properfil",
-  LIDASUR = "Lidasur",
+  VEROSOL = "verosol",
+  PROPERFIL = "properfil",
+  LIDASUR = "lidasur",
   URUCORTINAS = "urucortinas",
+  BEMAOR = "bemaor",
 }
 
 @Entity()
@@ -72,8 +73,8 @@ export class Product extends BaseEntity {
   subcategory: SubCategory;
 
   @OneToMany(() => Order_Entry, (order_entry) => order_entry.order, {
-    // eager: true,
-    // cascade: true,
+    eager: true,
+    cascade: true,
   })
   order_entries: Order_Entry[];
 

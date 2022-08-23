@@ -14,7 +14,7 @@ const router = Router();
 router.get("/", getAllProduct);
 
 //add a product
-router.post("/add/:id", addProduct);
+router.post("/add", addProduct);
 
 //get a product
 router.post("/:id", getProductById);

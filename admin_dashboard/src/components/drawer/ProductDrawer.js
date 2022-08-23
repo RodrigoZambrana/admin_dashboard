@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { Scrollbars } from 'react-custom-scrollbars-2'
-import { Textarea, Select } from '@windmill/react-ui'
-import ReactTagInput from '@pathofdev/react-tag-input'
+import React, { useEffect, useState } from "react";
+import { Scrollbars } from "react-custom-scrollbars-2";
+import { Textarea, Select } from "@windmill/react-ui";
+import ReactTagInput from "@pathofdev/react-tag-input";
 
-import Title from '../form/Title'
-import Error from '../form/Error'
-import LabelArea from '../form/LabelArea'
-import InputArea from '../form/InputArea'
-import InputValue from '../form/InputValue'
-import DrawerButton from '../form/DrawerButton'
-import Uploader from '../image-uploader/Uploader'
-import ChildrenCategory from '../category/ChildrenCategory'
-import ParentCategory from '../category/ParentCategory'
-import useProductSubmit from '../../hooks/useProductSubmit'
-import useAsync from '../../hooks/useAsync'
-import CategoryServices from '../../services/CategoryServices'
-import SelectProductUnit from '../form/SelectProductUnit'
-import SelectProductProvider from '../form/SelectProductProvider'
+import Title from "../form/Title";
+import Error from "../form/Error";
+import LabelArea from "../form/LabelArea";
+import InputArea from "../form/InputArea";
+import InputValue from "../form/InputValue";
+import DrawerButton from "../form/DrawerButton";
+import Uploader from "../image-uploader/Uploader";
+import ChildrenCategory from "../category/ChildrenCategory";
+import ParentCategory from "../category/ParentCategory";
+import useProductSubmit from "../../hooks/useProductSubmit";
+import useAsync from "../../hooks/useAsync";
+import CategoryServices from "../../services/CategoryServices";
+import SelectProductUnit from "../form/SelectProductUnit";
+import SelectProductProvider from "../form/SelectProductProvider";
 
 const ProductDrawer = ({ id }) => {
   const {
@@ -30,27 +30,27 @@ const ProductDrawer = ({ id }) => {
     setTag,
     subcategories,
     categoryTest,
-  } = useProductSubmit(id)
+  } = useProductSubmit(id);
 
-  const { data } = useAsync(CategoryServices.getAllCategory) //   console.log(value);
-  const [selectedCategory, setSelectedCategory] = useState()
-  const [categoryId, setCategoryId] = useState()
+  const { data } = useAsync(CategoryServices.getAllCategory); //   console.log(value);
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [categoryId, setCategoryId] = useState();
 
   useEffect(() => {
-    setCategoryId(categoryTest)
-    setSelectedCategory(subcategories)
-    console.log('categoryID:' + categoryTest)
-  }, [subcategories])
+    setCategoryId(categoryTest);
+    setSelectedCategory(subcategories);
+    console.log("categoryID:" + categoryTest);
+  }, [subcategories]);
 
   const handleCategoryChange = function (e) {
-    const categoryId = e.target.value
-    setCategoryId(categoryId)
+    const categoryId = e.target.value;
+    setCategoryId(categoryId);
 
     const filter = data.filter((category) => {
-      return category.id == categoryId
-    })
-    setSelectedCategory(filter[0])
-  }
+      return category.id == categoryId;
+    });
+    setSelectedCategory(filter[0]);
+  };
 
   return (
     <>
@@ -97,8 +97,8 @@ const ProductDrawer = ({ id }) => {
                 <Select
                   className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
                   name="category"
-                  {...register('category', {
-                    required: 'Product parent category is required!',
+                  {...register("category", {
+                    required: "Product parent category is required!",
                   })}
                   onChange={handleCategoryChange}
                 >
@@ -122,8 +122,8 @@ const ProductDrawer = ({ id }) => {
                 <Select
                   className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
                   name="subcategory"
-                  {...register('subcategory', {
-                    required: 'Product parent category is required!',
+                  {...register("subcategory", {
+                    required: "Product parent category is required!",
                   })}
                 >
                   {categoryId > -1 &&
@@ -155,6 +155,7 @@ const ProductDrawer = ({ id }) => {
                 <SelectProductProvider
                   register={register}
                   label="Proveedor"
+                  id="provider"
                   name="provider"
                 />
                 <Error errorName={errors.provider} />
@@ -191,7 +192,7 @@ const ProductDrawer = ({ id }) => {
                   type="number"
                   placeholder="Precio de Venta"
                 />
-                <Error errorName={errors.salePrice} />
+                <Error errorName={errors.sale_price} />
               </div>
             </div>
             <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
@@ -209,11 +210,11 @@ const ProductDrawer = ({ id }) => {
               <div className="col-span-8 sm:col-span-4">
                 <Textarea
                   className="border text-sm focus:outline-none block w-full bg-gray-100 border-transparent focus:bg-white"
-                  {...register('description', {
-                    required: 'Description is required!',
+                  {...register("description", {
+                    required: "Description is required!",
                     minLength: {
                       value: 10,
-                      message: 'Minimum 10 character!',
+                      message: "Minimum 10 character!",
                     },
                   })}
                   name="description"
@@ -230,7 +231,7 @@ const ProductDrawer = ({ id }) => {
         </form>
       </Scrollbars>
     </>
-  )
-}
+  );
+};
 
-export default ProductDrawer
+export default ProductDrawer;

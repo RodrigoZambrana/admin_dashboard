@@ -5,8 +5,6 @@ import CategoryServices from "../../services/CategoryServices";
 
 const SelectProductCategory = ({ setCategory, register, name, label }) => {
   const { data } = useAsync(CategoryServices.getAllCategory); //   console.log(value);
-  console.log(data);
-
   return (
     <>
       <Select

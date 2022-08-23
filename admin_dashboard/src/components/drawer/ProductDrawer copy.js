@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { Scrollbars } from 'react-custom-scrollbars-2'
-import { Textarea, Select } from '@windmill/react-ui'
-import ReactTagInput from '@pathofdev/react-tag-input'
+import React, { useEffect, useState } from "react";
+import { Scrollbars } from "react-custom-scrollbars-2";
+import { Textarea, Select } from "@windmill/react-ui";
+import ReactTagInput from "@pathofdev/react-tag-input";
 
-import Title from '../form/Title'
-import Error from '../form/Error'
-import LabelArea from '../form/LabelArea'
-import InputArea from '../form/InputArea'
-import InputValue from '../form/InputValue'
-import DrawerButton from '../form/DrawerButton'
-import Uploader from '../image-uploader/Uploader'
-import ChildrenCategory from '../category/ChildrenCategory'
-import ParentCategory from '../category/ParentCategory'
-import useProductSubmit from '../../hooks/useProductSubmit'
-import useAsync from '../../hooks/useAsync'
-import CategoryServices from '../../services/CategoryServices'
-import SelectProductUnit from '../form/SelectProductUnit'
-import SelectProductProvider from '../form/SelectProductProvider'
+import Title from "../form/Title";
+import Error from "../form/Error";
+import LabelArea from "../form/LabelArea";
+import InputArea from "../form/InputArea";
+import InputValue from "../form/InputValue";
+import DrawerButton from "../form/DrawerButton";
+import Uploader from "../image-uploader/Uploader";
+import ChildrenCategory from "../category/ChildrenCategory";
+import ParentCategory from "../category/ParentCategory";
+import useProductSubmit from "../../hooks/useProductSubmit";
+import useAsync from "../../hooks/useAsync";
+import CategoryServices from "../../services/CategoryServices";
+import SelectProductUnit from "../form/SelectProductUnit";
+import SelectProductProvider from "../form/SelectProductProvider";
 
 const ProductDrawer = ({ id }) => {
   const {
@@ -28,29 +28,31 @@ const ProductDrawer = ({ id }) => {
     setImageUrl,
     tag,
     setTag,
-    subcategories,
-    categoryTest,
-  } = useProductSubmit(id)
+  } = useProductSubmit(id);
 
-  const { data } = useAsync(CategoryServices.getAllCategory) //   console.log(value);
-  const [selectedCategory, setSelectedCategory] = useState()
-  const [categoryId, setCategoryId] = useState()
+  const { data } = useAsync(CategoryServices.getAllCategory); //   console.log(value);
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [categoryId, setCategoryId] = useState(-1);
+  const [subcategory, setSubcategory] = useState();
 
-  useEffect(() => {
-    setSelectedCategory(subcategories)
-    setCategoryId(categoryTest)
-    console.log('categoryID:' + categoryId)
-  }, [subcategories])
+  // const [categories, setCategories] = useState();
 
   const handleCategoryChange = function (e) {
-    const categoryId = e.target.value
-    setCategoryId(categoryId)
+    const categoryId = e.target.value;
+    setCategoryId(categoryId);
+    console.log(categoryId);
 
     const filter = data.filter((category) => {
-      return category.id == categoryId
-    })
-    setSelectedCategory(filter[0])
-  }
+      return category.id == categoryId;
+    });
+    setSelectedCategory(filter[0]);
+  };
+
+  const handleSubCategoryChange = function (e) {
+    const s = e.target.value;
+    setSubcategory(s);
+    console.log(s);
+  };
 
   return (
     <>
@@ -97,12 +99,11 @@ const ProductDrawer = ({ id }) => {
                 <Select
                   className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
                   name="category"
-                  {...register('category', {
-                    required: 'Product parent category is required!',
+                  {...register(`${category}`, {
+                    required: `${label} is required!`,
                   })}
-                  onChange={handleCategoryChange}
                 >
-                  <option defaultValue hidden>
+                  <option value={-1} defaultValue hidden>
                     Seleccione una categoria
                   </option>
                   {data.length > 0 &&
@@ -120,21 +121,20 @@ const ProductDrawer = ({ id }) => {
               <LabelArea label="Subcategoria" />
               <div className="col-span-8 sm:col-span-4">
                 <Select
+                  register={register}
                   className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 dark:bg-white border-transparent focus:bg-white"
                   name="subcategory"
-                  {...register('subcategory', {
-                    required: 'Product parent category is required!',
-                  })}
-                  // onChange={handleSubCategoryChange}
+                  id="subcategory"
+                  onChange={handleSubCategoryChange}
+                  value={subcategory}
                 >
+                  <option value={-1} defaultValue hidden>
+                    Seleccione una subcategoria
+                  </option>
                   {categoryId > -1 &&
                     selectedCategory.subCategories.length > 0 &&
                     selectedCategory.subCategories.map((subcategory) => (
-                      <option
-                        defaultValue
-                        key={subcategory.id}
-                        value={subcategory.id}
-                      >
+                      <option key={subcategory.id} value={subcategory.id}>
                         {subcategory.name}
                       </option>
                     ))}
@@ -213,11 +213,11 @@ const ProductDrawer = ({ id }) => {
               <div className="col-span-8 sm:col-span-4">
                 <Textarea
                   className="border text-sm focus:outline-none block w-full bg-gray-100 border-transparent focus:bg-white"
-                  {...register('description', {
-                    required: 'Description is required!',
+                  {...register("description", {
+                    required: "Description is required!",
                     minLength: {
                       value: 10,
-                      message: 'Minimum 10 character!',
+                      message: "Minimum 10 character!",
                     },
                   })}
                   name="description"
@@ -234,7 +234,7 @@ const ProductDrawer = ({ id }) => {
         </form>
       </Scrollbars>
     </>
-  )
-}
+  );
+};
 
-export default ProductDrawer
+export default React.memo(ProductDrawer);

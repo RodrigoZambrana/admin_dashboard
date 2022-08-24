@@ -24,6 +24,7 @@
     "axios": "^0.24.0",
     "chart.js": "^3.7.1",
     "classnames": "2.2.6",
+    "cldr-data": "^36.0.1",
     "currency-symbol-map": "^5.0.1",
     "dayjs": "^1.10.7",
     "html2canvas": "^1.4.0",

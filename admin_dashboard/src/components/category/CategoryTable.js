@@ -10,6 +10,7 @@ import EditDeleteButton from "../table/EditDeleteButton";
 
 const CategoryTable = ({ categories }) => {
   const { serviceId, handleModalOpen, handleUpdate } = useToggleDrawer();
+
   return (
     <>
       <MainModal id={serviceId} />
@@ -21,11 +22,14 @@ const CategoryTable = ({ categories }) => {
         {categories?.map((category) => (
           <TableRow key={category.id}>
             <TableCell className="font-semibold uppercase text-xs">
-              {category.id}
-            </TableCell>
-            <TableCell className="font-semibold uppercase text-xs">
               {category.name}
             </TableCell>
+            <TableCell>
+              {category.subCategories?.map((sub) => (
+                <span className="text-sm text-center">{sub.name},</span>
+              ))}
+            </TableCell>
+
             <TableCell>
               <ShowHideButton id={category.id} status={category.status} />
             </TableCell>

@@ -28,7 +28,7 @@ const ProductDetails = () => {
         <div className="inline-block overflow-y-auto h-full align-middle transition-all transform">
           <div className="flex flex-col lg:flex-row md:flex-row w-full overflow-hidden">
             <div className="flex-shrink-0 flex items-center justify-center h-auto">
-              <img src={data.image} alt={data.name} />
+              <img src={data.image} alt={data.name} width={450} height={450} />
             </div>
             <div className="w-full flex flex-col p-5 md:p-8 text-left">
               <div className="mb-5 block ">

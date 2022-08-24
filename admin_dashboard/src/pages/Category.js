@@ -84,8 +84,8 @@ const Category = () => {
           <Table>
             <TableHeader>
               <tr>
-                <TableCell>ID</TableCell>
                 <TableCell>Nombre</TableCell>
+                <TableCell className="text-center">Subcategorias</TableCell>
                 <TableCell className="text-center">Publicada</TableCell>
                 <TableCell className="text-right">Actiones</TableCell>
               </tr>

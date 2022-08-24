@@ -93,19 +93,23 @@ const useFilter = (data) => {
 
     //products filtering
 
-    if (filter) {
-      services = services.filter((item) => item.parent === filter);
-    }
+    // if (filter) {
+    //   services = services.filter((item) => item.parent === filter);
+    // }
 
-    if (sortedField === "Low") {
-      services = services.sort((a, b) => a.price < b.price && -1);
+    if (sortedField == "low") {
+      console.log(sortedField);
+      services = [...services].sort((a, b) => a.sale_price - b.sale_price);
+      console.log(services);
     }
-    if (sortedField === "High") {
-      services = services.sort((a, b) => a.price > b.price && -1);
+    if (sortedField == "high") {
+      console.log(sortedField);
+      services = [...services].sort((a, b) => b.id - a.id);
+      console.log(services);
     }
     if (searchText) {
       services = services.filter((search) =>
-        search.title.toLowerCase().includes(searchText.toLowerCase())
+        search.name.toLowerCase().includes(searchText.toLowerCase())
       );
     }
 
@@ -118,7 +122,7 @@ const useFilter = (data) => {
 
     //admin Filtering
 
-    if (role) {
+    if (role && role !== "all") {
       services = services.filter((staff) => staff.role === role);
     }
 
@@ -260,6 +264,7 @@ const useFilter = (data) => {
     setStatus,
     setRole,
     setTime,
+    setDataTable,
     handleChangePage,
     totalResults,
     resultsPerPage,

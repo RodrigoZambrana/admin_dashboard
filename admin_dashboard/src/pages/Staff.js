@@ -77,9 +77,7 @@ const Staff = () => {
                 onChange={(e) => setRole(e.target.value)}
                 className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 border-transparent focus:bg-white"
               >
-                <option value="All" defaultValue hidden>
-                  Staff Role
-                </option>
+                <option value="all">Todos</option>
                 <option value="superAdmin">Super Admin</option>
                 <option value="admin">Admin</option>
                 <option value="staff">Staff</option>

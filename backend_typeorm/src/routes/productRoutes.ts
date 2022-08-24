@@ -22,7 +22,7 @@ router.post("/:id", getProductById);
 router.put("/:id", updateProduct);
 
 //delete a product
-router.patch("/:id", deleteProduct);
+router.delete("/:id", deleteProduct);
 
 //update a product status
 router.put("/status/:id", updateStatus);

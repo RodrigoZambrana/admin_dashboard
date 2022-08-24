@@ -65,16 +65,18 @@ export const gridOrderStatus = (props) => (
 );
 
 export const kanbanGrid = [
-  { headerText: "Para hacer", keyField: "Open", allowToggle: true },
+  { headerText: "To Do", keyField: "Open", allowToggle: true },
 
-  { headerText: "En progreso", keyField: "InProgress", allowToggle: true },
+  { headerText: "In Progress", keyField: "InProgress", allowToggle: true },
 
-  // { headerText: 'Testing',
-  //   keyField: 'Testing',
-  //   allowToggle: true,
-  //   isExpanded: false },
+  {
+    headerText: "Testing",
+    keyField: "Testing",
+    allowToggle: true,
+    isExpanded: false,
+  },
 
-  { headerText: "Terminado", keyField: "Close", allowToggle: true },
+  { headerText: "Done", keyField: "Close", allowToggle: true },
 ];
 const gridEmployeeProfile = (props) => (
   <div className="flex items-center gap-2">
@@ -3098,14 +3100,14 @@ export const stackedPrimaryYAxis = {
 export const kanbanData = [
   {
     Id: "Task 1",
-    Titulo: "Task - 29001",
+    Title: "Task - 29001",
     Status: "Open",
-    Resumen: "Analyze the new requirements gathered from the customer.",
-    Tipo: "Story",
-    Prioridad: "Low",
+    Summary: "Analyze the new requirements gathered from the customer.",
+    Type: "Story",
+    Priority: "Low",
     Tags: "Analyze,Customer",
-    Estimado: 3.5,
-    Asignado: "Nancy Davloio",
+    Estimate: 3.5,
+    Assignee: "Nancy Davloio",
     RankId: 1,
     Color: "#02897B",
     ClassName: "e-story, e-low, e-nancy-davloio",

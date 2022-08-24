@@ -4,7 +4,7 @@ import {
   ColumnsDirective,
   ColumnDirective,
 } from "@syncfusion/ej2-react-kanban";
-import { extend, L10n } from "@syncfusion/ej2-base";
+import { L10n } from "@syncfusion/ej2-base";
 
 import { kanbanData, kanbanGrid } from "../data/dummy";
 
@@ -14,7 +14,7 @@ L10n.load({
       items: "Items",
       min: "Min",
       max: "Max",
-      cardsSelected: "Cards",
+      cardsSelected: "Tarjetas",
       addTitle: "Agregar Titulo",
       editTitle: "Editar",
       deleteTitle: "Eliminar",

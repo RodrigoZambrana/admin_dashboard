@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
@@ -36,6 +36,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet" />
+
     <title>Dashtar | React eCommerce Admin Dashboard</title>
   </head>
   <body class="antialiased">
@@ -53,12 +55,12 @@
     -->
 
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
           navigator.serviceWorker
-            .register('./serviceworker.js')
-            .then((reg) => console.log('Success: ', reg.scope))
-            .catch((err) => console.log('Failure: ', err));
+            .register("./serviceworker.js")
+            .then((reg) => console.log("Success: ", reg.scope))
+            .catch((err) => console.log("Failure: ", err));
         });
       }
     </script>

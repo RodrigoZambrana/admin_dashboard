@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Table,
   TableHeader,
@@ -9,18 +9,18 @@ import {
   Card,
   CardBody,
   Pagination,
-} from '@windmill/react-ui';
+} from "@windmill/react-ui";
 
-import useAsync from '../hooks/useAsync';
-import useFilter from '../hooks/useFilter';
-import NotFound from '../components/table/NotFound';
-import UserServices from '../services/UserServices';
-import Loading from '../components/preloader/Loading';
-import PageTitle from '../components/Typography/PageTitle';
-import CustomerTable from '../components/customer/CustomerTable';
+import useAsync from "../hooks/useAsync";
+import useFilter from "../hooks/useFilter";
+import NotFound from "../components/table/NotFound";
+import customerServices from "../services/CustomerServices";
+import Loading from "../components/preloader/Loading";
+import PageTitle from "../components/Typography/PageTitle";
+import CustomerTable from "../components/customer/CustomerTable";
 
 const Customers = () => {
-  const { data, loading } = useAsync(UserServices.getAllUsers);
+  const { data, loading } = useAsync(customerServices.getAllCustomers);
 
   const {
     userRef,
@@ -34,11 +34,11 @@ const Customers = () => {
 
   return (
     <>
-      <PageTitle>Customers</PageTitle>
+      <PageTitle>Clientes</PageTitle>
       <Card className="min-w-0 shadow-xs overflow-hidden bg-white dark:bg-gray-800 mb-5">
         <CardBody>
           <form
-            onSubmit={handleSubmitUser}
+            onChange={handleSubmitUser}
             className="py-3 grid gap-4 lg:gap-6 xl:gap-6 md:flex xl:flex"
           >
             <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
@@ -65,12 +65,12 @@ const Customers = () => {
           <Table>
             <TableHeader>
               <tr>
-                <TableCell>ID</TableCell>
-                <TableCell>Joining Date</TableCell>
-                <TableCell>Name</TableCell>
+                <TableCell>Nombre</TableCell>
                 <TableCell>Email</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell className="text-right">Actions</TableCell>
+                <TableCell>Teléfono</TableCell>
+                <TableCell>Dirección</TableCell>
+                <TableCell>Ver compras</TableCell>
+                <TableCell className="text-right">Accciones</TableCell>
               </tr>
             </TableHeader>
             <CustomerTable customers={dataTable} />

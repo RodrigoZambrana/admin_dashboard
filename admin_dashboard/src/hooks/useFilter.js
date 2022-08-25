@@ -130,8 +130,8 @@ const useFilter = (data) => {
     if (searchUser) {
       services = services.filter(
         (search) =>
-          search.name.toLowerCase().includes(searchUser.toLowerCase()) ||
-          search?.phone?.toLowerCase().includes(searchUser.toLowerCase()) ||
+          search.full_name.toLowerCase().includes(searchUser.toLowerCase()) ||
+          search?.telephone?.toLowerCase().includes(searchUser.toLowerCase()) ||
           search?.email?.toLowerCase().includes(searchUser.toLowerCase())
       );
     }

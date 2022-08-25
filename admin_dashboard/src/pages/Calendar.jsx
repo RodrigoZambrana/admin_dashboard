@@ -47,7 +47,7 @@ L10n.load({
       noEvents: "No hay eventos",
       emptyContainer: "No hay eventos programados para este día.",
       allDay: "Todo el dia",
-      start: "comienzo",
+      start: "Comienzo",
       end: "Final",
       more: "más",
       close: "Cerca",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Table,
   TableHeader,
@@ -9,6 +9,7 @@ import {
   Card,
   CardBody,
   Pagination,
+  Button,
 } from "@windmill/react-ui";
 
 import useAsync from "../hooks/useAsync";
@@ -18,9 +19,12 @@ import customerServices from "../services/CustomerServices";
 import Loading from "../components/preloader/Loading";
 import PageTitle from "../components/Typography/PageTitle";
 import CustomerTable from "../components/customer/CustomerTable";
+import { FiPlus } from "react-icons/fi";
+import { SidebarContext } from "../context/SidebarContext";
 
 const Customers = () => {
   const { data, loading } = useAsync(customerServices.getAllCustomers);
+  const { toggleDrawer } = useContext(SidebarContext);
 
   const {
     userRef,
@@ -47,12 +51,20 @@ const Customers = () => {
                 className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 border-transparent focus:bg-white"
                 type="search"
                 name="search"
-                placeholder="Search by name/email/phone"
+                placeholder="buscar por nombre/email/teléfono"
               />
               <button
                 type="submit"
                 className="absolute right-0 top-0 mt-5 mr-1"
               ></button>
+            </div>
+            <div className="w-full md:w-56 lg:w-56 xl:w-56">
+              <Button onClick={toggleDrawer} className="w-full rounded-md h-12">
+                <span className="mr-3">
+                  <FiPlus />
+                </span>
+                Agregar Cliente
+              </Button>
             </div>
           </form>
         </CardBody>

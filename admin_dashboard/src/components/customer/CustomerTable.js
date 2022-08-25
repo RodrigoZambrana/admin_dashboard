@@ -6,10 +6,13 @@ import { FiEye, FiTrash2 } from "react-icons/fi";
 import Tooltip from "../tooltip/Tooltip";
 import MainModal from "../modal/MainModal";
 import { SidebarContext } from "../../context/SidebarContext";
+import EditDeleteButton from "../table/EditDeleteButton";
+import useToggleDrawer from "../../hooks/useToggleDrawer";
 
 const CustomerTable = ({ customers }) => {
   const [customerId, setCustomerId] = useState("");
   const { toggleModal } = useContext(SidebarContext);
+  const { handleUpdate } = useToggleDrawer();
 
   const handleModalOpen = (id) => {
     setCustomerId(id);
@@ -54,19 +57,11 @@ const CustomerTable = ({ customers }) => {
               </Link>
             </TableCell>
             <TableCell>
-              <div className="flex justify-end text-right">
-                <div
-                  onClick={() => handleModalOpen(customer.id)}
-                  className="p-2 cursor-pointer text-gray-400 hover:text-red-600"
-                >
-                  <Tooltip
-                    id="delete"
-                    Icon={FiTrash2}
-                    title="Eliminar"
-                    bgColor="#F87171"
-                  />
-                </div>
-              </div>
+              <EditDeleteButton
+                id={customer.id}
+                handleUpdate={handleUpdate}
+                handleModalOpen={handleModalOpen}
+              />
             </TableCell>
           </TableRow>
         ))}

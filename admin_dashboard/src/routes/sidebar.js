@@ -3,8 +3,8 @@ import {
   FiShoppingBag,
   FiUsers,
   FiUser,
-  FiCompass,
-  FiGift,
+  FiShoppingCart,
+  FiFile,
   FiList,
   FiSettings,
   FiCalendar,
@@ -40,13 +40,13 @@ const sidebar = [
   },
   {
     path: "/orders",
-    icon: FiCompass,
+    icon: FiShoppingCart,
     name: "Pedidos",
   },
   {
     path: "/coupons",
-    icon: FiGift,
-    name: "Coupones",
+    icon: FiFile,
+    name: "Presupuestos",
   },
   {
     path: "/calendar",

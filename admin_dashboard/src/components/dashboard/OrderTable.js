@@ -11,7 +11,7 @@ const OrderTable = ({ orders }) => {
           <TableRow key={order.id}>
             <TableCell>
               <span className="text-sm">
-                {dayjs(order.createdAt).format("DD/MM/YYYY")}
+                {dayjs(order.created_at).format("DD/MM/YYYY")}
               </span>
             </TableCell>
             <TableCell>

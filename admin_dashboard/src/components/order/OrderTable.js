@@ -21,7 +21,7 @@ const OrderTable = ({ orders }) => {
             </TableCell>
             <TableCell>
               <span className="text-sm">
-                {dayjs(order.createdAt).format("MMM D, YYYY")}
+                {dayjs(order.created_at).format("DD/MM/YYYY")}
               </span>
             </TableCell>
 

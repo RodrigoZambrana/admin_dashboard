@@ -37,6 +37,18 @@ const sidebar = [
     path: "/customers",
     icon: FiUsers,
     name: "Clientes",
+    routes: [
+      // submenu
+      {
+        path: "/customers",
+        icon: FiUser,
+        name: "Clientes",
+      },
+      {
+        path: "/customer/add",
+        name: "Agregar Cliente",
+      },
+    ],
   },
   {
     path: "/orders",

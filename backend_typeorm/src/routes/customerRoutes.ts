@@ -1,27 +1,27 @@
-import { Router } from 'express'
+import { Router } from "express";
 import {
   addCustomer,
   getAllCustomer,
   getCustomerById,
   updateCustomer,
   deleteCustomer,
-} from '../controller/customerController'
+} from "../controller/customerController";
 
-const router = Router()
+const router = Router();
 
 //get all category
-router.get('/', getAllCustomer)
+router.get("/", getAllCustomer);
 
 //add a category
-router.post('/add', addCustomer)
+router.post("/add", addCustomer);
 
 //get a category
-router.get('/:id', getCustomerById)
+router.get("/:id", getCustomerById);
 
 //update a category
-router.put('/:id', updateCustomer)
+router.put("/:id", updateCustomer);
 
 //delete a category
-router.patch('/:id', deleteCustomer)
+router.delete("/:id", deleteCustomer);
 
-export default router
+export default router;

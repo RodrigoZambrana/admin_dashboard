@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Modal, ModalBody, ModalFooter, Button } from "@windmill/react-ui";
 import { FiTrash2 } from "react-icons/fi";
 
-import UserServices from "../../services/UserServices";
+import CustomerServices from "../../services/CustomerServices";
 import AdminServices from "../../services/AdminServices";
 import CouponServices from "../../services/CouponServices";
 import ProductServices from "../../services/ProductServices";
@@ -36,7 +36,7 @@ const MainModal = ({ id }) => {
       closeModal();
     }
     if (location.pathname === "/customers") {
-      UserServices.deleteUser(id)
+      CustomerServices.deleteCustomer(id)
         .then((res) => {
           setIsUpdate(true);
           notifySuccess(res.message);

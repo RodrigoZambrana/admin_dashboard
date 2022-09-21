@@ -4,35 +4,36 @@ import {
   PrimaryGeneratedColumn,
   BaseEntity,
   OneToMany,
-} from 'typeorm'
+} from "typeorm";
 
-import { Address } from './Address'
-import { Order } from './Order'
+import { Address } from "./Address";
+import { Order } from "./Order";
 
 @Entity()
 export class Customer extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  full_name: string
+  full_name: string;
 
   @Column({ nullable: true })
-  email: string
+  email: string;
 
   @Column({ nullable: true })
-  telephone: string
+  telephone: string;
 
   @OneToMany(() => Address, (address) => address.customer, {
     cascade: true,
     eager: true,
-    onDelete: 'CASCADE',
+    onDelete: "CASCADE",
   })
-  addresses: Address[]
+  addresses: Address[];
 
   @OneToMany(() => Order, (order) => order.customer, {
     cascade: true,
     eager: true,
+    onDelete: "CASCADE",
   })
-  orders: Order[]
+  orders: Order[];
 }

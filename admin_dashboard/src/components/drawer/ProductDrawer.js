@@ -10,8 +10,6 @@ import InputArea from "../form/InputArea";
 import InputValue from "../form/InputValue";
 import DrawerButton from "../form/DrawerButton";
 import Uploader from "../image-uploader/Uploader";
-import ChildrenCategory from "../category/ChildrenCategory";
-import ParentCategory from "../category/ParentCategory";
 import useProductSubmit from "../../hooks/useProductSubmit";
 import useAsync from "../../hooks/useAsync";
 import CategoryServices from "../../services/CategoryServices";

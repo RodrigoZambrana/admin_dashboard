@@ -17,14 +17,12 @@ import { CSVReader, CSVDownloader } from "react-papaparse";
 
 import useAsync from "../hooks/useAsync";
 import useFilter from "../hooks/useFilter";
-import productData from "../utils/products";
 import NotFound from "../components/table/NotFound";
 import Loading from "../components/preloader/Loading";
 import ProductServices from "../services/ProductServices";
 import PageTitle from "../components/Typography/PageTitle";
 import { SidebarContext } from "../context/SidebarContext";
 import ProductTable from "../components/product/ProductTable";
-import SelectCategory from "../components/form/SelectCategory";
 import MainDrawer from "../components/drawer/MainDrawer";
 import ProductDrawer from "../components/drawer/ProductDrawer";
 

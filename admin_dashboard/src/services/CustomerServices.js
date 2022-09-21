@@ -1,6 +1,6 @@
 import requests from "./httpService";
 
-const UserServices = {
+const CustomerServices = {
   getAllCustomers(body) {
     return requests.get(`/customer`, body);
   },
@@ -13,4 +13,4 @@ const UserServices = {
   },
 };
 
-export default UserServices;
+export default CustomerServices;

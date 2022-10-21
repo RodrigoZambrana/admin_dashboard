@@ -9,9 +9,14 @@ const adminRepository = AppDataSource.getRepository(Admin);
 
 export const loginAdmin = async (req: Request, res: Response) => {
   try {
-    const { email } = req.body.email;
-    const admin = await Admin.findOneBy({ email: email });
-    console.log(admin);
+    const email = req.body.email;
+    console.log("el email es:" + email);
+    const admin = await AppDataSource.createQueryBuilder()
+      .select("admin")
+      .from(Admin, "admin")
+      .where("admin.email = :email", { email: email })
+      .getOne();
+
     if (admin && bcrypt.compareSync(req.body.password, admin.password)) {
       const token = signInToken(admin);
       res.json({

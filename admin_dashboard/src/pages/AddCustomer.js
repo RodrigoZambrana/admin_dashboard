@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import Error from '../components/form/Error'
-import LabelArea from '../components/form/LabelArea'
-import InputArea from '../components/form/InputArea'
-import useProductSubmit from '../hooks/useProductSubmit'
-import useAsync from '../hooks/useAsync'
-import CategoryServices from '../services/CategoryServices'
-import PageTitle from '../components/Typography/PageTitle'
+import React, { useEffect, useState } from "react";
+import Error from "../components/form/Error";
+import LabelArea from "../components/form/LabelArea";
+import InputArea from "../components/form/InputArea";
+import useProductSubmit from "../hooks/useProductSubmit";
+import useAsync from "../hooks/useAsync";
+import CategoryServices from "../services/CategoryServices";
+import PageTitle from "../components/Typography/PageTitle";
 
-import { Card, CardBody } from '@windmill/react-ui'
+import { Card, CardBody } from "@windmill/react-ui";
 
 const Customers = ({ id }) => {
   const {
@@ -21,11 +21,11 @@ const Customers = ({ id }) => {
     setTag,
     subcategories,
     categoryTest,
-  } = useProductSubmit(id)
+  } = useProductSubmit(id);
 
-  const { data } = useAsync(CategoryServices.getAllCategory) //   console.log(value);
-  const [selectedCategory, setSelectedCategory] = useState()
-  const [categoryId, setCategoryId] = useState()
+  const { data } = useAsync(CategoryServices.getAllCategory); //   console.log(value);
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [categoryId, setCategoryId] = useState();
 
   return (
     <>
@@ -50,7 +50,7 @@ const Customers = ({ id }) => {
                     register={register}
                     required="true"
                     label="Nombre"
-                    name="name"
+                    name="full_name"
                     type="text"
                     placeholder="Nombre"
                   />
@@ -95,43 +95,57 @@ const Customers = ({ id }) => {
             </p>
             <div className="px-6 pt-8 flex-grow w-full h-full max-h-full">
               <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-                <LabelArea label="Nombre" />
+                <LabelArea label="Calle" />
                 <div className="col-span-8 sm:col-span-4">
                   <InputArea
                     register={register}
                     required="true"
-                    label="Nombre"
-                    name="name"
+                    label="Calle"
+                    name="street"
                     type="text"
-                    placeholder="Nombre"
+                    placeholder="Calle"
                   />
                   <Error errorName={errors.name} />
                 </div>
               </div>
               <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-                <LabelArea label="E-mail" />
+                <LabelArea label="Número" />
                 <div className="col-span-8 sm:col-span-4">
                   <InputArea
                     register={register}
                     required="false"
-                    label="E-mail"
-                    name="email"
-                    type="email"
-                    placeholder="E-mail"
+                    label="Número"
+                    name="number"
+                    type="number"
+                    placeholder="Número"
                   />
                   <Error errorName={errors.name} />
                 </div>
               </div>
               <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
-                <LabelArea label="Teléfono" />
+                <LabelArea label="Apartamento" />
                 <div className="col-span-8 sm:col-span-4">
                   <InputArea
                     register={register}
-                    required="true"
-                    label="Teléfono"
-                    name="telephone"
+                    required="false"
+                    label="Apartamento"
+                    name="apartment"
                     type="number"
-                    placeholder="E-mail"
+                    placeholder="Apartmento"
+                  />
+                  <Error errorName={errors.name} />
+                </div>
+              </div>
+              <div className="grid grid-cols-6 gap-3 md:gap-5 xl:gap-6 lg:gap-6 mb-6">
+                <LabelArea label="Esquina" />
+                <div className="col-span-8 sm:col-span-4">
+                  <InputArea
+                    register={register}
+                    required="false"
+                    label="Esquina"
+                    name="corner"
+                    type="text"
+                    placeholder="Esquina"
                   />
                   <Error errorName={errors.name} />
                 </div>
@@ -141,7 +155,7 @@ const Customers = ({ id }) => {
         </Card>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default Customers
+export default Customers;

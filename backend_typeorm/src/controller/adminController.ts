@@ -16,7 +16,6 @@ export const loginAdmin = async (req: Request, res: Response) => {
       .from(Admin, "admin")
       .where("admin.email = :email", { email: email })
       .getOne();
-
     if (admin && bcrypt.compareSync(req.body.password, admin.password)) {
       const token = signInToken(admin);
       res.json({

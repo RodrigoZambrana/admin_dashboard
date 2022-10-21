@@ -1,4 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+
 import {
   Table,
   TableHeader,
@@ -36,6 +38,12 @@ const Customers = () => {
     handleSubmitUser,
   } = useFilter(data);
 
+  const history = useHistory();
+
+  const addCustomer = () => {
+    history.push("/customer/add");
+  };
+
   return (
     <>
       <PageTitle>Clientes</PageTitle>
@@ -59,7 +67,7 @@ const Customers = () => {
               ></button>
             </div>
             <div className="w-full md:w-56 lg:w-56 xl:w-56">
-              <Button onClick={toggleDrawer} className="w-full rounded-md h-12">
+              <Button onClick={addCustomer} className="w-full rounded-md h-12">
                 <span className="mr-3">
                   <FiPlus />
                 </span>
@@ -97,7 +105,7 @@ const Customers = () => {
           </TableFooter>
         </TableContainer>
       ) : (
-        <NotFound title="Customer" />
+        <NotFound title="Cliente" />
       )}
     </>
   );

@@ -26,6 +26,9 @@ export class EventData extends BaseEntity {
   @Column({ default: false })
   isAllDay: Boolean;
 
+  @Column({ nullable: true })
+  Description: string;
+
   @Column({ default: "1aaa55" })
   CategoryColor: String;
 }

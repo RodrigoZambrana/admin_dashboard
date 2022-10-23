@@ -6,7 +6,6 @@ import { getRepository } from "typeorm";
 import { AppDataSource } from "../db";
 
 const agendaRepository = AppDataSource.getRepository(EventData);
-const customerRepository = AppDataSource.getRepository(Customer);
 
 //categories and products of Address
 export const getAllAgenda = async (req: Request, res: Response) => {
@@ -38,6 +37,67 @@ export const getAllAgenda = async (req: Request, res: Response) => {
 
 export const addAgenda = async (req: Request, res: Response) => {
   try {
+    let param = req.body;
+    if (
+      param.action == "insert" ||
+      (param.action == "batch" && param.added.length > 0)
+    ) {
+      let newAgenda = new EventData();
+      newAgenda.Subject = req.body.added[0].Subject;
+      newAgenda.StartTime = req.body.added[0].StartTime;
+      newAgenda.EndTime = req.body.added[0].EndTime;
+      newAgenda.Location = req.body.added[0].Location;
+      newAgenda.Description = req.body.added[0].Description;
+      newAgenda.isAllDay = req.body.added[0].isAllDay;
+      console.log("para agregar:" + newAgenda);
+      await newAgenda.save();
+    }
+    if (
+      param.action == "update" ||
+      (param.action == "batch" && param.changed.length > 0)
+    ) {
+      const updateData = await AppDataSource.createQueryBuilder()
+        .select("event")
+        .from(EventData, "event")
+        .where("event.Id = :Id", { Id: param.changed[0].Id })
+        .getOne();
+      console.log(updateData);
+      if (updateData != null) {
+        updateData.Subject = param.changed[0].Subject;
+        updateData.isAllDay = param.changed[0].IsAllDay;
+        updateData.Location = param.changed[0].Location;
+        updateData.Description = param.changed[0].Description;
+        console.log("Actualizado:" + updateData);
+        await updateData.save();
+      }
+    }
+    if (
+      param.action == "remove" ||
+      (param.action == "batch" && param.deleted.length > 0)
+    ) {
+      let removeData = agendaRepository.findOneById(param.deleted[0].Id);
+
+      if (removeData != null) {
+        await agendaRepository
+          .createQueryBuilder()
+          .delete()
+          .from(EventData)
+          .where("Id = :Id", { Id: param.deleted[0].Id })
+          .execute();
+      }
+    }
+    res.status(200).json({
+      message: "Address  Successfully Added!",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+    });
+  }
+};
+
+export const addAgenda2 = async (req: Request, res: Response) => {
+  try {
     let newAgenda = new EventData();
     newAgenda.Subject = req.body.added[0].Subject;
     newAgenda.StartTime = req.body.added[0].StartTime;
@@ -46,6 +106,7 @@ export const addAgenda = async (req: Request, res: Response) => {
     newAgenda.isAllDay = req.body.added[0].isAllDay;
     console.log("para agregar:" + newAgenda);
     await newAgenda.save();
+
     res.status(200).json({
       message: "Address  Successfully Added!",
     });

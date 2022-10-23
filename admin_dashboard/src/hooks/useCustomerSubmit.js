@@ -1,12 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { SidebarContext } from "../context/SidebarContext";
-import CategoryServices from "../services/CategoryServices";
+import CustomerServices from "../services/CustomerServices";
 import { notifyError, notifySuccess } from "../utils/toast";
 
 const useCustomerSubmit = (id) => {
-  const [imageUrl, setImageUrl] = useState("");
-  const [children, setChildren] = useState([]);
   const { isDrawerOpen, closeDrawer, setIsUpdate } = useContext(SidebarContext);
 
   const {
@@ -17,26 +15,27 @@ const useCustomerSubmit = (id) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = ({ name }) => {
-    if (!name) {
-      notifyError("Ingrese un nombre");
-      return;
-    }
-    const categoryData = {
-      name: name,
-      image_url: imageUrl,
+  const onSubmit = (data) => {
+    const customerData = {
+      full_name: data.full_name,
+      email: data.email,
+      telephone: data.telephone,
+      street: data.street,
+      number: data.number,
+      apartment: data.apartment,
+      corner: data.corner,
     };
 
-    if (id) {
-      CategoryServices.updateCategory(id, categoryData)
+    if (id && id != 0) {
+      CustomerServices.updateCustomer(id, customerData)
         .then((res) => {
           setIsUpdate(true);
           notifySuccess(res.message);
         })
         .catch((err) => notifyError(err.message));
-      closeDrawer();
+      // closeDrawer();
     } else {
-      CategoryServices.addCategory(categoryData)
+      CustomerServices.addCustomer(customerData)
         .then((res) => {
           setIsUpdate(true);
           notifySuccess(res.message);
@@ -47,21 +46,19 @@ const useCustomerSubmit = (id) => {
   };
 
   useEffect(() => {
-    if (!isDrawerOpen) {
-      setImageUrl("");
-      setValue("name", "");
-      setImageUrl("");
-      setValue("icon", "");
-
-      return;
-    }
-    if (id) {
-      CategoryServices.getCategoryById(id)
+    if (id != 0) {
+      CustomerServices.getCustomerById(id)
         .then((res) => {
+          console.log(res);
           if (res) {
-            setValue("name", res.name);
-            setValue("icon", res.image_url);
-            setImageUrl(res.image_url);
+            setValue("full_name", res.full_name);
+            setValue("email", res.email);
+            setValue("telephone", res.telephone);
+            setValue("street", res.full_name);
+            setValue("number", res.full_name);
+            setValue("apartment", res.addresses[0].apartment);
+            setValue("corner", res.addresses[0].corner);
+            setValue("number", res.addresses[0].number);
           }
         })
         .catch((err) => {
@@ -69,16 +66,12 @@ const useCustomerSubmit = (id) => {
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, setValue, isDrawerOpen]);
+  }, []);
   return {
     register,
     handleSubmit,
     onSubmit,
     errors,
-    imageUrl,
-    setImageUrl,
-    children,
-    setChildren,
   };
 };
 

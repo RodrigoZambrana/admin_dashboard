@@ -4,8 +4,16 @@ const CustomerServices = {
   getAllCustomers(body) {
     return requests.get(`/customer`, body);
   },
-  customerById(id) {
-    return requests.get(`/customer/${id}`);
+  getCustomerById(id) {
+    return requests.post(`/customer/${id}`);
+  },
+
+  addCustomer(body) {
+    return requests.post("/customer/add", body);
+  },
+
+  updateCustomer(id) {
+    return requests.update(`/customer/${id}`);
   },
 
   deleteCustomer(id) {

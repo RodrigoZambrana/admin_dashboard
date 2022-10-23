@@ -1,22 +1,28 @@
-import React, { useContext } from 'react';
-import { Button } from '@windmill/react-ui';
+import React, { useContext } from "react";
+import { Button } from "@windmill/react-ui";
 
-import Error from '../components/form/Error';
-import useStaffSubmit from '../hooks/useStaffSubmit';
-import LabelArea from '../components/form/LabelArea';
-import InputArea from '../components/form/InputArea';
-import { AdminContext } from '../context/AdminContext';
-import SelectRole from '../components/form/SelectRole';
-import PageTitle from '../components/Typography/PageTitle';
-import Uploader from '../components/image-uploader/Uploader';
+import Error from "../components/form/Error";
+import useStaffSubmit from "../hooks/useStaffSubmit";
+import LabelArea from "../components/form/LabelArea";
+import InputArea from "../components/form/InputArea";
+import { AdminContext } from "../context/AdminContext";
+import SelectRole from "../components/form/SelectRole";
+import PageTitle from "../components/Typography/PageTitle";
+import Uploader from "../components/image-uploader/Uploader";
 
 const EditProfile = () => {
   const {
     state: { adminInfo },
   } = useContext(AdminContext);
 
-  const { register, handleSubmit, onSubmit, errors, imageUrl, setImageUrl } =
-    useStaffSubmit(adminInfo._id);
+  const {
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+    imageUrl,
+    setImageUrl,
+  } = useStaffSubmit(adminInfo._id);
 
   return (
     <>
@@ -84,8 +90,8 @@ const EditProfile = () => {
 
           <div className="flex flex-row-reverse pr-6 pb-6">
             <Button type="submit" className="h-12 px-6">
-              {' '}
-              Update Profile
+              {" "}
+              Actualizar Perfil
             </Button>
           </div>
         </form>

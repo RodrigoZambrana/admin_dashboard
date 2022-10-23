@@ -41,7 +41,7 @@ const Customers = () => {
   const history = useHistory();
 
   const addCustomer = () => {
-    history.push("/customer/add");
+    history.push("/customer/0");
   };
 
   return (

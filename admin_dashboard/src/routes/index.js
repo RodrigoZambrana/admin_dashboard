@@ -7,12 +7,11 @@ const ProductDetails = lazy(() => import("../pages/ProductDetails"));
 const Category = lazy(() => import("../pages/Category"));
 const Staff = lazy(() => import("../pages/Staff"));
 const Customers = lazy(() => import("../pages/Customers"));
-const AddCustomer = lazy(() => import("../pages/AddCustomer"));
+const CustomerAdd = lazy(() => import("../pages/CustomerAdd"));
 const CustomerOrder = lazy(() => import("../pages/CustomerOrder"));
 const Orders = lazy(() => import("../pages/Orders"));
 const OrderInvoice = lazy(() => import("../pages/OrderInvoice"));
 const Coupons = lazy(() => import("../pages/Coupons"));
-// const Setting = lazy(() => import("../pages/Setting"));
 const Page404 = lazy(() => import("../pages/404"));
 const EditProfile = lazy(() => import("../pages/EditProfile"));
 const Calendar = lazy(() => import("../pages/Calendar"));
@@ -51,8 +50,8 @@ const routes = [
     component: Customers,
   },
   {
-    path: "/customer/add",
-    component: AddCustomer,
+    path: "/customer/:id",
+    component: CustomerAdd,
   },
   {
     path: "/customer-order/:id",

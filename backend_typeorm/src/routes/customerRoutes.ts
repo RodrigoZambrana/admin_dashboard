@@ -16,7 +16,7 @@ router.get("/", getAllCustomer);
 router.post("/add", addCustomer);
 
 //get a category
-router.get("/:id", getCustomerById);
+router.post("/:id", getCustomerById);
 
 //update a category
 router.put("/:id", updateCustomer);

@@ -7,25 +7,11 @@ import useAsync from "../hooks/useAsync";
 import CategoryServices from "../services/CategoryServices";
 import PageTitle from "../components/Typography/PageTitle";
 
-import { Card, CardBody } from "@windmill/react-ui";
+import { Card, CardBody, Button } from "@windmill/react-ui";
 
 const Customers = ({ id }) => {
-  const {
-    register,
-    handleSubmit,
-    onSubmit,
-    errors,
-    imageUrl,
-    setImageUrl,
-    tag,
-    setTag,
-    subcategories,
-    categoryTest,
-  } = useProductSubmit(id);
-
-  const { data } = useAsync(CategoryServices.getAllCategory); //   console.log(value);
-  const [selectedCategory, setSelectedCategory] = useState();
-  const [categoryId, setCategoryId] = useState();
+  const { register, handleSubmit, onSubmit, errors } = useProductSubmit(id);
+  const { data } = useAsync(CategoryServices.getAllCategory);
 
   return (
     <>
@@ -80,7 +66,7 @@ const Customers = ({ id }) => {
                     label="Teléfono"
                     name="telephone"
                     type="number"
-                    placeholder="E-mail"
+                    placeholder="Teléfono"
                   />
                   <Error errorName={errors.name} />
                 </div>
@@ -131,7 +117,7 @@ const Customers = ({ id }) => {
                     label="Apartamento"
                     name="apartment"
                     type="number"
-                    placeholder="Apartmento"
+                    placeholder="Apartamento"
                   />
                   <Error errorName={errors.name} />
                 </div>
@@ -153,6 +139,13 @@ const Customers = ({ id }) => {
             </div>
           </CardBody>
         </Card>
+        <Button
+          type="submit"
+          className="mt-2 h-12 vertical-center"
+          style={{ margin: "0 auto", display: "flex" }}
+        >
+          Guardar
+        </Button>
       </form>
     </>
   );

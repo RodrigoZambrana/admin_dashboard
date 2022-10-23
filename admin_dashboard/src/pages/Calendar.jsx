@@ -13,16 +13,17 @@ import {
   Resize,
   DragAndDrop,
 } from "@syncfusion/ej2-react-schedule";
+import { DataManager, WebApiAdaptor, UrlAdaptor } from "@syncfusion/ej2-data";
 
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { Card, CardBody } from "@windmill/react-ui";
 import { scheduleData } from "../data/dummy";
 // import { Header } from "../components";
 import PageTitle from "../components/Typography/PageTitle";
-import * as numberingSystems from "../../src/culture-files/numberingSystems.json";
-import * as gregorian from "../../src/culture-files/ca-gregorian.json";
-import * as numbers from "../../src/culture-files/numbers.json";
-import * as timeZoneNames from "../../src/culture-files/timeZoneNames.json";
+import * as numberingSystems from "../culture-files/numberingSystems.json";
+import * as gregorian from "../culture-files/ca-gregorian.json";
+import * as numbers from "../culture-files/numbers.json";
+import * as timeZoneNames from "../culture-files/timeZoneNames.json";
 
 loadCldr(
   numberingSystems["default"],
@@ -164,17 +165,13 @@ L10n.load({
 // eslint-disable-next-line react/destructuring-assignment
 const PropertyPane = (props) => <div className="mt-5">{props.children}</div>;
 const Scheduler = () => {
-  const [scheduleObj, setScheduleObj] = useState();
-
-  const change = (args) => {
-    scheduleObj.selectedDate = args.value;
-    scheduleObj.dataBind();
-  };
-
-  const onDragStart = (arg) => {
-    // eslint-disable-next-line no-param-reassign
-    arg.navigation.enable = true;
-  };
+  const backendUrl = "http://localhost:3000";
+  const dataManger = new DataManager({
+    url: backendUrl + "/agenda/events",
+    removeUrl: backendUrl + "/agenda/events/crud",
+    adaptor: new UrlAdaptor(),
+    crossDomain: true,
+  });
 
   return (
     <>
@@ -183,11 +180,9 @@ const Scheduler = () => {
         <CardBody>
           <ScheduleComponent
             height="650px"
-            ref={(schedule) => setScheduleObj(schedule)}
-            selectedDate={new Date(2021, 0, 10)}
+            selectedDate={new Date()}
             locale="es"
-            eventSettings={{ dataSource: scheduleData }}
-            dragStart={onDragStart}
+            eventSettings={{ dataSource: dataManger }}
           >
             <ViewsDirective>
               {["Day", "Week", "WorkWeek", "Month", "Agenda"].map((item) => (
@@ -212,11 +207,10 @@ const Scheduler = () => {
                 <tr style={{ height: "50px" }}>
                   <td style={{ width: "100%" }}>
                     <DatePickerComponent
-                      value={new Date(2021, 0, 10)}
+                      value={new Date()}
                       showClearButton={false}
                       placeholder="Current Date"
                       floatLabelType="Always"
-                      change={change}
                     />
                   </td>
                 </tr>

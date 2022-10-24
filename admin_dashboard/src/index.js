@@ -9,6 +9,8 @@ import App from "./App";
 import myTheme from "./assets/theme/myTheme";
 import { AdminProvider } from "./context/AdminContext";
 import { SidebarProvider } from "./context/SidebarContext";
+import { BudgetProvider } from "./context/BudgetContext";
+
 import ThemeSuspense from "./components/theme/ThemeSuspense";
 
 // import * as serviceWorker from './serviceWorker';
@@ -21,11 +23,13 @@ import ThemeSuspense from "./components/theme/ThemeSuspense";
 ReactDOM.render(
   <AdminProvider>
     <SidebarProvider>
-      <Suspense fallback={<ThemeSuspense />}>
-        <Windmill usePreferences theme={myTheme}>
-          <App />
-        </Windmill>
-      </Suspense>
+      <BudgetProvider>
+        <Suspense fallback={<ThemeSuspense />}>
+          <Windmill usePreferences theme={myTheme}>
+            <App />
+          </Windmill>
+        </Suspense>
+      </BudgetProvider>
     </SidebarProvider>
   </AdminProvider>,
 

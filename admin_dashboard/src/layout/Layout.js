@@ -1,17 +1,20 @@
-import React, { useContext, Suspense, useEffect, lazy } from 'react';
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import React, { useContext, Suspense, useEffect, lazy } from "react";
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 
-import Main from './Main';
-import routes from '../routes';
-import Header from '../components/header/Header';
-import Sidebar from '../components/sidebar/Sidebar';
-import { SidebarContext } from '../context/SidebarContext';
-import ThemeSuspense from '../components/theme/ThemeSuspense';
+import Main from "./Main";
+import routes from "../routes";
+import Header from "../components/header/Header";
+import Sidebar from "../components/sidebar/Sidebar";
+import { SidebarContext } from "../context/SidebarContext";
+import { BudgetContext } from "../context/BudgetContext";
+import ThemeSuspense from "../components/theme/ThemeSuspense";
+import CartDrawer from "../components/drawer/CartDrawer";
 
-const Page404 = lazy(() => import('../pages/404'));
+const Page404 = lazy(() => import("../pages/404"));
 
 const Layout = () => {
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
+
   let location = useLocation();
 
   useEffect(() => {
@@ -22,15 +25,15 @@ const Layout = () => {
   return (
     <div
       className={`flex h-screen bg-gray-50 dark:bg-gray-900 ${
-        isSidebarOpen && 'overflow-hidden'
+        isSidebarOpen && "overflow-hidden"
       }`}
     >
       <Sidebar />
-
       <div className="flex flex-col flex-1 w-full">
         <Header />
         <Main>
           <Suspense fallback={<ThemeSuspense />}>
+            <CartDrawer />
             <Switch>
               {routes.map((route, i) => {
                 return route.component ? (

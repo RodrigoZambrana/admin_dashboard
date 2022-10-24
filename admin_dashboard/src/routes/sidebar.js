@@ -44,7 +44,7 @@ const sidebar = [
     name: "Pedidos",
   },
   {
-    path: "/coupons",
+    path: "/budgets",
     icon: FiFile,
     name: "Presupuestos",
   },

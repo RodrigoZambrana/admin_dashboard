@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { SidebarContext } from "../context/SidebarContext";
-import CouponServices from "../services/CouponServices";
+import CouponServices from "../services/BudgetServices";
 import { notifyError, notifySuccess } from "../utils/toast";
 
 const useCouponSubmit = (id) => {

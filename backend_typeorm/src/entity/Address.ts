@@ -36,6 +36,7 @@ export class Address extends BaseEntity {
   @Column({
     type: "enum",
     enum: address_type,
+    default: "Personal",
   })
   type: address_type;
 }

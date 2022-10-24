@@ -6,7 +6,7 @@ import { notifyError, notifySuccess } from "../utils/toast";
 
 const useCustomerSubmit = (id) => {
   const { isDrawerOpen, closeDrawer, setIsUpdate } = useContext(SidebarContext);
-
+  const [addressId, setAddressId] = useState();
   const {
     register,
     handleSubmit,
@@ -20,6 +20,7 @@ const useCustomerSubmit = (id) => {
       full_name: data.full_name,
       email: data.email,
       telephone: data.telephone,
+      addressId: addressId,
       street: data.street,
       number: data.number,
       apartment: data.apartment,
@@ -51,11 +52,12 @@ const useCustomerSubmit = (id) => {
         .then((res) => {
           console.log(res);
           if (res) {
+            setAddressId(res.addresses[0].id);
+            console.log("address id" + addressId);
             setValue("full_name", res.full_name);
             setValue("email", res.email);
             setValue("telephone", res.telephone);
-            setValue("street", res.full_name);
-            setValue("number", res.full_name);
+            setValue("street", res.addresses[0].street);
             setValue("apartment", res.addresses[0].apartment);
             setValue("corner", res.addresses[0].corner);
             setValue("number", res.addresses[0].number);
@@ -66,7 +68,7 @@ const useCustomerSubmit = (id) => {
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id, addressId]);
   return {
     register,
     handleSubmit,

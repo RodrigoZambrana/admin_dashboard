@@ -12,8 +12,8 @@ const CustomerServices = {
     return requests.post("/customer/add", body);
   },
 
-  updateCustomer(id) {
-    return requests.update(`/customer/${id}`);
+  updateCustomer(id, body) {
+    return requests.put(`/customer/${id}`, body);
   },
 
   deleteCustomer(id) {

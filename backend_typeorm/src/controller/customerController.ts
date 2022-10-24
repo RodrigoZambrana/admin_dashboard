@@ -20,7 +20,6 @@ export const addCustomer = async (req: Request, res: Response) => {
       apartment,
     } = req.body;
     const newCustomer = new Customer();
-
     newCustomer.email = email;
     newCustomer.full_name = full_name;
     newCustomer.telephone = telephone;
@@ -80,19 +79,43 @@ export const getCustomerById = async (req: Request, res: Response) => {
 export const updateCustomer = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
-    const search_customer = await customerRepository.find({
-      where: {
-        id: id,
-      },
-    });
+    const addressId = Number(req.body.addressId);
+    console.log("address ID:" + addressId);
+    const search_customer = await AppDataSource.createQueryBuilder()
+      .select("customer")
+      .from(Customer, "customer")
+      .where("customer.id = :id", { id: id })
+      .getOne();
     if (search_customer != null) {
-      const { full_name, email, telephone } = req.body;
-      const customer = await customerRepository.update(
+      const {
+        full_name,
+        email,
+        telephone,
+        street,
+        corner,
+        number,
+        apartment,
+      } = req.body;
+      await customerRepository.update(
         {
           id,
         },
         { full_name: full_name, email: email, telephone: telephone }
       );
+
+      const search_Address = await addressRepository.find({
+        where: {
+          id: addressId,
+        },
+      });
+      if (search_Address != null) {
+        await addressRepository.update(
+          {
+            id: addressId,
+          },
+          { street, corner, number, apartment }
+        );
+      }
       res.status(200).json({
         message: "Customer  Successfully Updated!",
       });
@@ -100,7 +123,7 @@ export const updateCustomer = async (req: Request, res: Response) => {
       res.status(404).send({ message: "Customer not found!" });
     }
   } catch (err) {
-    res.status(404).send({ message: "Customer not found!" });
+    res.status(500).send({ message: "Internal error!" });
   }
 };
 

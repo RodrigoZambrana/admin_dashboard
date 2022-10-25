@@ -104,15 +104,14 @@ const Orders = () => {
           <Table>
             <TableHeader>
               <tr>
-                <TableCell>Pedido Nº</TableCell>
-                <TableCell>Time</TableCell>
-                <TableCell>Shipping Address</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Method</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell className="text-center">Status</TableCell>
-                <TableCell className="text-center">Action</TableCell>
-                <TableCell className="text-right">Invoice</TableCell>
+                <TableCell>Fecha</TableCell>
+                <TableCell>Cliente</TableCell>
+                <TableCell>Dirección</TableCell>
+                <TableCell>Teléfono</TableCell>
+                <TableCell>Estado</TableCell>
+                <TableCell>Seña</TableCell>
+                <TableCell>Importe Total</TableCell>
+                <TableCell>Saldo Pendiente</TableCell>
               </tr>
             </TableHeader>
             <OrderTable orders={dataTable} />

@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext } from "react";
 
 // create context
 export const SidebarContext = createContext();
@@ -8,6 +8,7 @@ export const SidebarProvider = ({ children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const closeSidebar = () => setIsSidebarOpen(false);
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -53,6 +54,8 @@ export const SidebarProvider = ({ children }) => {
         closeModal,
         isUpdate,
         setIsUpdate,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

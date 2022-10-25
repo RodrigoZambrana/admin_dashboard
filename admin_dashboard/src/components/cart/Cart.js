@@ -15,14 +15,14 @@ const Cart = () => {
   const history = useHistory();
 
   const checkoutClass = (
-    <button
+    <Button
       onClick={closeCartDrawer}
       className="w-full py-3 px-3 rounded-lg bg-emerald-500 hover:bg-emerald-600 flex items-center justify-between bg-heading text-sm sm:text-base text-white focus:outline-none transition duration-300"
     >
       <span className="align-middle font-medium font-serif">
         Ver presupuesto
       </span>
-    </button>
+    </Button>
   );
 
   return (
@@ -70,9 +70,7 @@ const Cart = () => {
         </div>
         <div className="mx-5 my-3">
           <span>
-            <Button className="mt-4 h-12 w-full" href="/checkout">
-              <a>{checkoutClass}</a>
-            </Button>
+            <a>{checkoutClass}</a>
           </span>
         </div>
       </div>

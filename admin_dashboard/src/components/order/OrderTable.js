@@ -12,55 +12,43 @@ const OrderTable = ({ orders }) => {
   return (
     <>
       <TableBody>
-        {orders?.map((order, i) => (
+        {orders?.map((order) => (
           <TableRow key={order.id}>
-            <TableCell className="text-center">
-              <span className="font-semibold uppercase text-xs">
-                {order.id}
-              </span>
-            </TableCell>
             <TableCell>
               <span className="text-sm">
                 {dayjs(order.created_at).format("DD/MM/YYYY")}
               </span>
             </TableCell>
-
             <TableCell>
-              {/* <span className="text-sm">{order.address.substring(0, 25)}</span> */}
+              <span className="text-sm ">{order.customer.full_name}</span>
+            </TableCell>
+            <TableCell>
+              <span className="text-sm ">
+                {order.customer.addresses[0].street}
+              </span>
             </TableCell>
             <TableCell>
               {" "}
-              {/* <span className="text-sm">{order.contact}</span>{" "} */}
+              <span className="text-sm">{order.customer.telephone}</span>
+            </TableCell>
+            <TableCell>
+              <Status status={order.status} />
             </TableCell>
             <TableCell>
               <span className="text-sm font-semibold">
-                {/* {order.paymentMethod} */}
+                ${Math.round(order.advanced_payment)}
               </span>
             </TableCell>
             <TableCell>
               {" "}
               <span className="text-sm font-semibold">
-                ${Math.round(order.sub_total)}.00
+                ${Math.round(order.sub_total)}
+              </span>
+            </TableCell>
+            <TableCell>
+              <span className="text-sm font-semibold">
+                ${Math.round(order.sub_total - order.advanced_payment)}
               </span>{" "}
-            </TableCell>
-            <TableCell className="text-center text-xs">
-              <Status status={order.status} />
-            </TableCell>
-            <TableCell className="text-center">
-              <SelectStatus id={order.id} />
-            </TableCell>
-            <TableCell className="text-right flex justify-end">
-              <div className="p-2 cursor-pointer text-gray-400 hover:text-green-600">
-                {" "}
-                <Link to={`/order/${order.id}`}>
-                  <Tooltip
-                    id="view"
-                    Icon={FiEye}
-                    title="View Invoice"
-                    bgColor="#34D399"
-                  />
-                </Link>
-              </div>
             </TableCell>
           </TableRow>
         ))}

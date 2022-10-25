@@ -16,6 +16,7 @@ const Page404 = lazy(() => import("../pages/404"));
 const EditProfile = lazy(() => import("../pages/EditProfile"));
 const Calendar = lazy(() => import("../pages/Calendar"));
 const Kanban = lazy(() => import("../pages/Kanban"));
+const Market = lazy(() => import("../pages/Market"));
 
 /*
 //  * ⚠ These are internal routes!
@@ -36,6 +37,10 @@ const routes = [
   {
     path: "/products",
     component: Products,
+  },
+  {
+    path: "/market",
+    component: Market,
   },
   {
     path: "/product/:id",

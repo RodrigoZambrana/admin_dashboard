@@ -4,7 +4,7 @@ import { TableCell, TableBody, TableRow, Badge } from "@windmill/react-ui";
 
 import MainModal from "../modal/MainModal";
 import MainDrawer from "../drawer/MainDrawer";
-import CouponDrawer from "../drawer/CouponDrawer";
+import CouponDrawer from "../drawer/BudgetDrawer";
 import useToggleDrawer from "../../hooks/useToggleDrawer";
 import EditDeleteButton from "../table/EditDeleteButton";
 

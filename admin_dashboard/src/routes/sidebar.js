@@ -24,19 +24,9 @@ const sidebar = [
     name: "Principal", // name that appear in Sidebar
   },
   {
-    path: "/products",
-    icon: FiShoppingBag,
-    name: "Productos",
-  },
-  {
-    path: "/category",
-    icon: FiList,
-    name: "Categorias",
-  },
-  {
-    path: "/customers",
-    icon: FiUsers,
-    name: "Clientes",
+    path: "/budgets",
+    icon: FiFile,
+    name: "Presupuestos",
   },
   {
     path: "/orders",
@@ -44,9 +34,24 @@ const sidebar = [
     name: "Pedidos",
   },
   {
-    path: "/budgets",
-    icon: FiFile,
-    name: "Presupuestos",
+    path: "/customers",
+    icon: FiUsers,
+    name: "Clientes",
+  },
+  {
+    icon: FiShoppingBag,
+    name: "Productos",
+    routes: [
+      // submenu
+      {
+        path: "/products",
+        name: "Lista",
+      },
+      {
+        path: "/market",
+        name: "Tienda",
+      },
+    ],
   },
   {
     path: "/calendar",
@@ -57,6 +62,11 @@ const sidebar = [
     path: "/notes",
     icon: FiClipboard,
     name: "Notas",
+  },
+  {
+    path: "/category",
+    icon: FiList,
+    name: "Categorias",
   },
   {
     icon: FiSettings,

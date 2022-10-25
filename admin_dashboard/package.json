@@ -4,6 +4,7 @@
   "description": "this is Dashtar-admin built with react.js and tailwindcss",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.7.3",
     "@pathofdev/react-tag-input": "^1.0.7",
     "@react-pdf/renderer": "^2.1.1",
     "@syncfusion/ej2-base": "^19.1.63",

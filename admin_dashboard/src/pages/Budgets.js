@@ -22,12 +22,14 @@ import { SidebarContext } from "../context/SidebarContext";
 import CouponTable from "../components/coupon/CouponTable";
 import PageTitle from "../components/Typography/PageTitle";
 import MainDrawer from "../components/drawer/MainDrawer";
-import CouponDrawer from "../components/drawer/CouponDrawer";
+import CartDrawer from "../components/drawer/CartDrawer";
+import { BudgetContext } from "../context/BudgetContext";
+import { useCart } from "react-use-cart";
 
 const Budgets = () => {
-  const { toggleDrawer } = useContext(SidebarContext);
   const { data, loading } = useAsync(BudgetServices.getAllCoupons);
-
+  const { toggleCartDrawer } = useContext(BudgetContext);
+  const { totalItems } = useCart();
   const {
     handleSubmitCoupon,
     couponRef,
@@ -43,7 +45,7 @@ const Budgets = () => {
       <PageTitle>Presupuestos</PageTitle>
 
       <MainDrawer>
-        <CouponDrawer />
+        <CartDrawer />
       </MainDrawer>
 
       <Card className="min-w-0 shadow-xs overflow-hidden bg-white dark:bg-gray-800 mb-5">
@@ -61,7 +63,10 @@ const Budgets = () => {
               />
             </div>
             <div className="w-full md:w-56 lg:w-56 xl:w-56">
-              <Button onClick={toggleDrawer} className="w-full rounded-md h-12">
+              <Button
+                onClick={toggleCartDrawer}
+                className="w-full rounded-md h-12"
+              >
                 <span className="mr-3">
                   <FiPlus />
                 </span>

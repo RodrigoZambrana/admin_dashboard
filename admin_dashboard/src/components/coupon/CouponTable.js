@@ -1,16 +1,15 @@
-import React from 'react';
-import * as dayjs from 'dayjs';
-import { TableCell, TableBody, TableRow, Badge } from '@windmill/react-ui';
+import React from "react";
+import * as dayjs from "dayjs";
+import { TableCell, TableBody, TableRow, Badge } from "@windmill/react-ui";
 
-import MainModal from '../modal/MainModal';
-import MainDrawer from '../drawer/MainDrawer';
-import CouponDrawer from '../drawer/CouponDrawer';
-import useToggleDrawer from '../../hooks/useToggleDrawer';
-import EditDeleteButton from '../table/EditDeleteButton';
+import MainModal from "../modal/MainModal";
+import MainDrawer from "../drawer/MainDrawer";
+import CouponDrawer from "../drawer/CouponDrawer";
+import useToggleDrawer from "../../hooks/useToggleDrawer";
+import EditDeleteButton from "../table/EditDeleteButton";
 
-const CouponTable = ({ coupons }) => {
+const CouponTable = ({ budgets }) => {
   const { serviceId, handleModalOpen, handleUpdate } = useToggleDrawer();
-
   return (
     <>
       <MainModal id={serviceId} />
@@ -19,55 +18,43 @@ const CouponTable = ({ coupons }) => {
       </MainDrawer>
 
       <TableBody>
-        {coupons.map((coupon, i) => (
-          <TableRow key={i + 1}>
+        {budgets.map((budget, i) => (
+          <TableRow key={budget.id}>
             <TableCell>
-              <span className="font-semibold uppercase text-xs">
-                {coupon._id.substring(20, 24)}
-              </span>
+              {" "}
+              <span className="text-sm"> {budget.customer_name}</span>{" "}
             </TableCell>
             <TableCell>
+              {" "}
+              <span className="text-sm"> {budget.customer_address}</span>{" "}
+            </TableCell>
+            <TableCell>
+              {" "}
+              <span className="text-sm"> {budget.customer_telephone}</span>{" "}
+            </TableCell>
+            <TableCell>
+              {" "}
               <span className="text-sm">
-                {' '}
-                {dayjs(coupon.createdAt).format('MMM D, YYYY')}
-              </span>
+                {" "}
+                {dayjs(budget.created_at).format("DD/MM/YYYY")}
+              </span>{" "}
             </TableCell>
             <TableCell>
-              <span className="text-sm">
-                {' '}
-                {dayjs(coupon.endTime).format('MMM D, YYYY')}
-              </span>
+              {" "}
+              <span className="text-sm"> {budget.valid_days} días</span>{" "}
             </TableCell>
-            <TableCell>
-              {' '}
-              <span className="text-sm"> {coupon.title}</span>{' '}
-            </TableCell>
-            <TableCell>
-              {' '}
-              <span className="text-sm"> {coupon.couponCode}</span>{' '}
-            </TableCell>
-            <TableCell>
-              {' '}
-              <span className="text-sm font-semibold">
-                {' '}
-                {coupon.discountPercentage}%
-              </span>{' '}
-            </TableCell>
-            <TableCell>
-              {' '}
-              <span className="text-sm"> {coupon.productType}</span>{' '}
-            </TableCell>
-
             <TableCell className="align-middle ">
-              {dayjs().isAfter(dayjs(coupon.endTime)) ? (
-                <Badge type="danger">Expired</Badge>
+              {dayjs(budget.created_at)
+                .add(budget.valid_days, "day")
+                .isAfter(dayjs(new Date())) ? (
+                <Badge type="success">{budget.status}</Badge>
               ) : (
-                <Badge type="success">Active</Badge>
+                <Badge type="danger">Vencido</Badge>
               )}
             </TableCell>
             <TableCell>
               <EditDeleteButton
-                id={coupon._id}
+                id={budget.id}
                 handleUpdate={handleUpdate}
                 handleModalOpen={handleModalOpen}
               />

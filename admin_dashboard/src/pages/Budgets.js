@@ -17,16 +17,16 @@ import useAsync from "../hooks/useAsync";
 import useFilter from "../hooks/useFilter";
 import NotFound from "../components/table/NotFound";
 import Loading from "../components/preloader/Loading";
-import CouponServices from "../services/BudgetServices";
+import BudgetServices from "../services/BudgetServices";
 import { SidebarContext } from "../context/SidebarContext";
 import CouponTable from "../components/coupon/CouponTable";
 import PageTitle from "../components/Typography/PageTitle";
 import MainDrawer from "../components/drawer/MainDrawer";
 import CouponDrawer from "../components/drawer/CouponDrawer";
 
-const Presupuestos = () => {
+const Budgets = () => {
   const { toggleDrawer } = useContext(SidebarContext);
-  const { data, loading } = useAsync(CouponServices.getAllCoupons);
+  const { data, loading } = useAsync(BudgetServices.getAllCoupons);
 
   const {
     handleSubmitCoupon,
@@ -65,7 +65,7 @@ const Presupuestos = () => {
                 <span className="mr-3">
                   <FiPlus />
                 </span>
-                Add Coupon
+                Nuevo presupuesto
               </Button>
             </div>
           </form>
@@ -79,18 +79,16 @@ const Presupuestos = () => {
           <Table>
             <TableHeader>
               <tr>
-                <TableCell>ID</TableCell>
-                <TableCell>Start Date</TableCell>
-                <TableCell>End Date</TableCell>
-                <TableCell>Campaigns Name</TableCell>
-                <TableCell>Code</TableCell>
-                <TableCell>Percentage</TableCell>
-                <TableCell>Product Type</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell className="text-right">Actions</TableCell>
+                <TableCell>Cliente</TableCell>
+                <TableCell>Dirección</TableCell>
+                <TableCell>Telefóno</TableCell>
+                <TableCell>Creado</TableCell>
+                <TableCell>Validez</TableCell>
+                <TableCell>Estado</TableCell>
+                <TableCell className="text-right">Acciones</TableCell>
               </tr>
             </TableHeader>
-            <CouponTable coupons={dataTable} />
+            <CouponTable budgets={dataTable} />
           </Table>
           <TableFooter>
             <Pagination
@@ -102,10 +100,10 @@ const Presupuestos = () => {
           </TableFooter>
         </TableContainer>
       ) : (
-        <NotFound title="Coupon" />
+        <NotFound title="Presupuesto" />
       )}
     </>
   );
 };
 
-export default Presupuestos;
+export default Budgets;

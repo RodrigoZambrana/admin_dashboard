@@ -11,7 +11,7 @@ const CustomerAdd = lazy(() => import("../pages/CustomerAdd"));
 const CustomerOrder = lazy(() => import("../pages/CustomerOrder"));
 const Orders = lazy(() => import("../pages/Orders"));
 const OrderInvoice = lazy(() => import("../pages/OrderInvoice"));
-const Presupuestos = lazy(() => import("../pages/Presupuestos"));
+const Presupuestos = lazy(() => import("../pages/Budgets"));
 const Page404 = lazy(() => import("../pages/404"));
 const EditProfile = lazy(() => import("../pages/EditProfile"));
 const Calendar = lazy(() => import("../pages/Calendar"));

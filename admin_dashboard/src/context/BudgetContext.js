@@ -4,7 +4,7 @@ import React, { useState, useMemo, createContext } from "react";
 export const BudgetContext = createContext();
 
 export const BudgetProvider = ({ children }) => {
-  const [cartDrawerOpen, setCartDrawerOpen] = useState(true);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [categoryDrawerOpen, setCategoryDrawerOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);

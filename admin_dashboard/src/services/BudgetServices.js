@@ -6,7 +6,7 @@ const BudgetServices = {
   },
 
   getAllCoupons() {
-    return requests.get("/coupon");
+    return requests.get("/budget");
   },
   getCouponById(id) {
     return requests.get(`/coupon/${id}`);

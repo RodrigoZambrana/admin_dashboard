@@ -1,12 +1,19 @@
 import React, { useContext } from "react";
 import Drawer from "rc-drawer";
-
-//internal import
 import Cart from "../cart/Cart";
+import { BudgetContext } from "../../context/BudgetContext";
 
 const CartDrawer = () => {
+  const { cartDrawerOpen, closeCartDrawer } = useContext(BudgetContext);
+
   return (
-    <Drawer open={true} parent={null} level={null} placement={"right"}>
+    <Drawer
+      open={cartDrawerOpen}
+      onClose={closeCartDrawer}
+      parent={null}
+      level={null}
+      placement={"right"}
+    >
       <Cart />
     </Drawer>
   );

@@ -10,6 +10,7 @@ import myTheme from "./assets/theme/myTheme";
 import { AdminProvider } from "./context/AdminContext";
 import { SidebarProvider } from "./context/SidebarContext";
 import { BudgetProvider } from "./context/BudgetContext";
+import { CartProvider } from "react-use-cart";
 
 import ThemeSuspense from "./components/theme/ThemeSuspense";
 
@@ -22,15 +23,17 @@ import ThemeSuspense from "./components/theme/ThemeSuspense";
 
 ReactDOM.render(
   <AdminProvider>
-    <SidebarProvider>
-      <BudgetProvider>
-        <Suspense fallback={<ThemeSuspense />}>
-          <Windmill usePreferences theme={myTheme}>
-            <App />
-          </Windmill>
-        </Suspense>
-      </BudgetProvider>
-    </SidebarProvider>
+    <CartProvider>
+      <SidebarProvider>
+        <BudgetProvider>
+          <Suspense fallback={<ThemeSuspense />}>
+            <Windmill usePreferences theme={myTheme}>
+              <App />
+            </Windmill>
+          </Suspense>
+        </BudgetProvider>
+      </SidebarProvider>
+    </CartProvider>
   </AdminProvider>,
 
   document.getElementById("root")

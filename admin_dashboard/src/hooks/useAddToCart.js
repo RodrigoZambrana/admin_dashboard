@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
-
 import { notifySuccess, notifyError } from "../utils/toast";
 
 const useAddToCart = () => {
@@ -14,26 +13,23 @@ const useAddToCart = () => {
   }, []);
 
   const handleAddItem = (product) => {
-    const result = items.find((i) => i.id === product._id);
+    const result = items.find((i) => i.id === product.id);
 
     if (result !== undefined) {
-      if (result?.quantity < product?.quantity) {
-        const newItem = {
-          ...product,
-          id: product._id,
-        };
-        addItem(newItem, item);
-        notifySuccess(`${item} ${product.title} added to cart!`);
-      } else {
-        notifyError("No more quantity available for this product!");
-      }
+      const newItem = {
+        ...product,
+        id: product.id,
+      };
+      addItem(newItem, item);
+      notifySuccess(`${item} ${product.name} added to cart!`);
     } else {
       const newItem = {
         ...product,
-        id: product._id,
+        id: product.id,
+        price: product.price,
       };
       addItem(newItem, item);
-      notifySuccess(`${item} ${product.title} added to cart!`);
+      notifySuccess(`${item} ${product.name} added to cart!`);
     }
   };
 

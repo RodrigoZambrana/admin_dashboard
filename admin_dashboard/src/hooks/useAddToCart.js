@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 
 const useAddToCart = () => {
   const [item, setItem] = useState(1)
+  const [product, setProduct] = useState()
   const [products, setProducts] = useState([])
   const { addItem, items, updateItemQuantity } = useCart()
 
@@ -16,10 +17,24 @@ const useAddToCart = () => {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = ({ name }) => {
-    if (!name) {
-      notifyError('Ingrese un nombre')
-      return
+  const onSubmit = ({ width, height, description }) => {
+    // notifyError('El nombre del producto es:' + product.name)
+    if (product.unit === 'Metros Cuadrados') {
+      const newProduct = {
+        id: product.id + width + height,
+        name: product.name,
+        image: product.image,
+        width: width,
+        height: description,
+        price: product.price * width * height,
+      }
+      handleAddItem(newProduct)
+    }
+    if (product.unit === 'Metros lineales') {
+      notifySuccess('added to cart!')
+    }
+    if (product.unit === 'Unidad') {
+      handleAddItem(product)
     }
   }
 
@@ -28,22 +43,22 @@ const useAddToCart = () => {
     setProducts(JSON.parse(products))
   }, [])
 
-  const handleAddItem = (product) => {
-    const result = items.find((i) => i.id === product.id)
+  const handleAddItem = (cartProduct) => {
+    const result = items.find((i) => i.id === cartProduct.id)
 
     if (result !== undefined) {
       const newItem = {
-        ...product,
-        id: product.id,
-        price: product.price,
+        ...cartProduct,
+        id: cartProduct.id,
+        price: cartProduct.price,
       }
       addItem(newItem, item)
       notifySuccess(`${item} ${product.name} added to cart!`)
     } else {
       const newItem = {
-        ...product,
-        id: product.id,
-        price: product.price,
+        ...cartProduct,
+        id: cartProduct.id,
+        price: cartProduct.price,
       }
       addItem(newItem, item)
       notifySuccess(`${item} ${product.name} added to cart!`)
@@ -69,8 +84,10 @@ const useAddToCart = () => {
     handleAddItem,
     setItem,
     item,
+    setProduct,
     handleIncreaseQuantity,
     onSubmit,
+    errors,
   }
 }
 

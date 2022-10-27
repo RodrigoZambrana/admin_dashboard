@@ -1,85 +1,86 @@
 import React from "react";
 import useCheckoutSubmit from "../../hooks/useCheckoutSubmit";
-import Layout from "../../layout/Layout";
 import Error from "../form/Error";
 import InputArea from "../form/InputArea";
-import CartItem from "../cart/CartItem";
 import { Link } from "react-router-dom";
-
-import {
-  IoReturnUpBackOutline,
-  IoBagHandle,
-  IoArrowForward,
-} from "react-icons/io5";
-import { ImCreditCard } from "react-icons/im";
-import { Button, Card, CardBody } from "@windmill/react-ui";
+import { IoReturnUpBackOutline, IoArrowForward } from "react-icons/io5";
+import { Button } from "@windmill/react-ui";
+import { useForm } from "react-hook-form";
 
 const CheckoutForm = (customerId) => {
   const {
-    handleSubmit,
-    submitHandler,
-    register,
     errors,
-    total,
-    isEmpty,
-    items,
-    cartTotal,
     isCheckoutSubmit,
     onSubmit,
     customerBudget,
+    register,
+    handleSubmit,
   } = useCheckoutSubmit(customerId);
+
+  let prealoadedValues = {
+    id: 0,
+    full_name: "Rodrigo",
+    email: "rodrigo@gmail.com",
+    telephone: "35353534",
+    address: "general fraga",
+  };
+
+  if (customerId) {
+    prealoadedValues = customerId;
+  }
+
   return (
     <div>
-      <div className="mt-5 md:mt-0 md:col-span-2">
+      <div className="mt-20 md:mt-0 md:col-span-2">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
-            <h2 className="font-semibold font-serif text-base text-gray-700 pb-3">
+            <h2 className="font-semibold font-serif text-base text-gray-700 pb-3 mt-10">
               Datos del cliente
             </h2>
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <InputArea
-                  defaultValue={customerBudget.full_name}
                   register={register}
                   label="Nombre"
                   name="full_name"
                   type="text"
                   placeholder="Nombre"
+                  required="true"
                 />
-                <Error errorName={errors.firstName} />
+                <Error errorName={errors.full_name} />
               </div>
               <div className="col-span-6 sm:col-span-3">
                 <InputArea
-                  defaultValue={customerBudget.email}
                   register={register}
                   label="Email"
                   name="email"
                   type="email"
                   placeholder="email"
+                  required="true"
                 />
                 <Error errorName={errors.email} />
               </div>
               <div className="col-span-6 sm:col-span-3">
                 <InputArea
-                  defaultValue={customerBudget.telephone}
                   register={register}
                   label="Teléfono"
                   name="telephone"
                   type="tel"
                   placeholder="teléfono"
+                  required="true"
                 />
-                <Error errorName={errors.contact} />
+                <Error errorName={errors.telephone} />
               </div>
               <div className="col-span-6 sm:col-span-3">
                 <InputArea
-                  defaultValue={customerBudget.address}
                   register={register}
                   label="Direccion"
                   name="address"
                   type="text"
                   placeholder="Direccion"
+                  required="true"
                 />
-                <Error errorName={errors.lastName} />
+                <Error errorName={errors.address} />
               </div>
             </div>
           </div>

@@ -20,12 +20,7 @@ const useCheckoutSubmit = () => {
   const [customerId, setCustomerId] = useState();
   const couponRef = useRef("");
   const { isEmpty, emptyCart, items, cartTotal } = useCart();
-  const [customerBudget, setCustomerBudget] = useState({
-    full_name: "Learn Hooks",
-    email: "rodrigo@gmail.com",
-    telephone: "",
-    address: "",
-  });
+  const [customerBudget, setCustomerBudget] = useState();
 
   const {
     register,
@@ -35,21 +30,18 @@ const useCheckoutSubmit = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    setIsCheckoutSubmit(true);
-    setError("");
     let orderInfo = {
-      name: `${data.firstName} ${data.lastName}`,
+      name: data.full_name,
       address: data.address,
-      contact: data.contact,
+      contact: data.telephone,
       email: data.email,
-      city: data.city,
-      status: "Pending",
+      status: "Pendiente",
+      createdAt: dayjs(new Date()),
       cart: items,
-      subTotal: cartTotal,
-      shippingCost: shippingCost,
-      discount: discountAmount,
-      total: total,
+      total: cartTotal,
     };
+
+    Cookies.set("budget", JSON.stringify(orderInfo));
   };
 
   useEffect(() => {
@@ -57,7 +49,6 @@ const useCheckoutSubmit = () => {
       CustomerServices.getCustomerById(customerId.value.id)
         .then((res) => {
           if (res) {
-            setValue("full_name", res.full_name);
             setCustomerBudget(res);
             console.log(res);
             return;

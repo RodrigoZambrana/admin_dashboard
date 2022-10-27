@@ -1,27 +1,27 @@
-import dayjs from 'dayjs';
-import { useParams } from 'react-router';
-import ReactToPrint from 'react-to-print';
-import React, { useContext, useRef } from 'react';
-import { FiPrinter } from 'react-icons/fi';
-import { IoCloudDownloadOutline } from 'react-icons/io5';
+import dayjs from "dayjs";
+import { useParams } from "react-router";
+import ReactToPrint from "react-to-print";
+import React, { useContext, useRef } from "react";
+import { FiPrinter } from "react-icons/fi";
+import { IoCloudDownloadOutline } from "react-icons/io5";
 import {
   TableCell,
   TableHeader,
   Table,
   TableContainer,
   WindmillContext,
-} from '@windmill/react-ui';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+} from "@windmill/react-ui";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
-import useAsync from '../hooks/useAsync';
-import Status from '../components/table/Status';
-import OrderServices from '../services/OrderServices';
-import Invoice from '../components/invoice/Invoice';
-import Loading from '../components/preloader/Loading';
-import logoDark from '../assets/img/logo/logo-dark.svg';
-import logoLight from '../assets/img/logo/logo-light.svg';
-import PageTitle from '../components/Typography/PageTitle';
-import InvoiceForDownload from '../components/invoice/InvoiceForDownload';
+import useAsync from "../hooks/useAsync";
+import Status from "../components/table/Status";
+import OrderServices from "../services/OrderServices";
+import Invoice from "../components/invoice/Invoice";
+import Loading from "../components/preloader/Loading";
+import logoDark from "../assets/img/logo/logo-dark.svg";
+import logoLight from "../assets/img/logo/logo-light.svg";
+import PageTitle from "../components/Typography/PageTitle";
+import InvoiceForDownload from "../components/invoice/InvoiceForDownload";
 
 const OrderInvoice = () => {
   const { mode } = useContext(WindmillContext);
@@ -44,23 +44,23 @@ const OrderInvoice = () => {
               <h1 className="font-bold font-serif text-xl uppercase">
                 Invoice
                 <p className="text-xs mt-1 text-gray-500">
-                  Status:{' '}
+                  Status:{" "}
                   <span className="pl-2 font-medium text-xs capitalize">
-                    {' '}
+                    {" "}
                     <Status status={data.status} />
                   </span>
                 </p>
               </h1>
               <div className="lg:text-right text-left">
                 <h2 className="lg:flex lg:justify-end text-lg font-serif font-semibold mt-4 lg:mt-0 lg:ml-0 md:mt-0">
-                  {mode === 'dark' ? (
+                  {mode === "dark" ? (
                     <img src={logoLight} alt="dashtar" width="110" />
                   ) : (
                     <img src={logoDark} alt="dashtar" width="110" />
                   )}
                 </h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                  Cecilia Chapman, 561-4535 Nulla LA, <br /> United States 96522{' '}
+                  Cecilia Chapman, 561-4535 Nulla LA, <br /> United States 96522{" "}
                 </p>
               </div>
             </div>
@@ -71,7 +71,7 @@ const OrderInvoice = () => {
                 </span>
                 <span className="text-sm text-gray-500 dark:text-gray-400 block">
                   {data.createdAt !== undefined && (
-                    <span>{dayjs(data?.createdAt).format('MMMM D, YYYY')}</span>
+                    <span>{dayjs(data?.createdAt).format("MMMM D, YYYY")}</span>
                   )}
                 </span>
               </div>
@@ -166,10 +166,10 @@ const OrderInvoice = () => {
           >
             {({ blob, url, loading, error }) =>
               loading ? (
-                'Loading...'
+                "Loading..."
               ) : (
                 <button className="flex items-center text-sm leading-5 transition-colors duration-150 font-medium focus:outline-none px-5 py-2 rounded-md text-white bg-green-500 border border-transparent active:bg-green-600 hover:bg-green-600 focus:ring focus:ring-purple-300 w-auto cursor-pointer">
-                  Download Invoice{' '}
+                  Descargar presupueso{" "}
                   <span className="ml-2 text-base">
                     <IoCloudDownloadOutline />
                   </span>
@@ -181,14 +181,14 @@ const OrderInvoice = () => {
           <ReactToPrint
             trigger={() => (
               <button className="flex items-center text-sm leading-5 transition-colors duration-150 font-medium focus:outline-none px-5 py-2 rounded-md text-white bg-green-500 border border-transparent active:bg-green-600 hover:bg-green-600 focus:ring focus:ring-purple-300 w-auto">
-                Print Invoice{' '}
+                Imprimir presupuesto{" "}
                 <span className="ml-2">
                   <FiPrinter />
                 </span>
               </button>
             )}
             content={() => printRef.current}
-            documentTitle="Invoice"
+            documentTitle="Presupueso-"
           />
         </div>
       )}

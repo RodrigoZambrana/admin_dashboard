@@ -137,11 +137,11 @@ const InvoiceForDownload = ({ data }) => {
           <View style={styles.invoiceFirst}>
             <View>
               <Text style={{ fontFamily: "Open Sans", fontWeight: "bold" }}>
-                INVOICE
+                PRESUPUESTO
               </Text>
               <Text style={styles.info}>
                 Status :{" "}
-                {data.status === "Pending" && (
+                {data.status === "Pendiente" && (
                   <span style={{ color: "#eab308" }}>{data.status}</span>
                 )}
                 {data.status === "Processing" && (
@@ -157,16 +157,14 @@ const InvoiceForDownload = ({ data }) => {
             </View>
             <View>
               <Image style={styles.logo} src={logoLight} />
-              <Text style={styles.info}>
-                Cecilia Chapman, 561-4535 Nulla LA,
-              </Text>
-              <Text style={styles.info}> United States 96522</Text>
+              <Text style={styles.info}>urucortinas -097 365 931</Text>
+              <Text style={styles.info}> Montevideo-Uruguay</Text>
             </View>
           </View>
 
           <View style={styles.invoiceSecond}>
             <View>
-              <Text style={styles.title}>DATE</Text>
+              <Text style={styles.title}>Fecha</Text>
               <Text style={styles.info}>
                 {data.createdAt !== undefined && (
                   <span>{dayjs(data?.createdAt).format("MMMM D, YYYY")}</span>
@@ -174,45 +172,34 @@ const InvoiceForDownload = ({ data }) => {
               </Text>
             </View>
             <View>
-              <Text style={styles.title}>INVOICE NO</Text>
-              <Text style={styles.info}>#10012</Text>
-            </View>
-            <View>
-              <Text style={styles.title}>INVOICE TO</Text>
+              <Text style={styles.title}>PARA</Text>
               <Text style={styles.info}>{data.name}</Text>
-              <Text style={styles.info}> {data.address.substring(0, 25)}</Text>
-              <Text style={styles.info}>
-                {data.city}, {data.country}, {data.zipCode}
-              </Text>
+              <Text style={styles.info}> {data.address}</Text>
             </View>
           </View>
           <View style={styles.table}>
             <View style={styles.tableRow}>
+              <View style={styles.tableCol}></View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>
-                  <span style={styles.header}>Sr.</span>
+                  <span style={styles.header}>Producto</span>
                 </Text>
               </View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>
-                  <span style={styles.header}>Product Name</span>
+                  <span style={styles.header}>Cantidad</span>
                 </Text>
               </View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>
-                  <span style={styles.header}>Quantity</span>
-                </Text>
-              </View>
-              <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>
-                  <span style={styles.header}>Item Price</span>
+                  <span style={styles.header}>Precio</span>
                 </Text>
               </View>
 
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>
                   {" "}
-                  <span style={styles.header}>Amount</span>
+                  <span style={styles.header}>Total</span>
                 </Text>
               </View>
             </View>
@@ -233,13 +220,13 @@ const InvoiceForDownload = ({ data }) => {
                 <View style={styles.tableCol}>
                   <Text style={styles.tableCell}>
                     {" "}
-                    <span style={styles.quantity}>${item.price}.00</span>{" "}
+                    <span style={styles.quantity}>${item.price}</span>{" "}
                   </Text>
                 </View>
 
                 <View style={styles.tableCol}>
                   <Text style={styles.tableCell}>
-                    <span style={styles.amount}>${item.itemTotal}.00</span>{" "}
+                    <span style={styles.amount}>${item.itemTotal}</span>{" "}
                   </Text>
                 </View>
               </View>
@@ -248,23 +235,8 @@ const InvoiceForDownload = ({ data }) => {
 
           <View style={styles.invoiceThird}>
             <View>
-              <Text style={styles.title}> Payment Method</Text>
-              <Text style={styles.info}> {data.paymentMethod} </Text>
-            </View>
-            <View>
-              <Text style={styles.title}>Shipping Cost</Text>
-              <Text style={styles.info}>
-                ${Math.round(data.shippingCost)}.00
-              </Text>
-            </View>
-            <View>
-              <Text style={styles.title}>Discount</Text>
-              <Text style={styles.info}> ${Math.round(data.discount)}.00</Text>
-            </View>
-
-            <View>
-              <Text style={styles.title}>Total Amount</Text>
-              <Text style={styles.amount}>${Math.round(data.total)}.00</Text>
+              <Text style={styles.title}>Total</Text>
+              <Text style={styles.amount}>${Math.round(data.total)}</Text>
             </View>
           </View>
         </Page>

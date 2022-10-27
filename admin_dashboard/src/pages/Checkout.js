@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
 
 import {
   IoReturnUpBackOutline,
@@ -22,7 +21,6 @@ import useCheckoutSubmit from "../hooks/useCheckoutSubmit";
 import SearchCustomer from "../components/searchbar/SearchCustomer";
 
 const Checkout = () => {
-  const { setValue } = useForm();
   const {
     handleSubmit,
     submitHandler,
@@ -37,10 +35,12 @@ const Checkout = () => {
     customerBudget,
   } = useCheckoutSubmit();
 
+  const [data, setData] = useState(customerBudget);
+
   useEffect(() => {
-    setValue("email", customerBudget.email);
-    console.log(customerBudget.email);
-  }, []);
+    setData(customerBudget);
+    console.log(customerBudget?.full_name);
+  }, [customerBudget]);
 
   return (
     <div className="py-10 lg:py-12 px-0 2xl:max-w-screen-2xl w-full xl:max-w-screen-xl flex flex-col md:flex-row lg:flex-row">
@@ -48,7 +48,7 @@ const Checkout = () => {
         <Card className="min-w-0 shadow-xs overflow-hidden bg-white dark:bg-gray-800 mb-5">
           <CardBody>
             <SearchCustomer />
-            <CheckoutForm />
+            <CheckoutForm customerId={data} />
           </CardBody>
         </Card>
       </div>

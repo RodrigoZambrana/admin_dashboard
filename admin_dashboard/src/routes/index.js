@@ -1,22 +1,23 @@
-import { lazy } from "react";
+import { lazy } from 'react'
 
 // use lazy for better code splitting
-const Dashboard = lazy(() => import("../pages/Dashboard"));
-const Products = lazy(() => import("../pages/Products"));
-const ProductDetails = lazy(() => import("../pages/ProductDetails"));
-const Category = lazy(() => import("../pages/Category"));
-const Staff = lazy(() => import("../pages/Staff"));
-const Customers = lazy(() => import("../pages/Customers"));
-const CustomerAdd = lazy(() => import("../pages/CustomerAdd"));
-const CustomerOrder = lazy(() => import("../pages/CustomerOrder"));
-const Orders = lazy(() => import("../pages/Orders"));
-const OrderInvoice = lazy(() => import("../pages/OrderInvoice"));
-const Presupuestos = lazy(() => import("../pages/Budgets"));
-const Page404 = lazy(() => import("../pages/404"));
-const EditProfile = lazy(() => import("../pages/EditProfile"));
-const Calendar = lazy(() => import("../pages/Calendar"));
-const Kanban = lazy(() => import("../pages/Kanban"));
-const Market = lazy(() => import("../pages/Market"));
+const Dashboard = lazy(() => import('../pages/Dashboard'))
+const Products = lazy(() => import('../pages/Products'))
+const ProductDetails = lazy(() => import('../pages/ProductDetails'))
+const Category = lazy(() => import('../pages/Category'))
+const Staff = lazy(() => import('../pages/Staff'))
+const Customers = lazy(() => import('../pages/Customers'))
+const CustomerAdd = lazy(() => import('../pages/CustomerAdd'))
+const CustomerOrder = lazy(() => import('../pages/CustomerOrder'))
+const Orders = lazy(() => import('../pages/Orders'))
+const OrderInvoice = lazy(() => import('../pages/OrderInvoice'))
+const Presupuestos = lazy(() => import('../pages/Budgets'))
+const Page404 = lazy(() => import('../pages/404'))
+const EditProfile = lazy(() => import('../pages/EditProfile'))
+const Calendar = lazy(() => import('../pages/Calendar'))
+const Kanban = lazy(() => import('../pages/Kanban'))
+const Market = lazy(() => import('../pages/Market'))
+const Checkout = lazy(() => import('../pages/Checkout'))
 
 /*
 //  * ⚠ These are internal routes!
@@ -31,70 +32,74 @@ const Market = lazy(() => import("../pages/Market"));
 
 const routes = [
   {
-    path: "/dashboard",
+    path: '/dashboard',
     component: Dashboard,
   },
   {
-    path: "/products",
+    path: '/products',
     component: Products,
   },
   {
-    path: "/market",
+    path: '/market',
     component: Market,
   },
   {
-    path: "/product/:id",
+    path: '/product/:id',
     component: ProductDetails,
   },
   {
-    path: "/category",
+    path: '/category',
     component: Category,
   },
   {
-    path: "/customers",
+    path: '/customers',
     component: Customers,
   },
   {
-    path: "/customer/:id",
+    path: '/customer/:id',
     component: CustomerAdd,
   },
   {
-    path: "/customer-order/:id",
+    path: '/customer-order/:id',
     component: CustomerOrder,
   },
   {
-    path: "/our-staff",
+    path: '/our-staff',
     component: Staff,
   },
   {
-    path: "/orders",
+    path: '/orders',
     component: Orders,
   },
   {
-    path: "/order/:id",
+    path: '/order/:id',
     component: OrderInvoice,
   },
   {
-    path: "/budgets",
+    path: '/budgets',
     component: Presupuestos,
   },
-  { path: "/setting", component: EditProfile },
+  { path: '/setting', component: EditProfile },
   {
-    path: "/404",
+    path: '/404',
     component: Page404,
   },
   {
-    path: "/edit-profile",
+    path: '/edit-profile',
     component: EditProfile,
   },
   {
-    path: "/calendar",
+    path: '/calendar',
     component: Calendar,
   },
   {
-    path: "/notes",
+    path: '/notes',
     component: Kanban,
   },
-];
+  {
+    path: '/checkout',
+    component: Checkout,
+  },
+]
 
-export default routes;
+export default routes

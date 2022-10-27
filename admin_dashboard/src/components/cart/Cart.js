@@ -3,9 +3,10 @@ import { useCart } from "react-use-cart";
 import { IoBagCheckOutline, IoClose, IoBagHandle } from "react-icons/io5";
 import { useHistory } from "react-router-dom";
 import { Button } from "@windmill/react-ui";
+import { Link } from "react-router-dom";
 
 //internal import
-import CartItem from "../cart/CartItem";
+import CartItem from "./CartItem";
 import { BudgetContext } from "../../context/BudgetContext";
 
 const Cart = () => {
@@ -19,8 +20,9 @@ const Cart = () => {
       onClick={closeCartDrawer}
       className="w-full py-3 px-3 rounded-lg bg-emerald-500 hover:bg-emerald-600 flex items-center justify-between bg-heading text-sm sm:text-base text-white focus:outline-none transition duration-300"
     >
-      <span className="align-middle font-medium font-serif">
-        Ver presupuesto
+      <span className="align-middle font-medium font-serif">Ver carrito </span>
+      <span className="rounded-lg font-bold font-serif py-2 px-3 bg-green text-emerald-600">
+        ${cartTotal}
       </span>
     </Button>
   );
@@ -70,8 +72,8 @@ const Cart = () => {
         </div>
         <div className="mx-5 my-3">
           <span>
-            <a>{checkoutClass}</a>
-          </span>
+            <Link to="/checkout">{checkoutClass}</Link>
+          </span>{" "}
         </div>
       </div>
     </>

@@ -20,8 +20,6 @@ const CategoryDrawer = ({ id }) => {
     imageUrl,
     setImageUrl,
     setName,
-    children,
-    setChildren,
   } = useCategorySubmit(id);
 
   return (

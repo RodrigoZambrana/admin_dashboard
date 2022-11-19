@@ -13,7 +13,6 @@ import { Card, CardBody, Button } from "@windmill/react-ui";
 const CustomerAdd = () => {
   const { id } = useParams();
   const { register, handleSubmit, onSubmit, errors } = useCustomerSubmit(id);
-  console.log("id:" + id);
 
   return (
     <>
